@@ -6,13 +6,13 @@ import Gioco from "./Gioco.js";
 function App() {
 	return (
 		<Router>
-			<div className="App">
-				<div className="contenitore-principale">
-					<div className="cerchio" id="cerchio-tl"></div>
-					<div className="cerchio" id="cerchio-tr"></div>
-					<div className="cerchio" id="cerchio-bl"></div>
-					<div className="cerchio" id="cerchio-br"></div>
-					<div className="contenuto"></div>
+			<div className="container-fluid sfondo p-4 p-lg-5">
+				<div className="container-fluid contenitore-principale p-4">
+					<div className="cerchio rounded-circle m-3" id="cerchio-tl"></div>
+					<div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>
+					<div className="cerchio rounded-circle m-3" id="cerchio-bl"></div>
+					<div className="cerchio rounded-circle m-3" id="cerchio-br"></div>
+					<div className="container-fluid contenuto p-3"></div>
 					<Switch>
 						<Route path="/room/:id" component={Gioco}></Route>
 						<Route path="/"></Route>

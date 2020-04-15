@@ -3,31 +3,18 @@ html, body, #root {
   height: 100%;
 }
 
-.App {
+.sfondo {
   background-image: url(img/open-stage-blue.jpg);
   background-repeat: space;
   background-size: cover;
-  width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 4.5vw;
 }
 
 .contenitore-principale {
   background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), grey;
-  width: 100%;
   height: 100%;
   border-radius: 24px;
-  padding: 54px;
   position: relative;
-}
-
-@media only screen and (max-width: 768px) {
-  .contenitore-principale {
-    padding: 40px;
-  }
 }
 
 .cerchio {
@@ -38,9 +25,7 @@ html, body, #root {
   max-height: 40px;
   min-width: 20px;
   min-height: 20px;
-  border-radius: 100%;
   position: absolute;
-  margin: 16px;
   box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -65,6 +50,5 @@ html, body, #root {
 }
 
 .contenuto {
-  width: 100%;
   height: 100%;
 }
