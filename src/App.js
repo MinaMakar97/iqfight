@@ -12,7 +12,7 @@ function App() {
 					<div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>
 					<div className="cerchio rounded-circle m-3" id="cerchio-bl"></div>
 					<div className="cerchio rounded-circle m-3" id="cerchio-br"></div>
-					<div className="container-fluid contenuto p-3"></div>
+					<div className="container-fluid contenuto p-3 p-md-4"></div>
 					<Switch>
 						<Route path="/room/:id" component={Gioco}></Route>
 						<Route path="/"></Route>
