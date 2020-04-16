@@ -1,14 +1,12 @@
 
-.title{
+.title-box{
     background-color: #43A6C5;
-    min-width: 250px;
-    min-height: 50px;
-    width: 18%;
-    height: 6.5vh;
+    min-width: 100px;
+    min-height: 30px;
+    height: 40px;
     border-radius: 50px;
-    box-shadow: grey;
     color:white;
-    font-size: xx-large;
+    font-size: 20px;
     font-weight:400;
     display: flex;
     justify-content: center;

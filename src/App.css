@@ -52,3 +52,22 @@ html, body, #root {
 .contenuto {
   height: 100%;
 }
+
+.btn-primary{
+  background-color: #43A6C5;
+  width: 15vw;
+  height: 10%;
+  max-width: 150px;
+  border-color: #43A6C5 !important;
+  min-width: 100px;
+  min-height: 44px;
+}
+
+.btn-primary:hover {
+  background-color:  rgb(61, 149, 175);
+  border-color: rgb(61, 149, 175) !important;
+}
+
+.shadow{
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4) !important;
+}
