@@ -8,13 +8,11 @@ function App() {
 
 	return (
 		<Router>
-			<div className="container-fluid sfondo p-4 p-lg-5">
 				<div className="container-fluid contenitore-principale p-4">
 					<div className="cerchio rounded-circle m-3" id="cerchio-tl"></div>
 					<div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>
 					<div className="cerchio rounded-circle m-3" id="cerchio-bl"></div>
-					<div className="cerchio rounded-circle m-3" id="cerchio-br"></div>
-					
+					<div className="cerchio rounded-circle m-3" id="cerchio-br"></div>	
 					<div className="container-fluid contenuto p-3 p-md-4">
 						<Home></Home>
 					{/* <TitleBox titolo="Login"></TitleBox> */}
@@ -24,7 +22,6 @@ function App() {
 						</Switch> */}
 					</div>
 				</div>
-			</div>
 		</Router>
 	);
 }

@@ -1,0 +1,14 @@
+
+.loginn{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form{
+    width: 80%;
+    min-width: 250px;
+}
