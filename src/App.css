@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 html, body, #root {
   height: 100%;
   min-height: 500px;
@@ -9,6 +11,8 @@ body {
   background-size: 100% 100vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
+
+  font-family: "Poppins";
 }
 
 #root {
@@ -86,7 +90,6 @@ body {
   background-color: #43A6C5;
   width: 10% !important; 
   height: 10%;
-  max-width: 150px;
   border-color: #43A6C5 !important;
   min-width: 100px;
   min-height: 44px;

@@ -1,0 +1,14 @@
+.form-registrazione {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title-box {
+    height: 48px;
+}
+
+.form-registrazione img {
+    margin-bottom: 16px;
+}
