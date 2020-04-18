@@ -7,8 +7,8 @@ class Login extends React.Component{
             <form className="form">
                 <input type="email" className="form-control mt-3 mt-lg-4 shadow" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"></input>
                 <input type="password" className="form-control mt-3 mt-lg-4 shadow" id="exampleInputPassword1" placeholder="Password"></input>
-                <button type="submit" className="mt-3 mt-lg-4 btn btn-primary shadow ">Accedi</button>
-                <button type="submit" className="mt-3 mt-lg-4 btn btn-primary shadow" style={{ float:"right" }}>Registrati</button>
+                <button type="submit" className="mt-3 mt-lg-4 shadow bottone">Accedi</button>
+                <button type="submit" className="mt-3 mt-lg-4 shadow bottone" style={{ float:"right" }}>Registrati</button>
             </form>
         </div>
         

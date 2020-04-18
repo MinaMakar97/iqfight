@@ -1,5 +1,5 @@
 import React from "react";
-import "./Classifica.css";
+import "./Card.css";
 
 class Card extends React.Component{
     render(){

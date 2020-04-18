@@ -86,22 +86,32 @@ body {
   height: 100%;
 }
 
-.btn-primary{
-  background-color: #43A6C5;
-  width: 10% !important; 
-  height: 10%;
-  border-color: #43A6C5 !important;
-  min-width: 100px;
-  min-height: 44px;
-  display:inline-block;
-}
-
-
-.btn-primary:hover {
-  background-color:  rgb(61, 149, 175);
-  border-color: rgb(61, 149, 175) !important;
-}
 
 .shadow{
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4) !important;
+}
+
+.bottone{
+  background-color: #43A6C5;
+  width: 47%; 
+  height: 0%;
+  min-width: 100px;
+  min-height: 44px;
+  display:inline-block;
+  border-radius: 15px;
+  color: white;
+  border: none;
+}
+
+.bottone::selection {
+  color: white;
+}
+
+.bottone:hover {
+  background-color:  rgb(61, 149, 175);
+  background-color:  rgb(61, 149, 175);
+}
+
+.bottone:focus{
+  outline: 0;
 }

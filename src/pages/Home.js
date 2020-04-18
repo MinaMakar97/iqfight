@@ -4,7 +4,7 @@ import "./Home.css"
 import logo from "../img/iqfight-logo.png";
 import "../components/img.css";
 import Card from "../components/Card.js";
-import "../components/Classifica.css";
+import "../components/Card.css";
 import TitleBox from "../components/TitleBox.js";
 class Home extends React.Component{
     render(){
