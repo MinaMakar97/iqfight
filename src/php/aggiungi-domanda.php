@@ -5,12 +5,12 @@
 
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         // Richiesta delle categorie
-        $query = $dbConn->prepare("SELECT categoria FROM domanda GROUP BY categoria");
+        $query = $dbConn->prepare("SELECT nome FROM categoria");
         $query->execute();
         $result = $query->get_result();
         $risposta = [];
         while ($row = $result->fetch_assoc()) {
-            array_push($risposta, $row["categoria"]);
+            array_push($risposta, $row["nome"]);
         }
         echo json_encode(["categorie" => $risposta]);
     }

@@ -1,4 +1,9 @@
 <?php
+    
+    // Abilita risposte CORS
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: *");
+
     session_start();
     
     function prendiJson() {
