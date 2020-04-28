@@ -6,8 +6,7 @@
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		// Creazione di una stanza
 		$json = prendiJson();
-		if (!isset($json["privata"]) || !isset($json["nome"]) || !isset($json["categoria"])) 
-			die(json_encode(["errore" => "Formato della richiesta non corretto"]));
+		controllaParametri($json, "privata", "nome", "categoria");
 		$creatore = $_SESSION["username"];
 		$privata = intval($json["privata"]);
 		$nome = $json["nome"];
@@ -29,6 +28,7 @@
 		$json = prendiJson();
 		$azione = $json["azione"];
 		$idStanza = $json["idStanza"];
+		controllaParametri($json, "azione", "idStanza");
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
 			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1);");
@@ -54,6 +54,7 @@
 	else if ($_SERVER['REQUEST_METHOD'] == "DELETE"){
 		$json = prendiJson();
 		$idStanza = $json["idStanza"];
+		controllaParametri($json, "idStanza");
 		$query = $dbConn -> prepare("DELETE FROM partecipa where idStanza = ?");
 		$query -> bind_param("i",$idStanza);
 		$query -> execute();
