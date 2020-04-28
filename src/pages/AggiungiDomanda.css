@@ -1,0 +1,41 @@
+.aggiungi-domanda textarea, .input-toggle, select {
+    width: 100%;
+    resize: none;
+}
+
+.aggiungi-domanda textarea {
+    height: 3em;
+}
+
+.form-control-lg {
+    margin: 0em 0em 1em;
+    border-radius: 10px !important;
+    padding: .375rem .75rem !important;
+}
+
+.input-toggle-text::placeholder {
+    color: #c1b1ec;
+}
+
+.input-toggle-text {
+    color: #8B6EDD;
+}
+
+.titolo {
+    font-size: 1.8em;
+    margin: 1em 0 1em;
+}
+
+.aggiungi-domanda img {
+    max-width: 170px;
+}
+
+.react-select {
+    width: 100%;
+    padding: 0 !important;
+}
+
+.react-select > div {
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.4) !important;
+    border-radius: 10px !important;
+}
