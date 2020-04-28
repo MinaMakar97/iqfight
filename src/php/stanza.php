@@ -42,8 +42,9 @@
 			$risultato = ["successo" => true];
 			$query = $dbConn->prepare("SELECT id, nome, categoria, privata FROM stanza WHERE id = ?");
 			$query->bind_param("s", $idStanza);
-			$risultatoQuery = $query->execute();
-			$stanza = $risultatoQuery->fetch_assoc();
+			$query->execute();
+			$stanza = $query->get_result();
+			$stanza = $stanza->fetch_assoc();
 			$risultato["id"] = $stanza["id"];
 			$risultato["nome"] = $stanza["nome"];
 			$risultato["categoria"] = $stanza["categoria"];
