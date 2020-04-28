@@ -52,7 +52,21 @@ body {
   .contenitore-principale {
     max-height: unset;
     min-height: 90vh;
+    padding: 2em;
   }
+  hr{
+    height: 0.3em !important;
+    width: 90% !important;
+  }
+  
+}
+
+hr{
+  width: 10%;
+  height: 80%;
+  background-color: rgba(196, 196, 196, 0.18);
+  border-radius: 24px;
+  border: none;
 }
 
 .cerchio {
@@ -95,6 +109,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
 }
 
 
@@ -127,15 +143,17 @@ body {
   outline: 0;
 }
 
-input.form-control {
+.form-control-lg {
   color: #8B6EDD !important;
-  height: 30% !important;
+  width: 100% !important;
   border-radius: 10px;
   margin: 0em 0em 2em;
+  border:none;
+  outline: 0;
 }
 
-input.form-control::placeholder {
-  color: #8B6EDD;
+.form-control-lg::placeholder {
+  color: #c1b1ec;
 }
 
 .centra {
@@ -146,6 +164,11 @@ input.form-control::placeholder {
 
 .titolo {
   color: white;
-  font-size: 50px;
+  font-size: 1.9em;
+}
+
+
+.form-check-input{
+  outline: 0;
 }
 
