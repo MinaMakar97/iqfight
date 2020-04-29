@@ -6,7 +6,7 @@ class Card extends React.Component{
         return <div className="card shadow mt-3 mt-lg-4">
             {/* la prima colonna */}
             <div className="dis-img">
-                <img src={this.props.imagine} className="img-card"/> 
+                <img src={this.props.imagine} className="img-card" alt=""/> 
             </div>
 
             {/* la seconda colonna */}

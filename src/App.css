@@ -54,14 +54,14 @@ body {
     min-height: 90vh;
     padding: 2em;
   }
-  hr{
+  hr.riga{
     height: 0.3em !important;
     width: 90% !important;
   }
   
 }
 
-hr{
+hr.riga{
   width: 10%;
   height: 80%;
   background-color: rgba(196, 196, 196, 0.18);

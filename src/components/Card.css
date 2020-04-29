@@ -41,10 +41,3 @@ p.a{
     height: 40px;
 
 }
-
-@media screen and (max-width: 576px) {
-  .centro {
-    height: 100vh;
-    min-height: 900px;
-    }
-}
