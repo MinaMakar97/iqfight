@@ -125,18 +125,18 @@ export default class AggiungiDomanda extends Component {
 					</div>
 				</div>
 
-				<div class="modal fade" id="popup-successo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title">Aggiungi domanda</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<div className="modal fade" id="popup-successo" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog" role="document">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h5 className="modal-title">Aggiungi domanda</h5>
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
-							<div class="modal-body">Domanda inserita con successo, grazie per la tua collaborazione!</div>
-							<div class="modal-footer">
-								<button type="button" class="btn bottone" data-dismiss="modal">
+							<div className="modal-body">Domanda inserita con successo, grazie per la tua collaborazione!</div>
+							<div className="modal-footer">
+								<button type="button" className="btn bottone" data-dismiss="modal">
 									Ok
 								</button>
 							</div>

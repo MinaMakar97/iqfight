@@ -50,6 +50,7 @@ hr.riga-menu{
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .div-content:hover{
@@ -88,5 +89,4 @@ hr.riga-menu{
     border-bottom: 15px solid transparent;
     border-left: 15px solid #8B6EDD;
     transform: translateX(8px);
-
 }
