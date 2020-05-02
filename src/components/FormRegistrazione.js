@@ -23,8 +23,8 @@ class FormRegistrazione extends React.Component {
         xml.onreadystatechange = (e) => {
             if (e.target.readyState === 4 && e.target.status === 200) {
                 let json = JSON.parse(e.target.responseText);
-				if (json["successo"] == true) {
-					if (avatar != "") this.inviaImmagine(file);
+				if (json["successo"] === true) {
+					if (avatar !== "") this.inviaImmagine(file);
 					else window.location.replace("/login");
 				}
 				else {
@@ -48,7 +48,7 @@ class FormRegistrazione extends React.Component {
 		xmlImage.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] == true) 
+				if (json["successo"] === true) 
 					window.location.replace("/login");
 				else {
 					document.getElementById("err-log").textContent = json["motivazione"];
@@ -97,7 +97,7 @@ class FormRegistrazione extends React.Component {
 
 					<div className="centra"><button type="submit" className="shadow bottone mt-3 mb-4">Entra</button></div>
 				</form>
-				<Link to="/login"><a style={{color: "blue",textAlign: "center"}}>Indietro</a> </Link>
+				<Link to="/login"><p style={{color: "blue",textAlign: "center"}}>Indietro</p> </Link>
 			</div>
 		);
 	}

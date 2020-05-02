@@ -2,12 +2,13 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home.js"
-
+import MenuLaterale from "./components/Menulaterale.js"
 
 function App() {
 
 	return (
 		<Router>
+			<MenuLaterale section ="guida"></MenuLaterale>
 			<div className="container-fluid contenitore-principale p-4">
 				<div className="cerchio rounded-circle m-3" id="cerchio-tl"></div>
 				<div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>

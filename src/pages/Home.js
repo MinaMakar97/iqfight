@@ -5,6 +5,8 @@ import "./Home.css"
 import logo from "../img/iqfight-logo.png";
 import { Switch, Route } from "react-router-dom";
 
+
+
 class Home extends React.Component{
     render(){
         return <div className="row w-100 contenuto"> 

@@ -16,7 +16,7 @@ class Login extends React.Component{
         xml.onreadystatechange = (e) => {
             if (e.target.readyState === 4 && e.target.status === 200) {
                 let json = JSON.parse(e.target.responseText);
-                if (json["successo"] == true) window.location.replace(json["url"]);
+                if (json["successo"] === true) window.location.replace(json["url"]);
                 else {
                     document.getElementById("form-log").reset();
                     document.getElementById("err-log").textContent = json["errore"];
@@ -40,7 +40,7 @@ class Login extends React.Component{
             </form>
             <div className="div-logo">
                 <p style={{color: "white"}}> Non sei ancora registrato? </p>
-                <Link to="/registrazione"><a style={{color: "blue",textAlign: "center"}}> Cosa aspetti, clicca qui! </a></Link>
+                <Link to="/registrazione"><p style={{color: "blue",textAlign: "center"}}> Cosa aspetti, clicca qui! </p></Link>
             </div>
         </div>
         
