@@ -1,11 +1,10 @@
 
-.card{
+.card {
     border: 2px solid #43A6C5;
     border-radius: 25px;
     flex-direction: row;
     height: 60px;
     min-width: 100%;
-    width: 80%;
     min-width: 250px;
     display: flex;
     justify-content: flex-start;
@@ -13,7 +12,7 @@
 }
 
 .dis-img{
-    width: 20%;
+    margin-left: 2em;
     margin-right: 10px;
     margin: 10px;
     display: flex;
