@@ -1,6 +1,6 @@
 <?php
     // Abilita risposte CORS
-    header("Access-Control-Allow-Origin: http://localhost:3000");
+    header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
     header("Access-Control-Allow-Headers: Content-type");
     header("Access-Control-Allow-Methods: PUT, POST");
     header("Access-Control-Allow-Credentials: true");
@@ -13,9 +13,9 @@
     }
 
     function connettiDB() {
-        $conn = mysqli_connect("localhost", "root", "", "iqfight");
+        $conn = @mysqli_connect("localhost", "root", "", "iqfight");
         if (!$conn)
-            die ("Connessione fallita: " . $conn-> mysqli_connect_error());
+            die (json_encode(["successo" => false, "motivazione" => "Impossibile connettersi al database"]));
         return $conn;
     }
 
