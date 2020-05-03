@@ -1,0 +1,69 @@
+.gioca img {
+    max-width: 150px;
+}
+
+.gioca p {
+    margin: 0;
+}
+
+.riga-testo-riga {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.riga-testo-riga p {
+    color: white;
+    margin: .1em 1em .1em 1em;
+}
+
+.riga-testo-riga hr {
+    background-color: white;
+    height: 4px;
+    flex-grow: 1;
+}
+
+.gioca input {
+    margin: 0 !important;
+}
+
+.contenitore-viola {
+    background-color: #E0D5FF;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    width: 80%;
+    overflow: auto;
+}
+
+.contenitore-viola .col-12 {
+    margin-bottom: .5em;
+}
+
+.contenitore-viola .card-stanza {
+    width: 49%;
+    height: 80px;
+    margin: .5em 0px .5em 0px;
+}
+
+.div-stanze {
+    margin: 0px;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 576px) {
+    .contenitore-viola {
+        width: 100% !important;
+        max-height: 700px;
+    }
+    .contenitore-viola .card-stanza {
+        width: 100%;
+    }
+
+    .riga-testo-riga {
+        width: 100%;
+    }
+}
