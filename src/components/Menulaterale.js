@@ -27,7 +27,7 @@ class MenuLaterale extends Component {
 	}
 	componentWillMount(){
 		for (let sez of this.sezioni){
-			this.lista.push(<div className="div-content" id={sez.replace(" ","-")} onClick={this.cambiaPagina} >{sez}</div>);
+			this.lista.push(<div className="div-content" id={sez.replace(" ","-").toLowerCase()} onClick={this.cambiaPagina} >{sez}</div>);
 			this.lista.push(<hr className="riga-menu"></hr>);
 		}
 	}
