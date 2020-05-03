@@ -1,0 +1,75 @@
+.crea-stanza img {
+    max-width: 150px;
+}
+
+.opzione-toggle {
+    background-color: white;
+    justify-content: space-between;
+}
+
+.opzione-toggle p {
+    margin: 0 !important;
+}
+
+.contenitore-viola {
+    width: 80%;
+    overflow: hidden;
+    background-color: #E0D5FF;
+    border-radius: 15px;
+    padding: 1em;
+    overflow: auto;
+}
+
+.contenitore-viola h5 {
+    color: #8B6EDD;
+}
+
+.crea-stanza .categoria {
+    border-radius: 10px;
+    height: 60px;
+    width: 45%;
+    color: white;
+    font-size: 1.5em;
+    margin: .2em 0 .2em 0;
+    text-align: center;
+    transition: all .2s;
+    background-color: white;
+    user-select: none;
+    cursor: pointer;
+}
+
+.crea-stanza .domande-casuali {
+    background-image: linear-gradient(to left, #fa709a 0%, #fee140 100%);
+    font-size: 1.2em;
+    animation: heart-beat 3s infinite;
+}
+
+.crea-stanza .div-categorie {
+    padding: 15px;
+    justify-content: space-around;
+}
+
+.crea-stanza input:checked + label {
+    border: solid 4px rgb(255, 255, 255);
+    box-shadow: 2px 2px 4px rgba(0,0,0,.2);
+}
+
+@media screen and (max-width: 576px) {
+    .crea-stanza .categoria {
+        width: 100%;
+    }
+
+    .crea-stanza .div-categorie {
+        max-height: 400px;
+    }
+
+    .crea-stanza .contenitore-viola {
+        width: 100%;
+    }
+}
+
+@keyframes heart-beat {
+    0%, 35%, 45%, 50%, 55%, 100% {transform: scale(1) rotate(0deg);}
+    40% {transform: scale(1.05) rotate(1deg);}
+    50% {transform: scale(1.05) rotate(-1deg);}
+}
