@@ -28,7 +28,7 @@
     margin: 0 !important;
 }
 
-.contenitore-viola {
+.gioca .contenitore-viola {
     background-color: #E0D5FF;
     border-radius: 15px;
     display: flex;
@@ -38,11 +38,11 @@
     overflow: auto;
 }
 
-.contenitore-viola .col-12 {
+.gioca .contenitore-viola .col-12 {
     margin-bottom: .5em;
 }
 
-.contenitore-viola .card-stanza {
+.gioca .contenitore-viola .card-stanza {
     width: 49%;
     height: 80px;
     margin: .5em 0px .5em 0px;

@@ -8,8 +8,17 @@ class MenuLaterale extends Component {
 		this.state = { aperto: !(window.innerWidth <= 576) };
 		this.setta = this.setta.bind(this);
 		this.cambiaPagina = this.cambiaPagina.bind(this);
-        this.sezioni = ["Guida", "Classifica", "Gioca", "Aggiungi domanda", "Esci"];
-        this.lista = [];
+		this.sezioni = ["Guida", "Classifica", "Gioca", "Aggiungi domanda", "Esci"];
+		this.lista = [];
+
+		for (let sez of this.sezioni) {
+			this.lista.push(
+				<div className="div-content" key={sez} id={sez.replace(" ", "-")} onClick={this.cambiaPagina}>
+					{sez}
+				</div>
+			);
+			this.lista.push(<hr className="riga-menu" key={"riga-" + sez}></hr>);
+		}
 	}
 
 	setta() {
@@ -25,12 +34,6 @@ class MenuLaterale extends Component {
 		this.sezione = e.target;
 		if (window.innerWidth <= 576) this.setta();
 	}
-	componentWillMount(){
-		for (let sez of this.sezioni){
-			this.lista.push(<div className="div-content" id={sez.replace(" ","-")} onClick={this.cambiaPagina} >{sez}</div>);
-			this.lista.push(<hr className="riga-menu"></hr>);
-		}
-	}
 
 	componentDidMount() {
 		const path = this.props.location.pathname.slice(1);
@@ -38,8 +41,7 @@ class MenuLaterale extends Component {
 		if (elementoSezione) {
 			elementoSezione.style.backgroundColor = "#0996BB";
 			this.sezione = elementoSezione;
-        }
-        
+		}
 	}
 
 	render() {
@@ -47,7 +49,7 @@ class MenuLaterale extends Component {
 			<div id="div-menu-laterale" style={{ transform: "translateX(" + (this.state.aperto ? "0px" : "-100%") + ")" }}>
 				<div id="menu-laterale">
 					<hr className="riga-menu"></hr>
-                    {this.lista}
+					{this.lista}
 				</div>
 				<div className="menu-button" onClick={this.setta}>
 					<p id="freccia" className={this.state.aperto ? "arrow-right" : "arrow-left"}></p>
