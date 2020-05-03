@@ -1,0 +1,44 @@
+.card-stanza {
+    min-width: 200px;
+    border-radius: 10px;
+    margin: .2em;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-stanza .div-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.card-stanza .div-giocatori {
+    margin-right: 1em;
+}
+
+.card-stanza .num-giocatori {
+    color: black;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.card-stanza .max-giocatori {
+    color: white;
+}
+
+.card-stanza .nome-stanza {
+    color: black;
+    font-weight: bold;
+}
+
+.card-stanza .categoria-stanza {
+    color: white;
+}
+
+.card-stanza .freccia {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 4em;
+}

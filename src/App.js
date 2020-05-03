@@ -6,6 +6,7 @@ import Login from "./pages/Home.js";
 import AggiungiDomanda from "./pages/AggiungiDomanda.js";
 import Gioco from "./pages/Gioco.js";
 import Classifica from "./pages/Classifica";
+import Gioca from "./pages/Gioca";
 
 class App extends Component {
 	render() {
@@ -22,6 +23,7 @@ class App extends Component {
 							<Route path="/login" component={Login}></Route>
 							<Route path="/registrazione" component={Login}></Route>
 							<Route path="/aggiungi-domanda" component={AggiungiDomanda}></Route>
+							<Route path="/gioca" component={Gioca}></Route>
 							<Route path="/room/:id" component={Gioco}></Route>
 							<Route path="/classifica" component={Classifica}></Route>
 						</Switch>
