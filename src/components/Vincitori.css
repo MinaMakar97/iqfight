@@ -1,0 +1,101 @@
+.pagina-classifica img {
+    max-width: 200px;
+}
+
+.pagina-classifica .contenuto-classifica {
+    overflow: auto;
+    flex-grow: 1;
+    padding-bottom: 1em;
+}
+
+.pagina-classifica{
+    width: 80%;
+}
+
+.div-card{
+    width: 80%;
+}
+
+.pagina-classifica .card {
+    border: 4px solid #8B6EDD;
+    animation: fade-slide 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    height: 65px;
+    margin: 2em 2em 2em 5em ;
+    max-width: unset ;
+    margin-left: unset !important;
+}
+
+@media screen and (max-width: 576px){
+    .pagina-classifica{
+        width: 100% !important;
+    }
+    .div-card{
+        width: 100% !important;
+    }
+}
+
+.pagina-classifica .primo-classifica {
+    background: rgb(233,195,38);
+    background: linear-gradient(124deg, rgba(233,195,38,1) 0%, rgba(233,195,38,1) 39%, rgba(255,255,255,1) 49%, rgba(255,255,255,1) 52%, rgba(233,195,38,1) 63%, rgba(233,195,38,1) 100%);
+}
+
+.pagina-classifica .secondo-classifica {
+    background: #a8a8a8;
+    background: linear-gradient(124deg, #a8a8a8 0%, #a8a8a8 39%, rgba(255,255,255,1) 49%, rgba(255,255,255,1) 52%, #a8a8a8 63%, #a8a8a8 100%);
+}
+
+.pagina-classifica .terzo-classifica {
+    background: #ca8a00;
+    background: linear-gradient(124deg, #ca8a00 0%, #ca8a00 39%, rgba(255,255,255,1) 49%, rgba(255,255,255,1) 52%, #ca8a00 63%, #ca8a00 100%);
+}
+
+.pagina-classifica .primo-classifica .text-muted,
+.pagina-classifica .secondo-classifica .text-muted,
+.pagina-classifica .terzo-classifica .text-muted {
+    color: white !important;
+}
+
+.pagina-classifica .primo-classifica,
+.pagina-classifica .secondo-classifica,
+.pagina-classifica .terzo-classifica {
+    animation: fade-slide 1s forwards, shine 2s infinite;
+    background-size: 300% 100%;
+    background-position: 0% 0%;
+}
+
+
+@keyframes fade-slide {
+    from {
+        opacity: 0;
+        transform: translate(0, -16px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes shine {
+    from {
+        background-position: 0% 0%;
+        
+    }
+    to {
+        background-position: -150% 0%;
+    }
+}
+
+hr.riga{
+    width: 80%;
+    height: 10%;
+    background-color: rgba(196, 196, 196, 0.18);
+    border-radius: 24px;
+    border: none;
+    max-height: 10px;
+}
+
+.bottone{
+    width: 17em;
+}

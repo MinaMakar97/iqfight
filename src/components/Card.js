@@ -15,6 +15,7 @@ class Card extends React.Component {
 					<div className="font-weight-bold a">{this.props.nome}</div>
 					<div className="text-muted a">{this.props.punteggio}</div>
 				</div>
+				<div className="posizione">{this.props.posizione}</div>
 			</div>
 		);
 	}
