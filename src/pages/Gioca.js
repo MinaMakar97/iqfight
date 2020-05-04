@@ -3,6 +3,7 @@ import Logo from "../img/iqfight-logo.png";
 import "./Gioca.css";
 import Select from "react-select";
 import CardStanza from "../components/CardStanza";
+import { Link } from "react-router-dom";
 
 export default class Gioca extends Component {
 	constructor(props) {
@@ -90,7 +91,9 @@ export default class Gioca extends Component {
 					</div>
 				</div>
 				<div className="row centra order-1 order-sm-3">
-					<button className="bottone">Crea stanza</button>
+					<Link to="/crea-stanza">
+						<button className="bottone">Crea stanza</button>
+					</Link>
 				</div>
 			</div>
 		);

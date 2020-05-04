@@ -11,22 +11,28 @@ export default class Classifica extends Component {
 		this.state = {
 			giocatori: [],
 		};
+
+		this.xhr = null;
 	}
 
 	componentDidMount() {
-		let xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = (e) => {
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				const json = JSON.parse(e.target.responseText);
 				if (json["successo"]) this.setState({ giocatori: json["giocatori"] });
 				else document.getElementById("status").textContent = "Si è verificato un errore con la connessione al database";
 			}
 		};
-		xhr.onerror = (e) => {
+		this.xhr.onerror = (e) => {
 			document.getElementById("status").textContent = "Si è verificato un errore con la connessione al server";
 		};
-		xhr.open("GET", "http://skylion.zapto.org/iqfight/classifica.php");
-		xhr.send();
+		this.xhr.open("GET", "http://skylion.zapto.org/iqfight/classifica.php");
+		this.xhr.send();
+	}
+
+	componentWillUnmount() {
+		this.xhr.onerror = null;
 	}
 
 	creaGiocatori() {
