@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MenuLaterale from "./components/MenuLaterale.js";
+import MenuLaterale from "./components/Menulaterale.js";
 import Login from "./pages/Home.js";
 import AggiungiDomanda from "./pages/AggiungiDomanda.js";
-import Gioco from "./pages/Gioco.js";
+import Gioca from "./pages/Gioca.js";
 import Classifica from "./pages/Classifica";
-import Gioca from "./pages/Gioca";
+import CreaStanza from "./pages/CreaStanza";
+import SalaAttesa from "./pages/SalaAttesa.js";
 
 class App extends Component {
 	render() {
@@ -23,8 +24,9 @@ class App extends Component {
 							<Route path="/login" component={Login}></Route>
 							<Route path="/registrazione" component={Login}></Route>
 							<Route path="/aggiungi-domanda" component={AggiungiDomanda}></Route>
-							<Route path="/gioca" component={Gioca}></Route>
-							<Route path="/room/:id" component={Gioco}></Route>
+							<Route path="/gioca" component={SalaAttesa}></Route>
+							{/* {<Route path="/room/:id" component={Gioco}></Route>} */}
+							<Route path="/crea-stanza" component={CreaStanza}></Route>
 							<Route path="/classifica" component={Classifica}></Route>
 						</Switch>
 					</Router>

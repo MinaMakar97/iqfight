@@ -52,6 +52,7 @@
     margin: 0px;
     flex-grow: 1;
     justify-content: space-between;
+    max-height: 390px;
 }
 
 @media screen and (max-width: 576px) {
