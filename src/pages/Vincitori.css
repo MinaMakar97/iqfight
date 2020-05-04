@@ -1,0 +1,48 @@
+.pagina-classifica img {
+  max-width: 200px;
+}
+
+.pagina-classifica .contenuto-classifica {
+  overflow: auto;
+  flex-grow: 1;
+  padding-bottom: 1em;
+}
+
+.pagina-classifica {
+  width: 80%;
+}
+
+.div-card {
+  width: 80%;
+}
+
+.pagina-classifica .card {
+  border: 4px solid #8b6edd;
+  opacity: 0;
+  height: 65px;
+  margin: 2em 2em 2em 5em;
+  max-width: unset;
+  margin-left: unset !important;
+}
+
+@media screen and (max-width: 576px) {
+  .pagina-classifica {
+    width: 100% !important;
+  }
+  .div-card {
+    width: 100% !important;
+  }
+}
+
+hr.riga {
+  width: 80%;
+  height: 10%;
+  background-color: rgba(196, 196, 196, 0.18);
+  border-radius: 24px;
+  border: none;
+  max-height: 10px;
+}
+
+.bottone {
+  width: 17em;
+}

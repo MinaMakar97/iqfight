@@ -1,0 +1,30 @@
+.domanda{
+    background-color: white;
+    height: auto;
+    min-height: 8em;
+    width: 100%;
+    border: 4px solid rgb(101, 64, 204);
+    border-radius: 15px;
+    font-size: 29px;
+    word-spacing: break-all;
+    text-align: center;
+}
+
+.risposta{
+    background-color: white;
+    height: 4em;
+    width: 48%;
+    padding: 1em;
+    border: 4px solid rgb(101, 64, 204);
+    border-radius: 15px;
+}
+
+.div-domanda{
+    justify-content: space-between;
+    flex-direction: row;
+    
+}
+
+.row{
+    margin: unset !important;
+}

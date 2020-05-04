@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./MenuLaterale.css";
 import { withRouter } from "react-router-dom";
 
+
 class MenuLaterale extends Component {
 	constructor(props) {
 		super(props);
@@ -45,17 +46,15 @@ class MenuLaterale extends Component {
 	}
 
 	render() {
-		return (
-			<div id="div-menu-laterale" style={{ transform: "translateX(" + (this.state.aperto ? "0px" : "-100%") + ")" }}>
-				<div id="menu-laterale">
-					<hr className="riga-menu"></hr>
-					{this.lista}
-				</div>
-				<div className="menu-button" onClick={this.setta}>
-					<p id="freccia" className={this.state.aperto ? "arrow-right" : "arrow-left"}></p>
-				</div>
+		return <div id="div-menu-laterale" style={{ transform: "translateX(" + (this.state.aperto ? "0px" : "-100%") + ")" }}>
+			<div id="menu-laterale">
+				<hr className="riga-menu"></hr>
+				{this.lista}
 			</div>
-		);
+			<div className="menu-button" onClick={this.setta}>
+				<p id="freccia" className={this.state.aperto ? "arrow-right" : "arrow-left"}></p>
+			</div>
+		</div>
 	}
 }
 
