@@ -10,7 +10,7 @@
 
 .pagina-classifica .card {
     width: 33%;
-    border: 4px solid #8B6EDD;
+    border: 4px solid rgb(101, 64, 204);
     animation: fade-slide 1s;
     animation-fill-mode: forwards;
     opacity: 0;

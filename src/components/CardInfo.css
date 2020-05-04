@@ -1,0 +1,31 @@
+.nome-sezione{
+    color:#8B6EDD;
+    font-size: .9em;
+    height: 30%;
+}
+
+.sezione{
+    font-size: 1.5em;
+    text-overflow: clip;
+    
+}
+
+.div-card{
+    height: auto;
+    background-color: white;
+    border-style: solid;
+    border-color: rgb(101, 64, 204);
+    border-radius: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 3em;
+    word-break: break-all;
+    min-height: 70px;
+    padding-top: .4em;
+}
+
+@media screen and (max-width: 576px){
+    .div-card{
+        margin-bottom: 1em !important;
+    }
+}
