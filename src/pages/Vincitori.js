@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 class Vincitori extends React.Component {
   render() {
     return (
-      <div className="pagina-classifica w-100 h-100 flex-column centra">
+      <div className="pagina-classifica pagina-vincitore w-100 h-100 flex-column centra">
         <img src={logo} alt="Logo"></img>
         <p className="centra" style={{ color: "white", fontSize: "1em", marginTop: "1em" }}>
           {" "}
