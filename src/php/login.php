@@ -20,7 +20,7 @@
             die(json_encode(["errore" => "Username o password non corretti"]));
         }
         // header('Location: success.php');
-        echo json_encode(["successo" => true, "url" => "https://google.it"]);
+        echo json_encode(["successo" => true, "url" => "/gioca"]);
 
     }
 
@@ -28,6 +28,11 @@
         // Logout
         session_unset();
         echo json_encode(["successo" => true]);
+    }
+
+    else if ($_SERVER['REQUEST_METHOD'] == "GET") {
+        // Controllo autenticazione
+        echo json_encode(["loggato" => isset($_SESSION["username"])]);
     }
     disconnettiDB($conn);
 ?>
