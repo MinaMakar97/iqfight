@@ -1,5 +1,4 @@
-
-.loginn{
+.loginn {
     height: 100%;
     width: 100%;
     display: flex;
@@ -8,7 +7,7 @@
     flex-direction: column;
 }
 
-.form{
+.form {
     width: 80%;
     min-width: 250px;
     display: flex;
@@ -17,21 +16,21 @@
 }
 
 @media screen and (max-width: 576px) {
-    .row{
-      height: auto !important;
+    .row {
+        height: auto !important;
     }
-    .descrizione{
+    .descrizione {
         font-size: large !important;
     }
-    .log{
+    .log {
         font-size: x-large !important;
     }
-    .form{
+    .form {
         width: 100% !important;
     }
 }
 
-.descrizione{
+.descrizione {
     padding-top: 20px;
     text-align: center;
     color: white;
@@ -45,12 +44,12 @@
     flex-direction: column;
 }
 
-.riga{
+.riga {
     width: 100%;
     height: 100%;
 }
 
-.sfoglia{
+.sfoglia {
     flex-grow: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -60,25 +59,24 @@
     margin-right: 4px;
 }
 
-.prova{
-    color: #8B6EDD;
+.contorno {
+    color: #8b6edd;
     width: 4.5em;
     height: 100%;
-    background-color: #E0D5FF;
+    background-color: #e0d5ff;
     border-radius: 10px;
     text-align: center;
 }
 
-.termini-cond{
+.termini-cond {
     height: 2em;
     width: 100%;
     text-align: center;
     justify-content: center;
     flex-direction: row;
-
 }
 
-.form-check-label{
+.form-check-label {
     color: white;
 }
 
