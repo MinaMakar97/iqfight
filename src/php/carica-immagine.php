@@ -4,7 +4,10 @@
     $dbConn = connettiDB();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $target_dir = "img/";
+        $target_dir = "avatars/";
+        if (!file_exists($target_dir)) {
+            mkdir($target_dir);
+        }
         $source_file = $_FILES["avatar"]["name"];
         $imageFileType = strtolower(pathinfo($source_file,PATHINFO_EXTENSION));
         $target_file = $target_dir . basename($_SESSION["username"] . "." . $imageFileType);

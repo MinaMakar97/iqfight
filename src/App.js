@@ -2,36 +2,47 @@ import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MenuLaterale from "./components/Menulaterale.js";
-import Login from "./pages/Home.js";
 import AggiungiDomanda from "./pages/AggiungiDomanda.js";
 import Gioco from "./pages/Gioco.js";
 import Classifica from "./pages/Classifica";
 import Gioca from "./pages/Gioca";
+import Home from "./pages/Home.js";
+import PrivateRoute from "./components/PrivateRoute";
+import CreaStanza from "./pages/CreaStanza";
 
 class App extends Component {
-  render() {
-    return (
-      <div className="container-fluid contenitore-principale p-4">
-        <div className="cerchio rounded-circle m-3" id="cerchio-tl"></div>
-        <div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>
-        <div className="cerchio rounded-circle m-3" id="cerchio-bl"></div>
-        <div className="cerchio rounded-circle m-3" id="cerchio-br"></div>
-        <div className="container-fluid contenuto p-3 p-md-4">
-          <Router>
-            <MenuLaterale></MenuLaterale>
-            <Switch>
-              <Route path="/login" component={Login}></Route>
-              <Route path="/registrazione" component={Login}></Route>
-              <Route path="/aggiungi-domanda" component={AggiungiDomanda}></Route>
-              <Route path="/gioca" component={Gioca}></Route>
-              <Route path="/room/:id" component={Gioco}></Route>
-              <Route path="/classifica" component={Classifica}></Route>
-            </Switch>
-          </Router>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="container-fluid contenitore-principale p-4">
+				<div className="cerchio rounded-circle m-3" id="cerchio-tl"></div>
+				<div className="cerchio rounded-circle m-3" id="cerchio-tr"></div>
+				<div className="cerchio rounded-circle m-3" id="cerchio-bl"></div>
+				<div className="cerchio rounded-circle m-3" id="cerchio-br"></div>
+				<div className="container-fluid contenuto p-3 p-md-4">
+					<Router>
+						<MenuLaterale></MenuLaterale>
+						<Switch>
+							<Route path="/login" component={Home}></Route>
+							<Route path="/registrazione" component={Home}></Route>
+							<PrivateRoute path="/aggiungi-domanda">
+								<AggiungiDomanda></AggiungiDomanda>
+							</PrivateRoute>
+							<PrivateRoute path="/gioca">
+								<Gioca></Gioca>
+							</PrivateRoute>
+							<PrivateRoute path="/crea-stanza">
+								<CreaStanza></CreaStanza>
+							</PrivateRoute>
+							<PrivateRoute path="/room/:id">
+								<Gioco></Gioco>
+							</PrivateRoute>
+							<Route path="/classifica" component={Classifica}></Route>
+						</Switch>
+					</Router>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default App;

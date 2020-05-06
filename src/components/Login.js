@@ -24,9 +24,9 @@ class Login extends React.Component {
 				}
 			}
 		};
-		xml.open("POST", "http://192.168.1.100/iqfight/login.php");
-		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xml.open("POST", "http://localhost/iqfight/login.php");
 		xml.withCredentials = true;
+		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xml.send(JSON.stringify(json));
 	}
 
