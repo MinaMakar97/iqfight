@@ -16,10 +16,29 @@ export default class CreaStanza extends Component {
 			Spettacolo: "#9c7abe",
 			Storia: "#FF851B",
 		};
+		this.creaStanza = this.creaStanza.bind(this);
 	}
+
+	creaStanza(e) {
+		e.preventDefault();
+		const form = e.target;
+		let json = { nome: form.nomeStanza.value, privata: form.privata.checked, categoria: form.categoria.value };
+		let xml = new XMLHttpRequest();
+		xml.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json2 = JSON.parse(e.target.responseText);
+				if (json2["successo"] === true) window.location.replace("/room/" + json2["idStanza"]);
+			}
+		};
+		xml.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stanza.php");
+		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xml.withCredentials = true;
+		xml.send(JSON.stringify(json));
+	}
+
 	render() {
 		const categorie = [];
-		categorie.push(<input type="radio" name="categoria" className="d-none" id="casuale" key="casuale"></input>);
+		categorie.push(<input type="radio" name="categoria" className="d-none" id="casuale" key="casuale" value="casuale"></input>);
 		categorie.push(
 			<label className="categoria centra domande-casuali" htmlFor="casuale" key="lab-casuale">
 				Domande Casuali
@@ -28,7 +47,7 @@ export default class CreaStanza extends Component {
 			</label>
 		);
 		for (let key in this.mappaColori) {
-			categorie.push(<input type="radio" name="categoria" className="d-none" id={key} key={"lab-" + key}></input>);
+			categorie.push(<input type="radio" name="categoria" className="d-none" id={key} key={"lab-" + key} value={key}></input>);
 			categorie.push(
 				<label className="categoria centra" style={{ backgroundColor: this.mappaColori[key] }} htmlFor={key} key={key}>
 					{key}
@@ -36,7 +55,7 @@ export default class CreaStanza extends Component {
 			);
 		}
 		return (
-			<div className="crea-stanza container-fluid h-100 d-flex flex-column">
+			<form className="crea-stanza container-fluid h-100 d-flex flex-column" onSubmit={this.creaStanza}>
 				<div className="row centra">
 					<img src={Logo} className="w-50 centra" alt="Logo di IQFight"></img>
 				</div>
@@ -47,12 +66,12 @@ export default class CreaStanza extends Component {
 					<div className="contenitore-viola h-100 d-flex flex-column">
 						<div className="row">
 							<div className="col-12 col-sm-6">
-								<input type="text" className="form-control-lg shadow" placeholder="Nome stanza" required></input>
+								<input type="text" className="form-control-lg shadow" placeholder="Nome stanza" name="nomeStanza" required></input>
 							</div>
 							<div className="col-12 col-sm-6">
 								<div className="centra opzione-toggle form-control-lg shadow">
 									<p>Stanza privata</p>
-									<Toggle></Toggle>
+									<Toggle name="privata"></Toggle>
 								</div>
 							</div>
 						</div>
@@ -65,9 +84,11 @@ export default class CreaStanza extends Component {
 					</div>
 				</div>
 				<div className="row centra" style={{ marginTop: "1em" }}>
-					<button className="bottone">Crea</button>
+					<button type="submit" className="bottone">
+						Crea
+					</button>
 				</div>
-			</div>
+			</form>
 		);
 	}
 }

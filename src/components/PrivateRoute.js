@@ -15,7 +15,7 @@ export default class PrivateRoute extends Component {
 				return json["loggato"];
 			}
 		};
-		xhr.open("GET", "http://localhost/iqfight/login.php", true);
+		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/login.php", true);
 		xhr.withCredentials = true;
 		xhr.send();
 	}

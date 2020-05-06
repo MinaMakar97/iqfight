@@ -27,7 +27,7 @@ export default class Classifica extends Component {
 		this.xhr.onerror = (e) => {
 			document.getElementById("status").textContent = "Si è verificato un errore con la connessione al server";
 		};
-		this.xhr.open("GET", "http://skylion.zapto.org/iqfight/classifica.php");
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/classifica.php");
 		this.xhr.send();
 	}
 

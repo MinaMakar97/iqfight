@@ -20,7 +20,7 @@ export default class AggiungiDomanda extends Component {
 				this.setState({ categorie: JSON.parse(e.target.responseText)["categorie"] });
 			}
 		};
-		req.open("GET", "http://192.168.1.110/iqfight/aggiungi-domanda.php");
+		req.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/aggiungi-domanda.php");
 		req.send();
 	}
 
@@ -45,7 +45,7 @@ export default class AggiungiDomanda extends Component {
 				$("#popup-successo").modal();
 			}
 		};
-		req.open("POST", "http://192.168.1.110/iqfight/aggiungi-domanda.php");
+		req.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/aggiungi-domanda.php");
 		req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		req.send(JSON.stringify(dati));
 	}

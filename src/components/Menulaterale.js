@@ -30,7 +30,7 @@ class MenuLaterale extends Component {
 
 	esci() {
 		let xml = new XMLHttpRequest();
-		xml.open("DELETE", "http://localhost/iqfight/login.php");
+		xml.open("DELETE", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/login.php");
 		xml.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);

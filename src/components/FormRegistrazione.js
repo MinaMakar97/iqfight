@@ -32,7 +32,7 @@ class FormRegistrazione extends React.Component {
 				}
 			}
 		};
-		xml.open("POST", "http://192.168.1.100/iqfight/registrazione.php");
+		xml.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/registrazione.php");
 		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xml.send(JSON.stringify(json));
 	}
@@ -52,7 +52,7 @@ class FormRegistrazione extends React.Component {
 				}
 			}
 		};
-		xmlImage.open("POST", "http://192.168.1.100/iqfight/carica-immagine.php");
+		xmlImage.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/carica-immagine.php");
 		xmlImage.send(formData);
 	}
 
@@ -72,7 +72,7 @@ class FormRegistrazione extends React.Component {
 
 	render() {
 		return (
-			<div div className="loginn">
+			<div className="loginn">
 				<p style={{ color: "white", fontSize: "2em" }}> Registrazione</p>
 				<form className="form" onSubmit={this.registerSubmit}>
 					<input className="form-control-lg shadow mb-4" maxLength="40" type="email" placeholder="Email" name="email" required></input>
@@ -89,14 +89,14 @@ class FormRegistrazione extends React.Component {
 						<p id="name-avatar" className="sfoglia">
 							{this.state.filePath}
 						</p>
-						<label class="contorno centra">
+						<label className="contorno centra">
 							Sfoglia
 							<input type="file" name="avatar" style={{ display: "none" }} onChange={this.cambiaFile}></input>
 						</label>
 					</div>
 					<div className="termini-cond mt-3">
 						<input className="form-check-input" type="checkbox" value="" id="defaultCheck1" required />
-						<label className="form-check-label" for="defaultCheck1">
+						<label className="form-check-label" htmlFor="defaultCheck1">
 							Accetto i termini di servizio
 						</label>
 					</div>
