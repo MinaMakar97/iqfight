@@ -7,7 +7,7 @@ import Gioco from "./pages/Gioco.js";
 import Classifica from "./pages/Classifica";
 import Gioca from "./pages/Gioca";
 import Home from "./pages/Home.js";
-import PrivateRoute from "./components/PrivateRoute";
+import withAuth from "./components/withAuth";
 import CreaStanza from "./pages/CreaStanza";
 
 class App extends Component {
@@ -24,18 +24,10 @@ class App extends Component {
 						<Switch>
 							<Route path="/login" component={Home}></Route>
 							<Route path="/registrazione" component={Home}></Route>
-							<PrivateRoute path="/aggiungi-domanda">
-								<AggiungiDomanda></AggiungiDomanda>
-							</PrivateRoute>
-							<PrivateRoute path="/gioca">
-								<Gioca></Gioca>
-							</PrivateRoute>
-							<PrivateRoute path="/crea-stanza">
-								<CreaStanza></CreaStanza>
-							</PrivateRoute>
-							<PrivateRoute path="/room/:id">
-								<Gioco></Gioco>
-							</PrivateRoute>
+							<Route path="/aggiungi-domanda" component={withAuth(AggiungiDomanda)}></Route>
+							<Route path="(/|/gioca)" component={withAuth(Gioca)}></Route>
+							<Route path="/crea-stanza" component={withAuth(CreaStanza)}></Route>
+							<Route path="/room/:id" component={withAuth(Gioco)}></Route>
 							<Route path="/classifica" component={Classifica}></Route>
 						</Switch>
 					</Router>

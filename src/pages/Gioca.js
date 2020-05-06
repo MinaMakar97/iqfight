@@ -12,21 +12,53 @@ export default class Gioca extends Component {
 			stanze: [],
 			categorie: ["Tutte", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
 		};
+		this.xhr = null;
+		this.xhrCat = null;
 	}
 
 	componentDidMount() {
-		const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
-		let stanze = [];
-		for (let i = 0; i < 25; i++) {
-			stanze.push({
-				nome: "Stanza" + i,
-				categoria: categorie[Math.floor(Math.random() * categorie.length)],
-				giocatori: Math.floor(Math.random() * 8),
-			});
-		}
-		this.setState({
-			stanze: stanze,
-		});
+		// const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
+		// let stanze = [];
+		// for (let i = 0; i < 25; i++) {
+		// 	stanze.push({
+		// 		nome: "Stanza" + i,
+		// 		categoria: categorie[Math.floor(Math.random() * categorie.length)],
+		// 		giocatori: Math.floor(Math.random() * 8),
+		// 	});
+		// }
+		// this.setState({
+		// 	stanze: stanze,
+		// });
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ stanze: json["stanze"] });
+				}
+			}
+		};
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser_stanze.php");
+		this.xhr.withCredentials = true;
+		this.xhr.send();
+
+		this.xhrCat = new XMLHttpRequest();
+		this.xhrCat.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ categorie: json["categorie"] });
+				}
+			}
+		};
+		this.xhrCat.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/aggiungi-domanda.php");
+		this.xhrCat.withCredentials = true;
+		this.xhrCat.send();
+	}
+
+	componentWillUnmount() {
+		if (this.xhr) this.xhr.onreadystatechange = null;
+		if (this.xhrCat) this.xhrCat.onreadystatechange = null;
 	}
 
 	render() {

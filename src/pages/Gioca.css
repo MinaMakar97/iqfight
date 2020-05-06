@@ -36,6 +36,7 @@
     padding: 1em;
     width: 80%;
     overflow: auto;
+    min-height: 450px;
 }
 
 .gioca .contenitore-viola .col-12 {
@@ -50,7 +51,6 @@
 
 .div-stanze {
     margin: 0px;
-    flex-grow: 1;
     justify-content: space-between;
     max-height: 390px;
 }
