@@ -44,7 +44,7 @@
 }
 
 .gioca .contenitore-viola .card-stanza {
-    width: 49%;
+    width: 100%;
     height: 80px;
     margin: .5em 0px .5em 0px;
 }
@@ -55,13 +55,26 @@
     max-height: 390px;
 }
 
+.div-stanze a{
+    width: 49%;
+}
+
+.div-stanze a:hover{
+    text-decoration: none;
+}
+
+.gioca .contenitore-viola .card-stanza:hover {
+    box-shadow: 4px 4px 2px rgba(0,0,0,.2);
+}
+
+
 @media screen and (max-width: 576px) {
     .contenitore-viola {
         width: 100% !important;
         max-height: 700px;
     }
     
-    .gioca .contenitore-viola .card-stanza {
+    .gioca .contenitore-viola a {
         width: 100%;
     }
 

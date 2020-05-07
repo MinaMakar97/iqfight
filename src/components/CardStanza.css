@@ -17,6 +17,7 @@
 
 .card-stanza .div-giocatori {
     margin-right: 1em;
+    min-width: 2em;
 }
 
 .card-stanza .num-giocatori {

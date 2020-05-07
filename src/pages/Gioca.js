@@ -38,7 +38,7 @@ export default class Gioca extends Component {
 				}
 			}
 		};
-		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser_stanze.php");
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
 		this.xhr.withCredentials = true;
 		this.xhr.send();
 
@@ -107,12 +107,14 @@ export default class Gioca extends Component {
 						</div>
 						<div className="row flex-wrap div-stanze centra">
 							{this.state.stanze.map((stanza, index) => (
-								<CardStanza
-									nomeStanza={stanza.nome}
-									categoria={stanza.categoria}
-									numGiocatori={stanza.giocatori}
-									maxGiocatori={8}
-									key={index}></CardStanza>
+								<Link to={"/room/" + stanza.id}>
+									<CardStanza
+										nomeStanza={stanza.nome}
+										categoria={stanza.categoria}
+										numGiocatori={stanza.giocatori}
+										maxGiocatori={8}
+										key={index}></CardStanza>
+								</Link>
 							))}
 						</div>
 					</div>
