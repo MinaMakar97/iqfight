@@ -1,16 +1,17 @@
-.giocatori{
-    height: 90%;
-    background-color: white;
-    border-radius: 15px;
-    justify-content: flex-start;
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    border: 4px solid rgb(101, 64, 204);
-    overflow-y: scroll;
-    max-height: 350px;
+.giocatori {
+	height: 90%;
+	background-color: white;
+	border-radius: 15px;
+	justify-content: flex-start;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	border: 4px solid rgb(101, 64, 204);
+	overflow-y: scroll;
+	max-height: 350px;
+	padding-bottom: 1em;
 }
 
-.div-princ{
-    height: 60%;
+.div-princ {
+	height: 60%;
 }
