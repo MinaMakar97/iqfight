@@ -94,12 +94,7 @@
 
 		foreach($giocatori as $giocatore){
 			if (time() - $giocatore["ultimaRichiesta"] > 4) {
-				$query = $dbConn->prepare("DELETE FROM partecipa where username = ?");
-				$query->bind_param("s",$giocatore["username"]);
-				$query->execute();
-				$query = $dbConn->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 where idStanza = ?");
-				$query->bind_param("i",$_SESSION["idStanza"]);
-				$query->execute();
+				eliminaGiocatoreDaStanza($dbConn, $giocatore["username"], $_SESSION["idStanza"]);
 			}
 		}
 
@@ -118,15 +113,26 @@
 		}
 	}
 	else if ($_SERVER['REQUEST_METHOD'] == "DELETE"){
-        // Cancella il giocatore dalla stanza
-		$username = $_SESSION["username"];
+        eliminaGiocatoreDaStanza($dbConn, $_SESSION["username"],$_SESSION["idStanza"]);
+	}
+
+	disconnettiDB($dbConn);
+
+	function eliminaGiocatoreDaStanza(mysqli $dbConn, $username, $idStanza) {
 		$query = $dbConn->prepare("DELETE FROM partecipa where username = ?");
 		$query->bind_param("s",$username);
         $query->execute();
         $query = $dbConn->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 where idStanza = ?");
-        $query->bind_param("i",$_SESSION["idStanza"]);
-        $query->execute();
-	}
+        $query->bind_param("i", $idStanza);
+		$query->execute();
 
-	disconnettiDB($dbConn);
+		if ($query->affected_rows == 0){
+			$query = $dbConn->prepare("DELETE FROM stanza where id = ?");
+			$query->bind_param("i", $idStanza);
+			$query->execute();
+		}
+		
+		unset($_SESSION["idStanza"]);
+	}
 ?>
+
