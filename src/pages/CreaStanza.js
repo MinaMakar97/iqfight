@@ -38,7 +38,7 @@ export default class CreaStanza extends Component {
 
 	render() {
 		const categorie = [];
-		categorie.push(<input type="radio" name="categoria" className="d-none" id="casuale" key="casuale" value="casuale"></input>);
+		categorie.push(<input type="radio" name="categoria" className="d-none" id="casuale" key="casuale" value="Casuale"></input>);
 		categorie.push(
 			<label className="categoria centra domande-casuali" htmlFor="casuale" key="lab-casuale">
 				Domande Casuali

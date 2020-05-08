@@ -4,8 +4,10 @@ import "./CardStanza.css";
 export default class CardStanza extends Component {
 	constructor(props) {
 		super(props);
+
 		this.mappaColori = {
 			Arte: "maroon",
+			Casuale: "linear-gradient(to left, #fa709a 0%, #fee140 100%)",
 			Geografia: "#56BADA",
 			Giochi: "gold",
 			Informatica: "#6254FF",
@@ -18,7 +20,7 @@ export default class CardStanza extends Component {
 
 	render() {
 		return (
-			<div className="card-stanza" style={{ backgroundColor: this.mappaColori[this.props.categoria] }}>
+			<div className="card-stanza" style={{ background: this.mappaColori[this.props.categoria] }}>
 				<div className="div-info">
 					<p className="nome-stanza">{this.props.nomeStanza}</p>
 					<p className="categoria-stanza">{this.props.categoria}</p>
