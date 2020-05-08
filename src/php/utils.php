@@ -6,7 +6,8 @@
         header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE");
         header("Access-Control-Allow-Credentials: true");
     }
-    
+
+    session_set_cookie_params(60 * 60 * 24 * 15);
     session_start();
     
     
