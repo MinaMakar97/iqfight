@@ -83,8 +83,8 @@ export default class CreaStanza extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="row centra" style={{ marginTop: "1em" }}>
-					<button type="submit" className="bottone">
+				<div className="row centra">
+					<button type="submit" className="bottone mt-4">
 						Crea
 					</button>
 				</div>

@@ -13,7 +13,7 @@
 		$categoria = $json["categoria"];
 		$query = $dbConn->prepare("INSERT INTO stanza VALUES (DEFAULT, ?, ?, ?, ?, null, 0, null, 0, 0);");
 		if (!$query) {
-			die (json_encode(["successo" => false, "errore" => "ciao sono errore "]));
+			die (json_encode(["successo" => false, "errore" => mysqli_error($dbConn)]));
 		}
 		$query->bind_param('ssis', $nome, $categoria, $privata, $creatore);
 		if (!$query->execute()) {

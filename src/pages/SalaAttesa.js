@@ -48,10 +48,10 @@ class StanzaAttesa extends React.Component {
 					<div className="col-12 col-sm-8">
 						<CardInfo nomeSezione={"Nome stanza"} sezione={this.props.nome} style={{ width: "100%" }}></CardInfo>
 						<div className="row">
-							<div className={"col-12 col-sm-6"} style={{ paddingLeft: 0 }}>
+							<div className={"col-12 col-sm-6 p-0 pr-sm-2"}>
 								<CardInfo nomeSezione={"Categoria"} sezione={this.props.categoria} style={{ width: "100%" }}></CardInfo>
 							</div>
-							<div className={"col-12 col-sm-6"} style={{ paddingRight: 0 }}>
+							<div className={"col-12 col-sm-6 p-0 pl-sm-2"} style={{ paddingRight: 0 }}>
 								<CardInfo
 									nomeSezione={"Visbilità stanza"}
 									sezione={this.props.privata === 0 ? "Pubblica" : "Privata"}
