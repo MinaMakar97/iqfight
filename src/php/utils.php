@@ -6,6 +6,9 @@
         header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE");
         header("Access-Control-Allow-Credentials: true");
     }
+    // Variabili di gioco
+    $tempoDomanda = 10;
+    $numDomande = 3;
 
     session_set_cookie_params(60 * 60 * 24 * 15);
     session_start();
@@ -39,7 +42,7 @@
 
     function getCategorie(mysqli $conn)
     {
-        $query = $conn->query("SELECT nome FROM categoria");
+        $query = $conn->query("SELECT nome FROM categoria WHERE nome <> 'Casuale'");
         $rows = $query->fetch_all(MYSQLI_ASSOC);
         $categoria = [];
         for ($i = 0; $i < count($rows); $i++)
@@ -54,20 +57,33 @@
         $query->execute();
     }
 
-    function tempoScaduto(mysqli $dbConn, $idStanza, $x)
+    function tempoScaduto(mysqli $dbConn, $idStanza, $tempo)
     {
         $query = $dbConn->prepare("SELECT UNIX_TIMESTAMP(timestampDomanda) as timestampDomanda FROM stanza WHERE id = ?");
         $query->bind_param("i", $idStanza);
         $query->execute();
         $stanza = $query->get_result();
         $stanza = $stanza->fetch_assoc();
-        if (time() - $stanza["timestampDomanda"] > $x) return true;
+        if (time() - $stanza["timestampDomanda"] > $tempo) return true;
         return false;
     }
 
-    if ($_SERVER["REQUEST_METHOD"] == "GET"){
-        $conn = connettiDB();
-        echo (tempoScaduto($conn,1,10));
-        disconnettiDB($conn);
+    function prendiDomanda($conn, $idStanza,$numDomanda){
+        $query = $conn->prepare("SELECT domanda, rispCorretta, risposta2, risposta3, risposta4 FROM domandeStanza,domanda WHERE indice = ? and idStanza = ? and domandeStanza.idDomanda = domanda.id");
+        $query->bind_param("ii",$numDomanda,$idStanza);
+        $query->execute();
+        $row = $query->get_result();
+        $row = $row->fetch_assoc();
+        return $row;
     }
+
+    function infoStanza($conn ,$idStanza){
+        $query = $conn->prepare("SELECT domandaDaCambiare,numDomanda FROM stanza WHERE id = ?");
+        $query->bind_param("i",$idStanza);
+        $query->execute();
+        $row = $query->get_result();
+        $row = $row->fetch_assoc();
+        return $row;
+    }
+
 ?>

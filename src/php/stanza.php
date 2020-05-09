@@ -25,9 +25,9 @@
 	else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 		// Un giocatore vuole entrare in una stanza o avviarla
 		$json = prendiJson();
+		controllaParametri($json, "azione", "idStanza");
 		$azione = $json["azione"];
 		$idStanza = $json["idStanza"];
-		controllaParametri($json, "azione", "idStanza");
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
 			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1,DEFAULT);");
@@ -58,16 +58,7 @@
 				echo json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]);
 			}
 		}
-		else if ($azione == "inizio"){
-			$query = $dbConn ->prepare("UPDATE stanza SET iniziata = 1 WHERE id = ?");
-			$query->bind_param("i",$idStanza);
-			if ($query->execute()){
-				echo json_encode(["successo" => true, "azione" => "inizio"]);
-			}
-			else {
-				echo json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]);
-			}
-		}
+		
 	}
 	else if($_SERVER["REQUEST_METHOD"] == "GET"){
 		//ritornare i giocatori
