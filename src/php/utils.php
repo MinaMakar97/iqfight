@@ -7,7 +7,7 @@
         header("Access-Control-Allow-Credentials: true");
     }
     // Variabili di gioco
-    $tempoDomanda = 10;
+    $tempoDomanda = 20;
     $numDomande = 3;
 
     session_set_cookie_params(60 * 60 * 24 * 15);
@@ -55,6 +55,7 @@
         $query = $conn->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 WHERE idStanza = ?");
         $query->bind_param("i", $idStanza);
         $query->execute();
+        return $query->affected_rows;
     }
 
     function tempoScaduto(mysqli $dbConn, $idStanza, $tempo)

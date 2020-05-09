@@ -113,11 +113,12 @@
 		$query = $dbConn->prepare("DELETE FROM partecipa where username = ?");
 		$query->bind_param("s",$username);
         $query->execute();
-        $query = $dbConn->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 where idStanza = ?");
-        $query->bind_param("i", $idStanza);
-		$query->execute();
+        $numGiocatoriAttuale = aggiornaGiocatori($dbConn, $idStanza);
 
-		if ($query->affected_rows == 0){
+		if ($numGiocatoriAttuale == 0){
+			$query = $dbConn->prepare("DELETE FROM domandeStanza where idStanza = ?");
+			$query->bind_param("i", $idStanza);
+			$query->execute();
 			$query = $dbConn->prepare("DELETE FROM stanza where id = ?");
 			$query->bind_param("i", $idStanza);
 			$query->execute();

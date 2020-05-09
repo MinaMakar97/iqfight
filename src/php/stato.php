@@ -9,7 +9,7 @@
 
         aggiornaUltimaRichiesta($dbConn, $username);
 
-        if (getNumDomanda($dbConn, $idStanza) < $numDomande) {
+        if (infoStanza($dbConn, $idStanza)["numDomanda"] < $numDomande) {
             if (!tempoScaduto($dbConn, $idStanza, $tempoDomanda)) {
                 $query = $dbConn->prepare("SELECT aggiornaGiocatori FROM partecipa WHERE username = ?");
                 $query->bind_param("s", $username);
@@ -17,6 +17,7 @@
                 $result = $query->get_result();
                 $result = $result->fetch_assoc();
                 $aggiornaGiocatori = $result["aggiornaGiocatori"];
+
                 if ($aggiornaGiocatori == 1) {
                     $giocatori = statoGiocatori($dbConn, $idStanza);
                     $tuttiRisposto = true;
@@ -79,19 +80,9 @@
         $query->execute();
     }
 
-    function getNumDomanda(mysqli $dbConn, $idStanza)
-    {
-        $query = $dbConn->prepare("SELECT numDomanda FROM stanza WHERE id = ?");
-        $query->bind_param("i", $idStanza);
-        $query->execute();
-        $result = $query->get_result();
-        $result = $result->fetch_assoc();
-        return $result["numDomanda"];
-    }
-
     function creaRisultati(mysqli $dbConn, $idStanza)
     {
-        $query = $dbConn->prepare("SELECT username, punteggio, rispostaCorretta FROM partecipa WHERE idStanza = ?");
+        $query = $dbConn->prepare("SELECT username, punteggio, rispostaCorretta FROM partecipa WHERE idStanza = ? ORDER BY punteggio DESC");
         $query->bind_param("i", $idStanza);
         $query->execute();
         $result = $query->get_result();
@@ -110,7 +101,7 @@
     }
 
     function statoGiocatori(mysqli $dbConn, $idStanza) {
-        $query = $dbConn->prepare("SELECT username, CASE WHEN rispostaCorretta IS NULL THEN 0 ELSE 1 END as risposto FROM partecipa WHERE idStanza = ?");
+        $query = $dbConn->prepare("SELECT partecipa.username, avatar, punteggio, CASE WHEN rispostaCorretta IS NULL THEN 0 ELSE 1 END as risposto FROM partecipa, utente WHERE idStanza = ? AND utente.username = partecipa.username");
         $query->bind_param("i", $idStanza);
         $query->execute();
         $result = $query->get_result();

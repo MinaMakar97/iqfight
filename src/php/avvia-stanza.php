@@ -7,7 +7,7 @@
         $categoria = getCategoria($conn,$_SESSION["idStanza"]);
         if ($categoria == "Casuale") generaDomandeCasuali($conn,$numDomande,$_SESSION["idStanza"]);
         else generaDomande($conn,$numDomande,$categoria,$_SESSION["idStanza"]);
-        echo json_encode( ["successo" => true]);
+        echo json_encode( ["successo" => true] );
     }
 
     disconnettiDB($conn);
@@ -27,6 +27,7 @@
         $query->bind_param("i", $idStanza);
         $query->execute();
         
+        aggiornaGiocatori($conn, $idStanza);
     }
 
     function salvaDomande(mysqli $conn,$domande,$idStanza){
