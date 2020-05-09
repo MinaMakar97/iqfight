@@ -5,7 +5,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         // Richiesta delle categorie
-        echo json_encode(["categorie" => getCategoria($dbConn)]);
+        echo json_encode(["categorie" => getCategorie($dbConn)]);
     }
     else if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Crea nuova domanda
