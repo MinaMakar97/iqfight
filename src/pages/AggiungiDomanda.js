@@ -77,6 +77,7 @@ export default class AggiungiDomanda extends Component {
 						<p className="titolo text-center"> Aggiungi domanda </p>
 						<form className="d-flex flex-column w-100 centra" onSubmit={this.inviaDomanda}>
 							<Select
+								name="categoria"
 								options={options}
 								className="form-control-lg"
 								styles={styles}
