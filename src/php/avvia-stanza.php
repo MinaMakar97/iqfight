@@ -23,7 +23,7 @@
 
     function avviaStanza(mysqli $conn, $idStanza)
     {
-        $query = $conn->prepare("UPDATE stanza SET iniziata=1 and domandaDaCambiare=1 WHERE id = ?");
+        $query = $conn->prepare("UPDATE stanza SET iniziata=1, domandaDaCambiare=1 WHERE id = ?");
         $query->bind_param("i", $idStanza);
         $query->execute();
         
