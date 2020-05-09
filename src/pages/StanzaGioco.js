@@ -4,52 +4,153 @@ import Card from "../components/Card";
 import logo from "../img/iqfight-logo.png";
 import userImage from "../img/user.png";
 import "./SalaAttesa.css";
+import Vincitori from "./Vincitori";
+
 class StanzaGioco extends React.Component {
 	constructor() {
 		super();
+		this.getStato = this.getStato.bind(this);
+		this.rispondi = this.rispondi.bind(this);
 		this.state = {
 			domanda: "",
 			risposta1: "",
 			risposta2: "",
 			risposta3: "",
 			risposta4: "",
+			giocatori: [],
+			finita: false,
+			risposto: false, // Riattivarlo quando cambia domanda
+			avviaTempo: false,
 		};
+
 		this.width = window.innerWidth;
+		this.stateInterval = null;
+		this.refresh = 1000;
+		this.tempoDomanda = "20s";
 	}
 
 	componentDidMount() {
-		this.setState({
-			domanda: "ciao come ti chiami io sono mina e noaxBIUqcbjvbajh jhcxvjh ujhgasvc jaissdgc",
-			risposta1: "Mina",
-			risposta2: "Emanuele",
-			risposta3: "Fabrizio",
-			risposta4: "Matteo",
-		});
+		this.chiediDomanda();
+	}
+
+	chiediDomanda() {
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/domanda.php");
+		xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({
+						domanda: json["domanda"],
+						risposta1: json["risposte"][0],
+						risposta2: json["risposte"][1],
+						risposta3: json["risposte"][2],
+						risposta4: json["risposte"][3],
+						avviaTempo: true,
+					});
+
+					if (!this.stateInterval) this.stateInterval = setInterval(this.getStato, this.refresh);
+				}
+			}
+		};
+		xhr.withCredentials = true;
+		xhr.send();
+	}
+
+	creaGiocatori() {
+		let cardGiocatori = [];
+		let jGiocatori = this.state.giocatori;
+		for (let i = 0; i < jGiocatori.length; i++) {
+			cardGiocatori.push(
+				<Card
+					nome={jGiocatori[i].username}
+					punteggio={jGiocatori[i].punteggio}
+					immagine={jGiocatori[i].avatar || userImage}
+					style={{ width: "90%", backgroundColor: jGiocatori[i].risposto ? "lightblue" : null }}
+					key={i}></Card>
+			);
+		}
+		return cardGiocatori;
+	}
+
+	getStato() {
+		let xhr = new XMLHttpRequest();
+		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stato.php");
+		xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					if (json["azione"] === "aggiorna") {
+						// Qualcuno ha risposto, è entrato o è uscito
+						this.setState({
+							giocatori: json["giocatori"],
+						});
+					} else if (json["azione"] === "risultati") {
+						// Fine del round
+						console.log("Risultati", json);
+					} else if (json["azione"] === "finita") {
+						// Fine della partita
+						this.setState({ finita: true, giocatori: json["giocatori"] });
+					}
+				}
+			}
+		};
+		xhr.withCredentials = true;
+		xhr.send();
+	}
+
+	rispondi(e) {
+		e.target.style.backgroundColor = "lightblue";
+		let xhr = new XMLHttpRequest();
+		xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/rispondi.php");
+		xhr.withCredentials = true;
+		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xhr.send(JSON.stringify({ risposta: e.target.textContent }));
+		this.setState({ risposto: true });
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.stateInterval);
 	}
 
 	render() {
-		return (
+		return this.state.finita ? (
+			<Vincitori giocatori={this.state.giocatori}></Vincitori>
+		) : (
 			<div className="pagina-classifica w-100 h-100 flex-column centra">
 				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
 				<div className="row w-100 div-princ mt-3">
 					<div className="col-12 col-sm-8 mt-4">
 						<div className="progress mb-4">
 							<div
-								className="progress-bar progress-bar-striped"
+								className="progress-bar progress-bar-striped progress-bar-animated"
 								role="progressbar"
-								style={{ width: "100%", height: "100%" }}
+								style={{
+									width: this.state.avviaTempo ? "0%" : "100%",
+									height: "100%",
+									transitionDuration: this.tempoDomanda,
+									transitionTimingFunction: "linear",
+								}}
 								aria-valuenow="10"
 								aria-valuemin="0"
 								aria-valuemax="100"></div>
 						</div>
 						<div className="domanda mb-4 centra">{this.state.domanda}</div>
 						<div className="div-domanda row">
-							<div className="risposta mb-4 centra">{this.state.risposta1}</div>
-							<div className="risposta mb-4 centra">{this.state.risposta2}</div>
+							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+								{this.state.risposta1}
+							</div>
+							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+								{this.state.risposta2}
+							</div>
 						</div>
 						<div className="div-domanda row">
-							<div className="risposta mb-4 centra">{this.state.risposta3}</div>
-							<div className="risposta mb-4 centra">{this.state.risposta4}</div>
+							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+								{this.state.risposta3}
+							</div>
+							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+								{this.state.risposta4}
+							</div>
 						</div>
 					</div>
 					<div className="col-12 col-sm-1 centra">
@@ -59,12 +160,7 @@ class StanzaGioco extends React.Component {
 						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
 						<div className=" giocatori ">
 							<div style={{ color: "#8B6EDD", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
-							<Card nome={"Mina Makar"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
-							<Card nome={"Fabrizio Rossi"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
-							<Card nome={"Matteo Orsini"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
-							<Card nome={"Mina Makar"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
-							<Card nome={"Fabrizio Rossi"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
-							<Card nome={"Matteo Orsini"} punteggio={"0 punti"} immagine={userImage} style={{ width: "90%" }}></Card>
+							{this.creaGiocatori()}
 						</div>
 					</div>
 				</div>

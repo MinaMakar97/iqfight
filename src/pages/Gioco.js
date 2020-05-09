@@ -6,7 +6,8 @@ class Gioco extends React.Component {
 	constructor(props) {
 		super(props);
 		this.aggiungiGiocatore = this.aggiungiGiocatore.bind(this);
-		this.aggiornaPagina = this.aggiornaPagina.bind(this);
+
+		this.inziaPartita = this.inziaPartita.bind(this);
 		this.state = {
 			id: this.props.match.params.id,
 			stringa: "",
@@ -15,9 +16,10 @@ class Gioco extends React.Component {
 			giocatori: [],
 			creatore: false,
 		};
+	}
 
-		this.updateInterval = null;
-		this.refresh = 1000;
+	inziaPartita() {
+		this.setState({ iniziata: 1 });
 	}
 
 	aggiungiGiocatore(id) {
@@ -32,7 +34,6 @@ class Gioco extends React.Component {
 							iniziata: 0,
 							diz: json2,
 						});
-						this.updateInterval = setInterval(this.aggiornaPagina, this.refresh);
 					} else {
 						this.setState({
 							stringa: "La partita è gia iniziata",
@@ -50,30 +51,6 @@ class Gioco extends React.Component {
 		xml.send(JSON.stringify(json));
 	}
 
-	aggiornaPagina() {
-		let xml = new XMLHttpRequest();
-		xml.onreadystatechange = (e) => {
-			if (e.target.readyState === 4 && e.target.status === 200) {
-				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] === true) {
-					if (json["azione"] === "aggiorna") {
-						this.setState({
-							giocatori: json["giocatori"],
-						});
-					} else if (json["azione"] === "inizio") {
-						clearInterval(this.updateInterval);
-						this.setState({
-							iniziata: true,
-						});
-					}
-				}
-			}
-		};
-		xml.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stanza.php");
-		xml.withCredentials = true;
-		xml.send();
-	}
-
 	componentDidMount() {
 		let id = this.state.id;
 		this.aggiungiGiocatore(id);
@@ -81,7 +58,6 @@ class Gioco extends React.Component {
 	}
 
 	componentWillUnmount() {
-		if (this.updateInterval) clearInterval(this.updateInterval);
 		window.removeEventListener("unload", this.esciStanza);
 		this.esciStanza();
 	}
@@ -99,7 +75,7 @@ class Gioco extends React.Component {
 
 	render() {
 		return this.state.iniziata === 0 ? (
-			<SalaAttesa {...this.state.diz} giocatori={this.state.giocatori} idStanza={this.state.id}></SalaAttesa>
+			<SalaAttesa {...this.state.diz} giocatori={this.state.giocatori} idStanza={this.state.id} inizia={this.inziaPartita}></SalaAttesa>
 		) : (
 			<StanzaGioco></StanzaGioco>
 		);

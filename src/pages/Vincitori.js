@@ -13,6 +13,7 @@ class Vincitori extends React.Component {
 	}
 
 	creaGiocatori() {
+		const classiPodio = ["primo-classifica", "secondo-classifica", "terzo-classifica"];
 		let cardGiocatori = [];
 		let jGiocatori = this.props.giocatori;
 		for (let i = 0; i < jGiocatori.length; i++) {

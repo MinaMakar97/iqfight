@@ -10,11 +10,19 @@ class StanzaAttesa extends React.Component {
 		super(props);
 		this.creaGiocatori = this.creaGiocatori.bind(this);
 		this.avvia = this.avvia.bind(this);
+		this.aggiornaPagina = this.aggiornaPagina.bind(this);
+
+		this.state = {
+			giocatori: [],
+		};
+
+		this.updateInterval = null;
+		this.refresh = 1000;
 	}
 
 	creaGiocatori() {
 		let cardGiocatori = [];
-		let jGiocatori = this.props.giocatori;
+		let jGiocatori = this.state.giocatori;
 		for (let i = 0; i < jGiocatori.length; i++) {
 			cardGiocatori.push(
 				<Card
@@ -30,11 +38,45 @@ class StanzaAttesa extends React.Component {
 
 	avvia() {
 		let xml = new XMLHttpRequest();
-		let json = { azione: "inizio", idStanza: this.props.id };
-		xml.open("PUT", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stanza.php");
-		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		xml.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) this.props.inizia();
+			}
+		};
+		xml.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/avvia-stanza.php");
 		xml.withCredentials = true;
-		xml.send(JSON.stringify(json));
+		xml.send();
+	}
+
+	aggiornaPagina() {
+		let xml = new XMLHttpRequest();
+		xml.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					if (json["azione"] === "aggiorna") {
+						this.setState({
+							giocatori: json["giocatori"],
+						});
+					} else if (json["azione"] === "inizio") {
+						clearInterval(this.updateInterval);
+						this.props.inizia();
+					}
+				}
+			}
+		};
+		xml.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stanza.php");
+		xml.withCredentials = true;
+		xml.send();
+	}
+
+	componentDidMount() {
+		this.updateInterval = setInterval(this.aggiornaPagina, this.refresh);
+	}
+
+	componentWillUnmount() {
+		if (this.updateInterval) clearInterval(this.updateInterval);
 	}
 
 	render() {
