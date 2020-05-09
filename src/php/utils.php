@@ -32,4 +32,13 @@
             if (!isset($json[$param])) die(json_encode(["errore" => "Formato della richiesta non corretto"]));
         }
     }
+
+    function getCategorie(mysqli $conn){
+        $query = $conn->query("SELECT nome FROM categoria");
+        $rows = $query->fetch_all(MYSQLI_ASSOC);
+        $categoria = [];
+        for ($i=0;$i< count($rows); $i++)
+            array_push($categoria,$rows[$i]["nome"]);
+        return $categoria;
+    }
 ?>

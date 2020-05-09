@@ -5,14 +5,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] == "GET") {
         // Richiesta delle categorie
-        $query = $dbConn->prepare("SELECT nome FROM categoria");
-        $query->execute();
-        $result = $query->get_result();
-        $risposta = [];
-        while ($row = $result->fetch_assoc()) {
-            array_push($risposta, $row["nome"]);
-        }
-        echo json_encode(["categorie" => $risposta]);
+        echo json_encode(["categorie" => getCategoria($dbConn)]);
     }
     else if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Crea nuova domanda
