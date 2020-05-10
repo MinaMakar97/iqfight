@@ -78,8 +78,12 @@
         $query->bind_param("i", $idStanza);
         $query->execute();
         $result = $query->get_result();
-        $result = $result->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        $giocatori = [];
+        //$result = $result->fetch_all(MYSQLI_ASSOC);
+        while( $row = $result->fetch_assoc()){
+            $giocatori[$row["username"]] = $row;  
+        }
+        return $giocatori;
     }
 
     function classificaGioco(mysqli $dbConn, $idStanza)
@@ -97,8 +101,12 @@
         $query->bind_param("i", $idStanza);
         $query->execute();
         $result = $query->get_result();
-        $result = $result->fetch_all(MYSQLI_ASSOC);
-        return $result;
+        $giocatori = [];
+        //$result = $result->fetch_all(MYSQLI_ASSOC);
+        while( $row = $result->fetch_assoc()){
+            $giocatori[$row["username"]] = $row;  
+        }
+        return $giocatori;
     }
 
     function mandaRisultati(mysqli $dbConn, $idStanza) {

@@ -11,17 +11,18 @@ class StanzaGioco extends React.Component {
 		super();
 		this.getStato = this.getStato.bind(this);
 		this.rispondi = this.rispondi.bind(this);
+		this.chiediDomanda = this.chiediDomanda.bind(this);
 		this.state = {
 			domanda: "",
 			risposta1: "",
 			risposta2: "",
 			risposta3: "",
 			risposta4: "",
-			giocatori: [],
+			giocatori: {},
 			finita: false,
 			risposto: false, // Riattivarlo quando cambia domanda
 			avviaTempo: false,
-			miaRisposta: "",
+			miaRisposta: null,
 		};
 
 		this.width = window.innerWidth;
@@ -30,11 +31,39 @@ class StanzaGioco extends React.Component {
 		this.tempoDomanda = "20s";
 	}
 
+	risettaStato() {
+		const progressBar = document.getElementById("prog");
+		progressBar.hidden = false;
+		progressBar.transitionDuration = 0;
+		progressBar.width = "100%";
+		progressBar.transitionDuration = this.tempoDomanda;
+		let giocatori = { ...this.state.giocatori };
+		for (let giocatore in giocatori) {
+			giocatori[giocatore].risposto = false;
+			giocatori[giocatore].rispostaCorretta = null;
+		}
+		let lista = document.getElementsByClassName("risposta");
+
+		for (let risposta of lista) {
+			risposta.style.opacity = 1;
+			risposta.style.backgroundColor = "white";
+			risposta.style.fontWeight = "unset";
+		}
+
+		this.setState({
+			risposto: false,
+			avviaTempo: false,
+			miaRisposta: null,
+			giocatori,
+		});
+	}
+
 	componentDidMount() {
 		this.chiediDomanda();
 	}
 
 	chiediDomanda() {
+		this.risettaStato();
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/domanda.php");
 		xhr.onreadystatechange = (e) => {
@@ -61,18 +90,46 @@ class StanzaGioco extends React.Component {
 	creaGiocatori() {
 		let cardGiocatori = [];
 		let jGiocatori = this.state.giocatori;
-		for (let i = 0; i < jGiocatori.length; i++) {
+		let stampaGiocatori = {};
+		Object.assign(stampaGiocatori, this.state.giocatori);
+		console.log(jGiocatori);
+		for (let chiave in jGiocatori) {
+			let classi = "";
+			if (jGiocatori[chiave].risposto) classi += "giocatore-risposto ";
+			if (jGiocatori[chiave].rispostaCorretta) classi += "giocatore-corretta ";
+			else if (jGiocatori[chiave].rispostaCorretta != null && !jGiocatori[chiave].rispostaCorretta) {
+				classi += "giocatore-sbagliata ";
+				console.log(jGiocatori[chiave].rispostaCorretta);
+			}
 			cardGiocatori.push(
 				<Card
-					nome={jGiocatori[i].username}
-					punteggio={jGiocatori[i].punteggio}
-					immagine={jGiocatori[i].avatar || userImage}
+					nome={jGiocatori[chiave].username}
+					punteggio={jGiocatori[chiave].punteggio}
+					immagine={jGiocatori[chiave].avatar || userImage}
 					style={{ width: "90%" }}
-					className={jGiocatori[i].risposto ? "giocatore-risposto" : ""}
-					key={i}></Card>
+					className={classi}
+					key={chiave}></Card>
 			);
+			console.log(chiave, classi);
 		}
 		return cardGiocatori;
+	}
+
+	rispostaGiusta() {
+		const risposta = this.state.miaRisposta;
+		risposta.style.backgroundColor = "#2FC017";
+	}
+
+	rispostaSbagliata(rispostaGiusta) {
+		const risposta = this.state.miaRisposta;
+		risposta.style.backgroundColor = "#C54343";
+		let listaRisposte = document.getElementsByClassName("risposta");
+		for (let risp of listaRisposte) {
+			if (risp.textContent === rispostaGiusta) {
+				risp.style.backgroundColor = "#2FC017";
+				risp.style.opacity = 1;
+			}
+		}
 	}
 
 	getStato() {
@@ -89,7 +146,17 @@ class StanzaGioco extends React.Component {
 						});
 					} else if (json["azione"] === "risultati") {
 						// Fine del round
+						document.getElementById("prog").hidden = true;
+						this.setState({
+							giocatori: json["giocatori"],
+						});
+						clearInterval(this.stateInterval);
+						this.stateInterval = null;
+						if (this.state.miaRisposta == null || this.state.miaRisposta.textContent !== json["rispCorretta"])
+							this.rispostaSbagliata(json["rispCorretta"]);
+						else this.rispostaGiusta();
 						//console.log("Risultati", json);
+						setTimeout(this.chiediDomanda, 5000);
 					} else if (json["azione"] === "finita") {
 						// Fine della partita
 						this.setState({ finita: true, giocatori: json["giocatori"] });
@@ -111,7 +178,7 @@ class StanzaGioco extends React.Component {
 			xhr.withCredentials = true;
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			xhr.send(JSON.stringify({ risposta: risposta }));
-			this.setState({ risposto: true, miaRisposta: risposta });
+			this.setState({ risposto: true, miaRisposta: e.target });
 			const risposte = document.getElementsByClassName("risposta");
 			for (let risposta of risposte) {
 				if (risposta !== e.target) risposta.style.opacity = 0.2;
@@ -133,6 +200,7 @@ class StanzaGioco extends React.Component {
 					<div className="col-12 col-sm-8 mt-4">
 						<div className="progress mb-4">
 							<div
+								id="prog"
 								className="progress-bar progress-bar-striped progress-bar-animated"
 								role="progressbar"
 								style={{
@@ -147,7 +215,7 @@ class StanzaGioco extends React.Component {
 						</div>
 						<div className="domanda mb-4 centra">{this.state.domanda}</div>
 						<div className="div-domanda row">
-							<div className="risposta mb-4 centra" onClick={this.rispondi}>
+							<div className={"risposta mb-4 centra"} onClick={this.rispondi}>
 								{this.state.risposta1}
 							</div>
 							<div className="risposta mb-4 centra" onClick={this.rispondi}>
@@ -169,7 +237,7 @@ class StanzaGioco extends React.Component {
 					<div className="col-12 col-sm-3 centra flex-column">
 						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
 						<div className=" giocatori ">
-							<div style={{ color: "#8B6EDD", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
+							<div style={{ color: "white", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
 							{this.creaGiocatori()}
 						</div>
 					</div>

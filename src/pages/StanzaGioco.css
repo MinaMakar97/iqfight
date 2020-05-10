@@ -22,10 +22,6 @@
     cursor: pointer;
 }
 
-.giocatore-risposto {
-    background-color: #E0D5FF;
-}
-
 .stanza-gioco .card {
     transition: all .5s;
  }
@@ -42,4 +38,16 @@
 
 .stanza-gioco .progress{
     height: .7rem;
+}
+
+.giocatore-risposto {
+    background-color: #E0D5FF;
+}
+
+.giocatore-corretta{
+    background-color: #2FC017 !important;
+}
+
+.giocatore-sbagliata{
+    background-color: #C54343 !important;
 }
