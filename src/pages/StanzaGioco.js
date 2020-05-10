@@ -29,6 +29,7 @@ class StanzaGioco extends React.Component {
 		this.stateInterval = null;
 		this.refresh = 1000;
 		this.tempoDomanda = "20s";
+		this.tempoRisultati = 2000;
 	}
 
 	risettaStato() {
@@ -71,16 +72,21 @@ class StanzaGioco extends React.Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
-					this.setState({
-						domanda: json["domanda"],
-						risposta1: json["risposte"][0],
-						risposta2: json["risposte"][1],
-						risposta3: json["risposte"][2],
-						risposta4: json["risposte"][3],
-						avviaTempo: true,
-					});
-
-					if (!this.stateInterval) this.stateInterval = setInterval(this.getStato, this.refresh);
+					if (json["azione"] === "finita") {
+						this.setState({ finita: true, giocatori: json["giocatori"] });
+						clearInterval(this.stateInterval);
+						this.stateInterval = null;
+					} else {
+						this.setState({
+							domanda: json["domanda"],
+							risposta1: json["risposte"][0],
+							risposta2: json["risposte"][1],
+							risposta3: json["risposte"][2],
+							risposta4: json["risposte"][3],
+							avviaTempo: true,
+						});
+						if (!this.stateInterval) this.stateInterval = setInterval(this.getStato, this.refresh);
+					}
 				}
 			}
 		};
@@ -91,16 +97,12 @@ class StanzaGioco extends React.Component {
 	creaGiocatori() {
 		let cardGiocatori = [];
 		let jGiocatori = this.state.giocatori;
-		let stampaGiocatori = {};
-		Object.assign(stampaGiocatori, this.state.giocatori);
-		console.log(jGiocatori);
 		for (let chiave in jGiocatori) {
 			let classi = "";
 			if (jGiocatori[chiave].risposto) classi += "giocatore-risposto ";
 			if (jGiocatori[chiave].rispostaCorretta) classi += "giocatore-corretta ";
 			else if (jGiocatori[chiave].rispostaCorretta != null && !jGiocatori[chiave].rispostaCorretta) {
 				classi += "giocatore-sbagliata ";
-				console.log(jGiocatori[chiave].rispostaCorretta);
 			}
 			cardGiocatori.push(
 				<Card
@@ -111,7 +113,6 @@ class StanzaGioco extends React.Component {
 					className={classi}
 					key={chiave}></Card>
 			);
-			console.log(chiave, classi);
 		}
 		return cardGiocatori;
 	}
@@ -123,7 +124,7 @@ class StanzaGioco extends React.Component {
 
 	rispostaSbagliata(rispostaGiusta) {
 		const risposta = this.state.miaRisposta;
-		if (risposta !== null && risposta === true) risposta.style.backgroundColor = "#C54343";
+		if (risposta) risposta.style.backgroundColor = "#C54343";
 		let listaRisposte = document.getElementsByClassName("risposta");
 		for (let risp of listaRisposte) {
 			if (risp.textContent === rispostaGiusta) {
@@ -156,11 +157,7 @@ class StanzaGioco extends React.Component {
 						if (this.state.miaRisposta == null || this.state.miaRisposta.textContent !== json["rispCorretta"])
 							this.rispostaSbagliata(json["rispCorretta"]);
 						else this.rispostaGiusta();
-						//console.log("Risultati", json);
-						setTimeout(this.chiediDomanda, 5000);
-					} else if (json["azione"] === "finita") {
-						// Fine della partita
-						this.setState({ finita: true, giocatori: json["giocatori"] });
+						setTimeout(this.chiediDomanda, this.tempoRisultati);
 					}
 				}
 			}

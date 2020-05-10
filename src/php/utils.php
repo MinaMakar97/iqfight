@@ -103,6 +103,12 @@
 		}
 		
 		unset($_SESSION["idStanza"]);
-	}
+    }
+    
+    function fLog($message) {
+        $file = fopen("lastest.log", "a");
+        fwrite($file, date(DATE_ISO8601) . " " . $message . "\n");
+        fclose($file);
+    }
 
 ?>

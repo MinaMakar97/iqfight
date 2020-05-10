@@ -11,7 +11,7 @@
 		$privata = intval($json["privata"]);
 		$nome = $json["nome"];
 		$categoria = $json["categoria"];
-		$query = $dbConn->prepare("INSERT INTO stanza VALUES (DEFAULT, ?, ?, ?, ?, null, 0, null, 0, 0);");
+		$query = $dbConn->prepare("INSERT INTO stanza VALUES (DEFAULT, ?, ?, ?, ?, null, 0, null, -1, 0);");
 		if (!$query) {
 			die (json_encode(["successo" => false, "errore" => mysqli_error($dbConn)]));
 		}
