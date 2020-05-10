@@ -29,11 +29,7 @@
                     }
                     if ($tuttiRisposto) {
                         // Tutti hanno risposto, manda risultati
-                        $query = $dbConn->prepare("UPDATE stanza SET domandaDaCambiare = 1 WHERE id = ?");
-                        $query->bind_param("i", $idStanza);
-                        $query->execute();
-
-                        echo json_encode(["successo" => true, "azione" => "risultati", "giocatori" => creaRisultati($dbConn, $idStanza)]);
+                        mandaRisultati($dbConn, $idStanza);
                     }
                     else {
                         // Un giocatore ha risposto oppure è entrato/uscito
@@ -60,11 +56,7 @@
                 }
             } else {
                 // Tempo scaduto, manda i risultati
-                $query = $dbConn->prepare("UPDATE stanza SET domandaDaCambiare = 1 WHERE id = ?");
-                $query->bind_param("i", $idStanza);
-                $query->execute();
-
-                echo json_encode(["successo" => true, "azione" => "risultati", "giocatori" => creaRisultati($dbConn, $idStanza)]);
+                mandaRisultati($dbConn, $idStanza);
             }
         } else {
             echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => classificaGioco($dbConn, $idStanza)]);
@@ -107,5 +99,16 @@
         $result = $query->get_result();
         $result = $result->fetch_all(MYSQLI_ASSOC);
         return $result;
+    }
+
+    function mandaRisultati(mysqli $dbConn, $idStanza) {
+        $query = $dbConn->prepare("UPDATE stanza SET domandaDaCambiare = 1 WHERE id = ?");
+        $query->bind_param("i", $idStanza);
+        $query->execute();
+
+        $info = infoStanza($dbConn, $idStanza);
+        $domanda = prendiDomanda($dbConn, $idStanza, $info["numDomanda"]);
+
+        echo json_encode(["successo" => true, "azione" => "risultati", "rispCorretta" => $domanda["rispCorretta"], "giocatori" => creaRisultati($dbConn, $idStanza)]);
     }
 ?>

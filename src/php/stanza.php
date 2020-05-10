@@ -103,9 +103,6 @@
 			die (json_encode(["successo"=>true,"azione" => null]));
 		}
 	}
-	else if ($_SERVER['REQUEST_METHOD'] == "DELETE"){
-        eliminaGiocatoreDaStanza($dbConn, $_SESSION["username"],$_SESSION["idStanza"]);
-	}
 
 	disconnettiDB($dbConn);
 	

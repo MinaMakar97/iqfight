@@ -66,8 +66,8 @@ class Gioco extends React.Component {
 		// Il keepalive permette alla richiesta di proseguire anche dopo la chiusura della finestra corrente
 		// L'alternativa con l'XHR è di usare una richiesta sincrona ma non è più supportata da Chrome
 		// Il fetch al contrario, non è supportato da IE
-		fetch(process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/stanza.php", {
-			method: "DELETE",
+		fetch(process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/esci-stanza.php", {
+			method: "POST",
 			credentials: "include",
 			keepalive: true,
 		});
