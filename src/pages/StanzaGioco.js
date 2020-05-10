@@ -45,6 +45,7 @@ class StanzaGioco extends React.Component {
 		let lista = document.getElementsByClassName("risposta");
 
 		for (let risposta of lista) {
+			risposta.classList.remove("correggi-risposta");
 			risposta.style.opacity = 1;
 			risposta.style.backgroundColor = "white";
 			risposta.style.fontWeight = "unset";
@@ -122,11 +123,11 @@ class StanzaGioco extends React.Component {
 
 	rispostaSbagliata(rispostaGiusta) {
 		const risposta = this.state.miaRisposta;
-		risposta.style.backgroundColor = "#C54343";
+		if (risposta !== null && risposta === true) risposta.style.backgroundColor = "#C54343";
 		let listaRisposte = document.getElementsByClassName("risposta");
 		for (let risp of listaRisposte) {
 			if (risp.textContent === rispostaGiusta) {
-				risp.style.backgroundColor = "#2FC017";
+				risp.classList.add("correggi-risposta");
 				risp.style.opacity = 1;
 			}
 		}

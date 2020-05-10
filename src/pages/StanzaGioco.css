@@ -51,3 +51,15 @@
 .giocatore-sbagliata{
     background-color: #C54343 !important;
 }
+
+.correggi-risposta{
+    animation: changeColor linear;
+    animation-iteration-count: 3;
+    animation-duration: .4s;
+    animation-direction: alternate;  
+}
+
+@keyframes changeColor {
+    from {background-color: white;}
+    to {background-color: green;}   
+}
