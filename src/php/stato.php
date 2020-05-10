@@ -45,7 +45,7 @@
                 }
                 else {
                     // Controlla se qualcuno si è disconnesso
-                    $query = $dbConn->prepare("SELECT username, UNIX_TIMESTAMP(ultimaRichiesta) as ultimaRichiesta FROM partecipaWHERE idStanza = ?");
+                    $query = $dbConn->prepare("SELECT username, UNIX_TIMESTAMP(ultimaRichiesta) as ultimaRichiesta FROM partecipa WHERE idStanza = ?");
                     $query->bind_param("i", $idStanza);
                     $query->execute();
                     $giocatori = $query->get_result();
@@ -75,7 +75,7 @@
 
     function aggiornaUltimaRichiesta(mysqli $dbConn, $username)
     {
-        $query = $dbConn->prepare("UPDATE partecipa SET ultimoTempo = CURRENT_TIMESTAMP WHERE username = ?");
+        $query = $dbConn->prepare("UPDATE partecipa SET ultimaRichiesta = CURRENT_TIMESTAMP WHERE username = ?");
         $query->bind_param("s", $username);
         $query->execute();
     }
