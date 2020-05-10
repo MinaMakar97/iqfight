@@ -32,7 +32,6 @@
         $query = $dbConn->prepare("UPDATE partecipa SET rispostaCorretta = ? WHERE username = ?");
         $query->bind_param("is", $rispCorrettaClient, $username);
         $query->execute();
-
         return $rispCorrettaClient;
     }
 
