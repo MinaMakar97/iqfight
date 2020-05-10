@@ -21,6 +21,7 @@ class StanzaGioco extends React.Component {
 			finita: false,
 			risposto: false, // Riattivarlo quando cambia domanda
 			avviaTempo: false,
+			miaRisposta: "",
 		};
 
 		this.width = window.innerWidth;
@@ -66,7 +67,8 @@ class StanzaGioco extends React.Component {
 					nome={jGiocatori[i].username}
 					punteggio={jGiocatori[i].punteggio}
 					immagine={jGiocatori[i].avatar || userImage}
-					style={{ width: "90%", backgroundColor: jGiocatori[i].risposto ? "lightblue" : null }}
+					style={{ width: "90%" }}
+					className={jGiocatori[i].risposto ? "giocatore-risposto" : ""}
 					key={i}></Card>
 			);
 		}
@@ -87,7 +89,7 @@ class StanzaGioco extends React.Component {
 						});
 					} else if (json["azione"] === "risultati") {
 						// Fine del round
-						console.log("Risultati", json);
+						//console.log("Risultati", json);
 					} else if (json["azione"] === "finita") {
 						// Fine della partita
 						this.setState({ finita: true, giocatori: json["giocatori"] });
@@ -100,13 +102,21 @@ class StanzaGioco extends React.Component {
 	}
 
 	rispondi(e) {
-		e.target.style.backgroundColor = "lightblue";
-		let xhr = new XMLHttpRequest();
-		xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/rispondi.php");
-		xhr.withCredentials = true;
-		xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-		xhr.send(JSON.stringify({ risposta: e.target.textContent }));
-		this.setState({ risposto: true });
+		if (!this.state.risposto) {
+			const risposta = e.target.textContent;
+			e.target.style.backgroundColor = "#E0D5FF";
+			e.target.style.fontWeight = "bolder";
+			let xhr = new XMLHttpRequest();
+			xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/rispondi.php");
+			xhr.withCredentials = true;
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(JSON.stringify({ risposta: risposta }));
+			this.setState({ risposto: true, miaRisposta: risposta });
+			const risposte = document.getElementsByClassName("risposta");
+			for (let risposta of risposte) {
+				if (risposta !== e.target) risposta.style.opacity = 0.2;
+			}
+		}
 	}
 
 	componentWillUnmount() {
@@ -117,7 +127,7 @@ class StanzaGioco extends React.Component {
 		return this.state.finita ? (
 			<Vincitori giocatori={this.state.giocatori}></Vincitori>
 		) : (
-			<div className="pagina-classifica w-100 h-100 flex-column centra">
+			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra">
 				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
 				<div className="row w-100 div-princ mt-3">
 					<div className="col-12 col-sm-8 mt-4">
@@ -137,18 +147,18 @@ class StanzaGioco extends React.Component {
 						</div>
 						<div className="domanda mb-4 centra">{this.state.domanda}</div>
 						<div className="div-domanda row">
-							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+							<div className="risposta mb-4 centra" onClick={this.rispondi}>
 								{this.state.risposta1}
 							</div>
-							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+							<div className="risposta mb-4 centra" onClick={this.rispondi}>
 								{this.state.risposta2}
 							</div>
 						</div>
 						<div className="div-domanda row">
-							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+							<div className="risposta mb-4 centra" onClick={this.rispondi}>
 								{this.state.risposta3}
 							</div>
-							<div className="risposta mb-4 centra" onClick={this.rispondi} disabled={this.state.risposto}>
+							<div className="risposta mb-4 centra" onClick={this.rispondi}>
 								{this.state.risposta4}
 							</div>
 						</div>
