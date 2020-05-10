@@ -4,7 +4,7 @@ import "./Card.css";
 class Card extends React.Component {
 	render() {
 		return (
-			<div className={"card shadow mt-3 mt-lg-4 " + this.props.className} style={this.props.style}>
+			<div className={"card shadow mt-2 mt-lg-2 " + this.props.className} style={this.props.style}>
 				{/* la prima colonna */}
 				<div className="dis-img">
 					<img src={this.props.immagine} className="img-card" alt="" />

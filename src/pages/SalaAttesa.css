@@ -1,16 +1,20 @@
 .giocatori {
-	height: 90%;
-	background-color: white;
 	border-radius: 15px;
 	justify-content: flex-start;
 	flex-direction: column;
 	display: flex;
 	align-items: center;
-	border: 4px solid rgb(101, 64, 204);
-	overflow-y: scroll;
+	overflow-y: auto;
 	max-height: 350px;
 	padding-bottom: 1em;
 	width: 100%;
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	min-height: 305px;
+}
+
+.scroll-view {
+	padding-right: 8px;
 }
 
 .div-princ {

@@ -4,6 +4,7 @@ import CardInfo from "../components/CardInfo";
 import "./SalaAttesa.css";
 import Card from "../components/Card";
 import userImage from "../img/user.png";
+import Scrollbars from "react-custom-scrollbars";
 
 class StanzaAttesa extends React.Component {
 	constructor(props) {
@@ -108,10 +109,11 @@ class StanzaAttesa extends React.Component {
 					<div className="col-12 col-sm-1">
 						<hr className="riga"></hr>
 					</div>
-
 					<div className="col-12 col-sm-3 giocatori">
-						<div style={{ color: "#8B6EDD", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
-						{this.creaGiocatori()}
+						<Scrollbars renderView={(props) => <div {...props} className="scroll-view d-flex flex-column align-items-center" />}>
+							<div style={{ color: "white", paddingTop: "1em", fontSize: "x-large" }}>Giocatori</div>
+							{this.creaGiocatori()}
+						</Scrollbars>
 					</div>
 				</div>
 				<div className="centra mt-4">

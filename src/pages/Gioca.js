@@ -29,6 +29,7 @@ export default class Gioca extends Component {
 		// this.setState({
 		// 	stanze: stanze,
 		// });
+
 		this.xhr = new XMLHttpRequest();
 		this.xhr.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
@@ -107,13 +108,12 @@ export default class Gioca extends Component {
 						</div>
 						<div className="row flex-wrap div-stanze centra">
 							{this.state.stanze.map((stanza, index) => (
-								<Link to={"/room/" + stanza.id}>
+								<Link to={"/room/" + stanza.id} key={index}>
 									<CardStanza
 										nomeStanza={stanza.nome}
 										categoria={stanza.categoria}
 										numGiocatori={stanza.giocatori}
-										maxGiocatori={8}
-										key={index}></CardStanza>
+										maxGiocatori={8}></CardStanza>
 								</Link>
 							))}
 						</div>

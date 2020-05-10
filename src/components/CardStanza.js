@@ -6,7 +6,7 @@ export default class CardStanza extends Component {
 		super(props);
 
 		this.mappaColori = {
-			Arte: "maroon",
+			Arte: "#f991c3",
 			Casuale: "linear-gradient(to left, #fa709a 0%, #fee140 100%)",
 			Geografia: "#56BADA",
 			Giochi: "gold",
