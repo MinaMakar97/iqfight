@@ -79,7 +79,6 @@ class MenuLaterale extends Component {
 	}
 
 	render() {
-		console.log("Rendering menu laterale with", this.props.username, this.props.avatar);
 		return (
 			<div id="div-menu-laterale" style={{ transform: "translateX(" + (this.state.aperto ? "0px" : "-100%") + ")" }}>
 				<div id="menu-laterale">
@@ -87,7 +86,10 @@ class MenuLaterale extends Component {
 						<div>
 							<hr className="riga-menu"></hr>
 							<div className="div-content centra">
-								<img src={this.state.avatar || avatarPredefinito} style={{ width: "40px", borderRadius: "100%" }}></img>
+								<img
+									alt="Avatar utente"
+									src={this.state.avatar || avatarPredefinito}
+									style={{ width: "40px", borderRadius: "100%" }}></img>
 								<p style={{ marginBottom: 0 }}>{this.state.username}</p>
 							</div>
 						</div>
