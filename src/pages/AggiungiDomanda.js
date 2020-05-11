@@ -48,6 +48,8 @@ export default class AggiungiDomanda extends Component {
 		req.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/aggiungi-domanda.php");
 		req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		req.send(JSON.stringify(dati));
+
+		form.reset();
 	}
 
 	render() {
