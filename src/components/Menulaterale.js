@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import "./MenuLaterale.css";
 import { withRouter } from "react-router-dom";
+import avatarPredefinito from "../img/user.png";
 
 class MenuLaterale extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { aperto: !(window.innerWidth <= 576) };
+		this.state = { aperto: !(window.innerWidth <= 576), username: null, avatar: null };
 		this.setta = this.setta.bind(this);
 		this.cambiaPagina = this.cambiaPagina.bind(this);
 		this.esci = this.esci.bind(this);
@@ -35,7 +36,7 @@ class MenuLaterale extends Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
-					this.props.history.push("/login");
+					window.location.replace("/");
 				}
 			}
 		};
@@ -62,12 +63,35 @@ class MenuLaterale extends Component {
 			elementoSezione.style.backgroundColor = "#0996BB";
 			this.sezione = elementoSezione;
 		}
+
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ username: json["username"], avatar: json["avatar"] });
+				}
+			}
+		};
+		xhr.withCredentials = true;
+		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/info-utente.php");
+		xhr.send();
 	}
 
 	render() {
+		console.log("Rendering menu laterale with", this.props.username, this.props.avatar);
 		return (
 			<div id="div-menu-laterale" style={{ transform: "translateX(" + (this.state.aperto ? "0px" : "-100%") + ")" }}>
 				<div id="menu-laterale">
+					{this.state.username ? (
+						<div>
+							<hr className="riga-menu"></hr>
+							<div className="div-content centra">
+								<img src={this.state.avatar || avatarPredefinito} style={{ width: "40px", borderRadius: "100%" }}></img>
+								<p style={{ marginBottom: 0 }}>{this.state.username}</p>
+							</div>
+						</div>
+					) : null}
 					<hr className="riga-menu"></hr>
 					{this.lista}
 				</div>
