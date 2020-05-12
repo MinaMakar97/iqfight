@@ -3,10 +3,10 @@
     $conn = connettiDB();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        avviaStanza($conn,$_SESSION["idStanza"]);
         $categoria = getCategoria($conn,$_SESSION["idStanza"]);
         if ($categoria == "Casuale") generaDomandeCasuali($conn,$numDomande,$_SESSION["idStanza"]);
         else generaDomande($conn,$numDomande,$categoria,$_SESSION["idStanza"]);
+        avviaStanza($conn,$_SESSION["idStanza"]);
         echo json_encode( ["successo" => true] );
     }
 
