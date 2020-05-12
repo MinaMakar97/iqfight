@@ -2,6 +2,7 @@
     include "utils.php";
     $conn = connettiDB();
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
+        $conn->query("START TRANSACTION");
         $json = infoStanza($conn,$_SESSION["idStanza"]);
         $domandaDaCambiare = $json["domandaDaCambiare"];
         $numDomanda = $json["numDomanda"];
@@ -16,6 +17,7 @@
             aggiornaStanza($conn, $_SESSION["idStanza"]);
             $numDomanda+=1;
         }
+        $conn->query("COMMIT");
         $json = prendiDomanda($conn,$_SESSION["idStanza"],$numDomanda);
         $domanda = $json["domanda"];
         $risposte = [$json["rispCorretta"],$json["risposta2"],$json["risposta3"],$json["risposta4"]];

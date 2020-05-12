@@ -79,7 +79,7 @@
     }
 
     function infoStanza($conn ,$idStanza){
-        $query = $conn->prepare("SELECT domandaDaCambiare,numDomanda FROM stanza WHERE id = ?");
+        $query = $conn->prepare("SELECT domandaDaCambiare,numDomanda FROM stanza WHERE id = ? FOR UPDATE");
         $query->bind_param("i",$idStanza);
         $query->execute();
         $row = $query->get_result();
@@ -107,7 +107,7 @@
     
     function fLog($message) {
         $file = fopen("lastest.log", "a");
-        fwrite($file, date(DATE_ISO8601) . " " . $message . "\n");
+        fwrite($file, date("d/m/Y - H:i:s") . " " . $message . "\n");
         fclose($file);
     }
 
