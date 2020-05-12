@@ -4,6 +4,9 @@
 
 .pagina-vincitore .div-card {
   width: 80%;
+  border-color: unset !important;
+  background-color: unset !important;
+  border-style: unset !important;
 }
 
 .pagina-vincitore .card {

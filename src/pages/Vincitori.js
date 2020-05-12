@@ -34,15 +34,14 @@ class Vincitori extends React.Component {
 		return (
 			<div className="pagina-classifica pagina-vincitore w-100 h-100 flex-column centra">
 				<img src={logo} alt="Logo"></img>
-				<p className="centra" style={{ color: "white", fontSize: "1em", marginTop: "1em" }}>
-					{" "}
-					Complimenti a me per questo risultato
+				<p className="centra" style={{ color: "white", fontSize: "2em", marginTop: "1em", textAlign: "center" }}>
+					{"Complimenti " + this.props.giocatori[0].username + ", hai vinto!"}
 				</p>
 				<div className="div-card">{this.creaGiocatori()}</div>
 				{/* <hr className="riga"></hr> */}
 				<div className="row">
 					<div className="col-12 col-sm-6 centra">
-						<Link>
+						<Link to="/" replace>
 							<button type="submit" className="shadow bottone mb-4">
 								Torna alla Home
 							</button>

@@ -1,18 +1,19 @@
 .domanda{
     background-color: white;
     height: auto;
-    min-height: 8em;
+    min-height: 5em;
     width: 100%;
     border: 4px solid rgb(101, 64, 204);
     border-radius: 15px;
-    font-size: 29px;
+    font-size: 25px;
     word-spacing: break-all;
     text-align: center;
+    font-weight: bold;
 }
 
 .risposta {
     background-color: white;
-    height: 4em;
+    height: 5em;
     width: 48%;
     padding: 1em;
     border: 4px solid rgb(101, 64, 204);
@@ -20,7 +21,11 @@
     transition: all .5s;
     user-select: none;
     cursor: pointer;
+    word-spacing: break-all;
+    text-align: center;
 }
+
+
 
 .stanza-gioco .card {
     transition: all .5s;
@@ -62,4 +67,24 @@
 @keyframes changeColor {
     from {background-color: white;}
     to {background-color: green;}   
+}
+.elimina-padding{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.immagine{
+    width: 10em;
+}
+
+@media screen and (max-width: 576px){
+    .domanda{
+        font-size: 20px;
+        padding: 5px;
+        margin-bottom: 1em !important;
+    }
+
+    .risposta{
+        margin-bottom: 1em !important;
+    }
 }

@@ -29,12 +29,13 @@ class StanzaGioco extends React.Component {
 		this.stateInterval = null;
 		this.refresh = 1000;
 		this.tempoDomanda = "20s";
-		this.tempoRisultati = 2000;
+		this.tempoRisultati = 2000 + Math.floor(Math.random() * 1000);
 	}
 
 	risettaStato() {
 		const progressBar = document.getElementById("prog");
-		progressBar.hidden = false;
+		const divProgress = document.getElementById("progress");
+		divProgress.hidden = false;
 		progressBar.transitionDuration = 0;
 		progressBar.width = "100%";
 		progressBar.transitionDuration = this.tempoDomanda;
@@ -71,6 +72,7 @@ class StanzaGioco extends React.Component {
 		xhr.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === false) this.stateInterval = setInterval(this.chiediDomanda, this.refresh);
 				if (json["successo"] === true) {
 					if (json["azione"] === "finita") {
 						this.setState({ finita: true, giocatori: json["giocatori"] });
@@ -148,7 +150,7 @@ class StanzaGioco extends React.Component {
 						});
 					} else if (json["azione"] === "risultati") {
 						// Fine del round
-						document.getElementById("prog").hidden = true;
+						document.getElementById("progress").hidden = true;
 						this.setState({
 							giocatori: json["giocatori"],
 						});
@@ -192,11 +194,11 @@ class StanzaGioco extends React.Component {
 		return this.state.finita ? (
 			<Vincitori giocatori={this.state.giocatori}></Vincitori>
 		) : (
-			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra">
-				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
-				<div className="row w-100 div-princ mt-3">
-					<div className="col-12 col-sm-8 mt-4">
-						<div className="progress mb-4">
+			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra elimina-padding">
+				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine"></img> : null}
+				<div className="row w-100 div-princ mt-3 elimina-padding">
+					<div className="col-12 col-sm-8 mt-4 elimina-padding">
+						<div className="progress mb-4" id="progress">
 							<div
 								id="prog"
 								className="progress-bar progress-bar-striped progress-bar-animated"
