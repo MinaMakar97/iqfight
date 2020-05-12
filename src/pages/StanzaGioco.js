@@ -72,7 +72,6 @@ class StanzaGioco extends React.Component {
 		xhr.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] === false) this.stateInterval = setInterval(this.chiediDomanda, this.refresh);
 				if (json["successo"] === true) {
 					if (json["azione"] === "finita") {
 						this.setState({ finita: true, giocatori: json["giocatori"] });
