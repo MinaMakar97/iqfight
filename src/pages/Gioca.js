@@ -106,17 +106,25 @@ export default class Gioca extends Component {
 								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow"></input>
 							</div>
 						</div>
-						<div className="row flex-wrap div-stanze centra">
-							{this.state.stanze.map((stanza, index) => (
-								<Link to={"/room/" + stanza.id} key={index}>
-									<CardStanza
-										nomeStanza={stanza.nome}
-										categoria={stanza.categoria}
-										numGiocatori={stanza.giocatori}
-										maxGiocatori={8}></CardStanza>
-								</Link>
-							))}
-						</div>
+						{this.state.stanze.length == 0 ? (
+							<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
+								<p>
+									Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
+								</p>
+							</div>
+						) : (
+							<div className="row flex-wrap div-stanze centra">
+								{this.state.stanze.map((stanza, index) => (
+									<Link to={"/room/" + stanza.id} key={index}>
+										<CardStanza
+											nomeStanza={stanza.nome}
+											categoria={stanza.categoria}
+											numGiocatori={stanza.giocatori}
+											maxGiocatori={8}></CardStanza>
+									</Link>
+								))}
+							</div>
+						)}
 					</div>
 				</div>
 				<div className="row centra order-2">
