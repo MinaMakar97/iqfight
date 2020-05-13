@@ -22,7 +22,6 @@ class StanzaGioco extends React.Component {
 			giocatori: {},
 			finita: false,
 			risposto: false, // Riattivarlo quando cambia domanda
-			avviaTempo: false,
 			miaRisposta: null,
 		};
 
@@ -37,10 +36,11 @@ class StanzaGioco extends React.Component {
 	risettaStato() {
 		const progressBar = document.getElementById("prog");
 		const divProgress = document.getElementById("progress");
-		divProgress.hidden = false;
-		progressBar.transitionDuration = 0;
-		progressBar.width = "100%";
-		progressBar.transitionDuration = this.tempoDomanda;
+
+		progressBar.ontransitionend = (e) => console.log(e);
+		progressBar.style.transitionDuration = "0s";
+		progressBar.style.width = "100%";
+
 		let giocatori = { ...this.state.giocatori };
 		for (let giocatore in giocatori) {
 			giocatori[giocatore].risposto = false;
@@ -57,13 +57,14 @@ class StanzaGioco extends React.Component {
 
 		this.setState({
 			risposto: false,
-			avviaTempo: false,
 			miaRisposta: null,
 			giocatori,
 		});
 	}
 
 	componentDidMount() {
+		if (window.innerWidth < 576) window.scrollTo({ top: 0, behavior: "smooth" });
+		this.chiediDomanda();
 		this.domandaInterval = setInterval(this.chiediDomanda, this.refresh);
 	}
 
@@ -88,8 +89,11 @@ class StanzaGioco extends React.Component {
 							risposta2: json["risposte"][1],
 							risposta3: json["risposte"][2],
 							risposta4: json["risposte"][3],
-							avviaTempo: true,
 						});
+						const progress = document.getElementById("prog");
+						progress.style.transitionDuration = this.tempoDomanda;
+						progress.style.width = "0%";
+						document.getElementById("progress").style.opacity = 1;
 						if (!this.stateInterval) this.stateInterval = setInterval(this.getStato, this.refresh);
 					}
 				}
@@ -153,7 +157,7 @@ class StanzaGioco extends React.Component {
 						});
 					} else if (json["azione"] === "risultati") {
 						// Fine del round
-						document.getElementById("progress").hidden = true;
+						document.getElementById("progress").style.opacity = 0;
 						this.setState({
 							giocatori: json["giocatori"],
 						});
@@ -162,7 +166,10 @@ class StanzaGioco extends React.Component {
 						if (this.state.miaRisposta == null || this.state.miaRisposta.textContent !== json["rispCorretta"])
 							this.rispostaSbagliata(json["rispCorretta"]);
 						else this.rispostaGiusta();
-						setTimeout(() => (this.domandaInterval = setInterval(this.chiediDomanda, this.refresh)), this.tempoRisultati);
+						setTimeout(() => {
+							this.chiediDomanda();
+							this.domandaInterval = setInterval(this.chiediDomanda, this.refresh);
+						}, this.tempoRisultati);
 					}
 				}
 			}
@@ -191,6 +198,7 @@ class StanzaGioco extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.stateInterval);
+		clearInterval(this.domandaInterval);
 	}
 
 	render() {
@@ -198,16 +206,16 @@ class StanzaGioco extends React.Component {
 			<Vincitori giocatori={this.state.giocatori} cambia={this.props.cambia}></Vincitori>
 		) : (
 			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra elimina-padding">
-				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine"></img> : null}
+				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine iqfight-logo"></img> : null}
 				<div className="row w-100 div-princ mt-3 elimina-padding">
 					<div className="col-12 col-sm-8 mt-4 elimina-padding">
-						<div className="progress mb-4" id="progress">
+						<div className="progress mb-4" id="progress" style={{ transition: "all .5s" }}>
 							<div
 								id="prog"
 								className="progress-bar progress-bar-striped progress-bar-animated"
 								role="progressbar"
 								style={{
-									width: this.state.avviaTempo ? "0%" : "100%",
+									width: "100%",
 									height: "100%",
 									transitionDuration: this.tempoDomanda,
 									transitionTimingFunction: "linear",
@@ -238,7 +246,7 @@ class StanzaGioco extends React.Component {
 						<hr className="riga"></hr>
 					</div>
 					<div className="col-12 col-sm-3 centra flex-column">
-						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
+						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4 iqfight-logo"></img> : null}
 						<div className=" giocatori ">
 							<div style={{ color: "white", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
 							<Scrollbars

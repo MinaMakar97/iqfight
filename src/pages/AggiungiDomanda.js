@@ -71,7 +71,7 @@ export default class AggiungiDomanda extends Component {
 			<div className="aggiungi-domanda w-100">
 				<div className="row">
 					<div className="col-12 text-center">
-						<img src={Logo} className="w-50" alt="Logo di IQFight"></img>
+						<img src={Logo} className="w-50 iqfight-logo" alt="Logo di IQFight"></img>
 					</div>
 				</div>
 				<div className="row centra">

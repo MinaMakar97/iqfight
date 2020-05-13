@@ -1,7 +1,3 @@
-.pagina-classifica img {
-    max-width: 200px;
-}
-
 .pagina-classifica .contenuto-classifica {
     overflow: auto;
     flex-grow: 1;

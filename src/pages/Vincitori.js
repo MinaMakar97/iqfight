@@ -75,7 +75,7 @@ class Vincitori extends React.Component {
 	render() {
 		return (
 			<div className="pagina-classifica pagina-vincitore w-100 h-100 flex-column centra">
-				<img src={logo} alt="Logo"></img>
+				<img src={logo} alt="Logo" className="iqfight-logo"></img>
 				<p className="centra" style={{ color: "white", fontSize: "2em", marginTop: "1em", textAlign: "center" }}>
 					{"Complimenti " + this.props.giocatori[0].username + ", hai vinto!"}
 				</p>

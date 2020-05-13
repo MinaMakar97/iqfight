@@ -9,6 +9,7 @@
     }
     else if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Crea nuova domanda
+        controllaLogin();
         $json = prendiJson();
         controllaParametri($json, "categoria", "domanda", "rispostaCorretta", "risposta2", "risposta3", "risposta4");
         $domanda = $json["domanda"];
@@ -17,7 +18,7 @@
         $risposta3 = $json["risposta3"];
         $risposta4 = $json["risposta4"];
         $categoria = $json["categoria"];
-        $query = $dbConn->prepare("INSERT INTO domanda VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)");
+        $query = $dbConn->prepare("INSERT INTO domanda (domanda, rispCorretta, risposta2, risposta3, risposta4, categoria) VALUES (?, ?, ?, ?, ?, ?)");
         $query->bind_param("ssssss", $domanda, $rispostaCorretta, $risposta2, $risposta3, $risposta4, $categoria);
         $query->execute();
         echo json_encode(["successo" => true]);

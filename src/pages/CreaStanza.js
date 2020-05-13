@@ -57,7 +57,7 @@ export default class CreaStanza extends Component {
 		return (
 			<form className="crea-stanza container-fluid h-100 d-flex flex-column" onSubmit={this.creaStanza}>
 				<div className="row centra">
-					<img src={Logo} className="w-50 centra" alt="Logo di IQFight"></img>
+					<img src={Logo} className="w-50 centra iqfight-logo" alt="Logo di IQFight"></img>
 				</div>
 				<div className="row centra">
 					<h1 className="titolo"> Crea stanza </h1>

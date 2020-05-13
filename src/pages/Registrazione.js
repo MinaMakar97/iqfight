@@ -8,7 +8,7 @@ class Registrazione extends React.Component {
 		return (
 			<div className="row h-100 registrazione">
 				<div className="col-12 col-sm-6 d-flex justify-content-center align-items-center">
-					<img src={logo} alt="Logo"></img>
+					<img src={logo} alt="Logo" className="iqfight-logo"></img>
 				</div>
 				<div className="col-12 col-sm-6 d-flex justify-content-center align-items-center">
 					<FormRegistrazione></FormRegistrazione>

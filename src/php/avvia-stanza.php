@@ -3,6 +3,7 @@
     $conn = connettiDB();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        controllaStanza();
         $categoria = getCategoria($conn,$_SESSION["idStanza"]);
         if ($categoria == "Casuale") generaDomandeCasuali($conn,$numDomande,$_SESSION["idStanza"]);
         else generaDomande($conn,$numDomande,$categoria,$_SESSION["idStanza"]);

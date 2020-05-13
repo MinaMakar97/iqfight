@@ -5,13 +5,14 @@
 
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		// Creazione di una stanza
+		controllaLogin();
 		$json = prendiJson();
 		controllaParametri($json, "privata", "nome", "categoria");
 		$creatore = $_SESSION["username"];
 		$privata = intval($json["privata"]);
 		$nome = $json["nome"];
 		$categoria = $json["categoria"];
-		$query = $dbConn->prepare("INSERT INTO stanza VALUES (DEFAULT, ?, ?, ?, ?, null, 0, null, -1, 0, null);");
+		$query = $dbConn->prepare("INSERT INTO stanza (nome, categoria, privata, creatore) VALUES (?, ?, ?, ?);");
 		if (!$query) {
 			die (json_encode(["successo" => false, "errore" => mysqli_error($dbConn)]));
 		}
@@ -24,18 +25,17 @@
 	}
 	else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 		// Un giocatore vuole entrare in una stanza o avviarla
+		controllaLogin();
 		$json = prendiJson();
 		controllaParametri($json, "azione", "idStanza");
 		$azione = $json["azione"];
 		$idStanza = $json["idStanza"];
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
-			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1,DEFAULT);");
-			if (!$query) {
-				die(json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]));
-			}
+			$query = $dbConn->prepare("INSERT INTO partecipa (idStanza, username) VALUES (?, ?)");
 			$query->bind_param('is', $idStanza, $username);
-			$query->execute();
+			if (!$query->execute()) 
+				die(json_encode(["successo" => false, "motivazione" => "La stanza non esiste"]));
 			$risultato = ["successo" => true];
 			$query = $dbConn->prepare("SELECT id, nome, categoria, privata, iniziata,creatore FROM stanza WHERE id = ?");
 			$query->bind_param("i", $idStanza);
@@ -61,6 +61,7 @@
 		
 	}
 	else if($_SERVER["REQUEST_METHOD"] == "GET"){
+		controllaStanza();
 		//ritornare i giocatori
 		$username = $_SESSION["username"];
 		$idStanza = $_SESSION["idStanza"];

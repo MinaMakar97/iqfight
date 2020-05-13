@@ -10,7 +10,7 @@ class Home extends React.Component {
 		return (
 			<div className="row">
 				<div className="col-12 col-sm-5 flex-column centra">
-					<img src={logo} width="70%" alt="logo" />
+					<img src={logo} width="70%" className="iqfight-logo" alt="logo" />
 					<p className="descrizione mt-sm-5">Sfida i tuoi amici in una competizione su chi ne sa di più!</p>
 				</div>
 				<div className="col-12 col-sm-1">

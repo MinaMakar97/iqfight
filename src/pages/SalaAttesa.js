@@ -75,6 +75,7 @@ class StanzaAttesa extends React.Component {
 	}
 
 	componentDidMount() {
+		this.aggiornaPagina();
 		this.updateInterval = setInterval(this.aggiornaPagina, this.refresh);
 	}
 
@@ -85,7 +86,7 @@ class StanzaAttesa extends React.Component {
 	render() {
 		return (
 			<div className="pagina-classifica w-100 h-100 flex-column centra">
-				<img src={logo} alt="Logo"></img>
+				<img src={logo} alt="Logo" className="iqfight-logo"></img>
 				<p className="centra" style={{ color: "white", fontSize: "2em", marginTop: ".5em" }}>
 					Sala d'attesa
 				</p>
@@ -126,7 +127,9 @@ class StanzaAttesa extends React.Component {
 							Avvia
 						</button>
 					) : (
-						<p className="titolo">In attesa dell'inizio della partita</p>
+						<p className="titolo" style={{ textAlign: "center" }}>
+							In attesa dell'inizio della partita
+						</p>
 					)}
 				</div>
 			</div>

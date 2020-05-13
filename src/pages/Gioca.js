@@ -99,7 +99,7 @@ export default class Gioca extends Component {
 		return (
 			<div className="gioca w-100 h-100 d-flex flex-column">
 				<div className="row centra">
-					<img src={Logo} className="w-50 centra" alt="Logo di IQFight"></img>
+					<img src={Logo} className="w-50 centra iqfight-logo" alt="Logo di IQFight"></img>
 				</div>
 				<div className="row centra">
 					<h1 className="titolo"> Entra in una stanza </h1>
@@ -138,7 +138,7 @@ export default class Gioca extends Component {
 									<div
 										{...props}
 										className="d-flex flex-wrap scroll-bar-content"
-										style={{ ...props.style, padding: "0 4em 0 4em" }}
+										style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
 									/>
 								)}>
 								{this.state.stanze

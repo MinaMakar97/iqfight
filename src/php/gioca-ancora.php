@@ -3,6 +3,7 @@
 
     $conn = connettiDB();
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        controllaStanza();
         $conn->query("START TRANSACTION");
         $query = $conn->prepare("DELETE FROM domandeStanza where idStanza = ?");
         $query->bind_param("i", $_SESSION["idStanza"]);
