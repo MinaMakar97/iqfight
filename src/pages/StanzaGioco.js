@@ -195,7 +195,7 @@ class StanzaGioco extends React.Component {
 
 	render() {
 		return this.state.finita ? (
-			<Vincitori giocatori={this.state.giocatori}></Vincitori>
+			<Vincitori giocatori={this.state.giocatori} cambia={this.props.cambia}></Vincitori>
 		) : (
 			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra elimina-padding">
 				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine"></img> : null}

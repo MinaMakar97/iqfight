@@ -7,8 +7,8 @@ class Gioco extends React.Component {
 	constructor(props) {
 		super(props);
 		this.aggiungiGiocatore = this.aggiungiGiocatore.bind(this);
-
-		this.inziaPartita = this.inziaPartita.bind(this);
+		this.cambiaIniziata = this.cambiaIniziata.bind(this);
+		this.iniziaPartita = this.iniziaPartita.bind(this);
 		this.state = {
 			id: this.props.match.params.id,
 			stringa: "",
@@ -16,11 +16,11 @@ class Gioco extends React.Component {
 			diz: {},
 			giocatori: [],
 			creatore: false,
-			stanzaCorretta: false,
+			stanzaCorretta: null,
 		};
 	}
 
-	inziaPartita() {
+	iniziaPartita() {
 		this.setState({ iniziata: 1 });
 	}
 
@@ -45,6 +45,7 @@ class Gioco extends React.Component {
 				} else
 					this.setState({
 						stringa: "fallimento nel caricamento...",
+						stanzaCorretta: false,
 					});
 			}
 		};
@@ -75,6 +76,11 @@ class Gioco extends React.Component {
 			keepalive: true,
 		});
 	}
+	cambiaIniziata() {
+		this.setState({
+			iniziata: 0,
+		});
+	}
 
 	render() {
 		let component = (
@@ -88,11 +94,15 @@ class Gioco extends React.Component {
 		if (this.state.stanzaCorretta)
 			component =
 				this.state.iniziata === 0 ? (
-					<SalaAttesa {...this.state.diz} giocatori={this.state.giocatori} idStanza={this.state.id} inizia={this.inziaPartita}></SalaAttesa>
+					<SalaAttesa
+						{...this.state.diz}
+						giocatori={this.state.giocatori}
+						idStanza={this.state.id}
+						inizia={this.iniziaPartita}></SalaAttesa>
 				) : (
-					<StanzaGioco></StanzaGioco>
+					<StanzaGioco cambia={this.cambiaIniziata}></StanzaGioco>
 				);
-		return component;
+		return this.state.stanzaCorretta != null ? component : null;
 	}
 }
 export default Gioco;

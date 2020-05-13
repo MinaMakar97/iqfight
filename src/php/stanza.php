@@ -63,12 +63,13 @@
 		$username = $_SESSION["username"];
 		$idStanza = $_SESSION["idStanza"];
 
-		$query = $dbConn->prepare("SELECT iniziata, aggiornaGiocatori FROM partecipa, stanza WHERE username = ? AND idStanza = ?");
+		$query = $dbConn->prepare("SELECT iniziata, aggiornaGiocatori,creatore FROM partecipa, stanza WHERE username = ? AND idStanza = ?");
 		$query->bind_param("si", $username, $idStanza);
 		$query->execute();
 		$row = $query->get_result();
 		$row = $row->fetch_assoc();
 		$iniziata = $row["iniziata"];
+		$creatore = $row["creatore"];
 		$aggiornaGiocatori = $row["aggiornaGiocatori"];
 
 		$query = $dbConn->prepare("SELECT utente.username,avatar,punteggio,UNIX_TIMESTAMP(ultimaRichiesta) as ultimaRichiesta FROM partecipa,utente WHERE idStanza = ? and partecipa.username=utente.username");
@@ -81,24 +82,25 @@
 		$query->bind_param("s",$_SESSION["username"]);
 		$query->execute();
 
-		foreach($giocatori as $giocatore){
-			if (time() - $giocatore["ultimaRichiesta"] > 4) {
-				eliminaGiocatoreDaStanza($dbConn, $giocatore["username"], $_SESSION["idStanza"]);
-			}
-		}
+		// foreach($giocatori as $giocatore){
+		// 	if ( $giocatore["ultimaRichiesta"] != null && time() - $giocatore["ultimaRichiesta"] > 4) {
+		// 		eliminaGiocatoreDaStanza($dbConn, $giocatore["username"], $_SESSION["idStanza"]);
+		// 	}
+		// }
 
 		if ($iniziata == 1){
 			echo json_encode(["successo"=>true, "azione"=>"inizio"]);
 		}
 		else if($aggiornaGiocatori == 1) {
-			echo json_encode(["successo"=>true, "azione"=>"aggiorna","giocatori"=>$giocatori]);
+			if ($creatore != $username) $creatore = null;
+			echo json_encode(["successo"=>true, "azione"=>"aggiorna","creatore"=>$creatore, "giocatori"=>$giocatori]);
 			$query = $dbConn->prepare("UPDATE partecipa SET aggiornaGiocatori = 0 WHERE username = ?");
 			$query->bind_param("s", $username);
 			$query->execute();
 		
 		}
 		else {
-			die (json_encode(["successo"=>true,"azione" => null]));
+			die (json_encode(["successo"=>true ,"azione" => null]));
 		}
 	}
 
