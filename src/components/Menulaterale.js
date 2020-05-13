@@ -57,7 +57,8 @@ class MenuLaterale extends Component {
 	}
 
 	componentDidMount() {
-		const path = this.props.location.pathname.slice(1);
+		let path = this.props.location.pathname.slice(1);
+		if (!path) path = "gioca";
 		const elementoSezione = document.getElementById(path);
 		if (elementoSezione) {
 			elementoSezione.style.backgroundColor = "#0996BB";
