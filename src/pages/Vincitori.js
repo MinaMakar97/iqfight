@@ -11,6 +11,9 @@ class Vincitori extends React.Component {
 		super(props);
 		this.creaGiocatori = this.creaGiocatori.bind(this);
 		this.giocaAncora = this.giocaAncora.bind(this);
+		this.chiediStato = this.chiediStato.bind(this);
+		this.updateInterval = null;
+		this.refresh = 1000;
 	}
 
 	creaGiocatori() {
@@ -42,6 +45,31 @@ class Vincitori extends React.Component {
 		xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/gioca-ancora.php");
 		xhr.withCredentials = true;
 		xhr.send();
+	}
+
+	chiediStato() {
+		let xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					if (json["iniziata"] === true) {
+						clearInterval(this.updateInterval);
+						this.props.cambia();
+					}
+				}
+			}
+		};
+		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/gioca-ancora.php");
+		xhr.withCredentials = true;
+		xhr.send();
+	}
+	componentDidMount() {
+		this.updateInterval = setInterval(this.chiediStato, this.refresh);
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.updateInterval);
 	}
 
 	render() {
