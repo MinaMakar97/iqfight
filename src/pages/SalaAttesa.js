@@ -15,6 +15,7 @@ class StanzaAttesa extends React.Component {
 
 		this.state = {
 			giocatori: [],
+			creatore: "",
 		};
 
 		this.updateInterval = null;
@@ -59,6 +60,7 @@ class StanzaAttesa extends React.Component {
 					if (json["azione"] === "aggiorna") {
 						this.setState({
 							giocatori: json["giocatori"],
+							creatore: json["creatore"],
 						});
 					} else if (json["azione"] === "inizio") {
 						clearInterval(this.updateInterval);
@@ -117,7 +119,7 @@ class StanzaAttesa extends React.Component {
 					</div>
 				</div>
 				<div className="centra mt-4">
-					{this.props.creatore ? (
+					{this.state.creatore ? (
 						<button className="bottone" onClick={this.avvia}>
 							Avvia
 						</button>

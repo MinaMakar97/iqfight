@@ -100,7 +100,24 @@
 			$query = $dbConn->prepare("DELETE FROM stanza where id = ?");
 			$query->bind_param("i", $idStanza);
 			$query->execute();
-		}
+        }
+        
+        $query = $dbConn->prepare("SELECT creatore FROM stanza WHERE stanza.id = ?");
+        $query->bind_param("i",$idStanza);
+        $query->execute();
+        $row = $query->get_result();
+        $row = $row->fetch_assoc();
+        if ($row["creatore"] == $username){
+            $query = $dbConn->prepare("SELECT username FROM partecipa where idStanza = ?");
+            $query->bind_param("i",$idStanza);
+            $query->execute();
+            $row = $query->get_result();
+            $row = $row->fetch_assoc();
+
+            $query = $dbConn->prepare("UPDATE stanza SET creatore = ?  WHERE id = ?");
+            $query->bind_param("si",$row["username"],$idStanza);
+            $query->execute();
+        }
 		
 		unset($_SESSION["idStanza"]);
     }
