@@ -76,9 +76,17 @@ class FormRegistrazione extends React.Component {
 				<p style={{ color: "white", fontSize: "2em" }}> Registrazione</p>
 				<form className="form" onSubmit={this.registerSubmit}>
 					<input className="form-control-lg shadow mb-4" maxLength="40" type="email" placeholder="Email" name="email" required></input>
-					<input className="form-control-lg shadow mb-4" maxLength="15" type="text" placeholder="Username" name="username" required></input>
 					<input
 						className="form-control-lg shadow mb-4"
+						maxLength="15"
+						minLength="3"
+						type="text"
+						placeholder="Username"
+						name="username"
+						required></input>
+					<input
+						className="form-control-lg shadow mb-4"
+						minLength="3"
 						maxLength="50"
 						type="password"
 						placeholder="Password"

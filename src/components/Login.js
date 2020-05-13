@@ -37,6 +37,7 @@ class Login extends React.Component {
 				<form className="form" onSubmit={this.loginSubmit} id="form-log">
 					<input
 						type="text"
+						minLength="3"
 						maxLength="15"
 						name="username"
 						className="shadow form-control-lg mb-4"
@@ -47,6 +48,7 @@ class Login extends React.Component {
 					<input
 						type="password"
 						name="password"
+						minLength="3"
 						className="form-control-lg shadow mb-4"
 						id="exampleInputPassword1"
 						placeholder="Password"
