@@ -64,6 +64,7 @@ class StanzaGioco extends React.Component {
 	}
 
 	componentDidMount() {
+		this.chiediDomanda();
 		this.domandaInterval = setInterval(this.chiediDomanda, this.refresh);
 	}
 

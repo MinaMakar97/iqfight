@@ -126,7 +126,9 @@ class StanzaAttesa extends React.Component {
 							Avvia
 						</button>
 					) : (
-						<p className="titolo">In attesa dell'inizio della partita</p>
+						<p className="titolo" style={{ textAlign: "center" }}>
+							In attesa dell'inizio della partita
+						</p>
 					)}
 				</div>
 			</div>

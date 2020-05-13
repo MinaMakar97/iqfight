@@ -120,7 +120,7 @@ export default class Gioca extends Component {
 									<div
 										{...props}
 										className="d-flex flex-wrap scroll-bar-content"
-										style={{ ...props.style, padding: "0 4em 0 4em" }}
+										style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
 									/>
 								)}>
 								{this.state.stanze.map((stanza, index) => (
