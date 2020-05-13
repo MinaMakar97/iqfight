@@ -75,6 +75,7 @@ class StanzaAttesa extends React.Component {
 	}
 
 	componentDidMount() {
+		this.aggiornaPagina();
 		this.updateInterval = setInterval(this.aggiornaPagina, this.refresh);
 	}
 

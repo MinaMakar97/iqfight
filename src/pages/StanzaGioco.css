@@ -59,7 +59,7 @@
 
 .correggi-risposta{
     animation: changeColor linear;
-    animation-iteration-count: 3;
+    animation-iteration-count: 4;
     animation-duration: .4s;
     animation-direction: alternate;  
 }
