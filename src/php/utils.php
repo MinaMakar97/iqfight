@@ -8,6 +8,7 @@
     }
     // Variabili di gioco
     $tempoDomanda = 20;
+    $tempoRisultati = 2;
     $numDomande = 3;
 
     session_set_cookie_params(60 * 60 * 24 * 15);
@@ -58,14 +59,14 @@
         return $query->affected_rows;
     }
 
-    function tempoScaduto(mysqli $dbConn, $idStanza, $tempo)
+    function tempoScaduto(mysqli $dbConn, $campo, $idStanza, $tempo)
     {
-        $query = $dbConn->prepare("SELECT UNIX_TIMESTAMP(timestampDomanda) as timestampDomanda FROM stanza WHERE id = ?");
+        $query = $dbConn->prepare("SELECT UNIX_TIMESTAMP(" . $campo . ") as " . $campo . " FROM stanza WHERE id = ?");
         $query->bind_param("i", $idStanza);
         $query->execute();
         $stanza = $query->get_result();
         $stanza = $stanza->fetch_assoc();
-        if (time() - $stanza["timestampDomanda"] > $tempo) return true;
+        if (time() - $stanza[$campo] > $tempo) return true;
         return false;
     }
 

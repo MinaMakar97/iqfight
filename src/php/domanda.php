@@ -10,12 +10,22 @@
         if ($domandaDaCambiare == 1){
             if ($numDomanda == $numDomande - 1) {
                 // Partita finita
+                $conn->query("COMMIT");
                 echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => classificaGioco($conn, $_SESSION["idStanza"])]);
                 die();
             }
-
-            aggiornaStanza($conn, $_SESSION["idStanza"]);
-            $numDomanda+=1;
+            else {
+                if (!tempoScaduto($conn, "timestampRisultati", $_SESSION["idStanza"], $tempoRisultati)) {
+                    // Domanda chiesta troppo presto, si devono ancora visualizzare i risultati
+                    echo json_encode(["successo" => false, "motivazione" => "La nuova domanda non è ancora pronta"]);
+                    $conn->query("COMMIT");
+                    die();
+                } else {
+                    // E' tempo di cambiare domanda
+                    aggiornaStanza($conn, $_SESSION["idStanza"]);
+                    $numDomanda += 1;
+                }
+            }
         }
         $conn->query("COMMIT");
         $json = prendiDomanda($conn,$_SESSION["idStanza"],$numDomanda);
