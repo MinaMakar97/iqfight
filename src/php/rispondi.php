@@ -9,7 +9,7 @@
         $json = prendiJson();
         controllaParametri($json, "risposta");
         $rispostaClient = $json["risposta"];
-        if (!tempoScaduto($dbConn, $idStanza, $tempoDomanda)) {
+        if (!tempoScaduto($dbConn, "timestampDomanda", $idStanza, $tempoDomanda)) {
             if (rispostaCorretta($dbConn, $username, $rispostaClient, $idStanza)) {
                 aggiornaPunteggio($dbConn, $username, $idStanza, $tempoDomanda);
             }

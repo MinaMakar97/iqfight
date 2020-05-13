@@ -16,8 +16,15 @@ class Login extends React.Component {
 		xml.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] === true) window.location.replace(json["url"]);
-				else {
+				if (json["successo"] === true) {
+					let url = json["url"];
+					const localUrl = localStorage.getItem("redirect");
+					if (localUrl) {
+						url = localUrl;
+						localStorage.removeItem("redirect");
+					}
+					window.location.replace(url);
+				} else {
 					document.getElementById("form-log").reset();
 					document.getElementById("err-log").textContent = json["errore"];
 					document.getElementById("err-log").style.display = "inline";

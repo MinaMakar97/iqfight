@@ -5,6 +5,7 @@ import logo from "../img/iqfight-logo.png";
 import userImage from "../img/user.png";
 import "./SalaAttesa.css";
 import Vincitori from "./Vincitori";
+import Scrollbars from "react-custom-scrollbars";
 
 class StanzaGioco extends React.Component {
 	constructor() {
@@ -27,6 +28,7 @@ class StanzaGioco extends React.Component {
 
 		this.width = window.innerWidth;
 		this.stateInterval = null;
+		this.domandaInterval = null;
 		this.refresh = 1000;
 		this.tempoDomanda = "20s";
 		this.tempoRisultati = 2000 + Math.floor(Math.random() * 1000);
@@ -62,7 +64,7 @@ class StanzaGioco extends React.Component {
 	}
 
 	componentDidMount() {
-		this.chiediDomanda();
+		this.domandaInterval = setInterval(this.chiediDomanda, this.refresh);
 	}
 
 	chiediDomanda() {
@@ -76,8 +78,10 @@ class StanzaGioco extends React.Component {
 					if (json["azione"] === "finita") {
 						this.setState({ finita: true, giocatori: json["giocatori"] });
 						clearInterval(this.stateInterval);
+						clearInterval(this.domandaInterval);
 						this.stateInterval = null;
 					} else {
+						clearInterval(this.domandaInterval);
 						this.setState({
 							domanda: json["domanda"],
 							risposta1: json["risposte"][0],
@@ -158,7 +162,7 @@ class StanzaGioco extends React.Component {
 						if (this.state.miaRisposta == null || this.state.miaRisposta.textContent !== json["rispCorretta"])
 							this.rispostaSbagliata(json["rispCorretta"]);
 						else this.rispostaGiusta();
-						setTimeout(this.chiediDomanda, this.tempoRisultati);
+						setTimeout(() => (this.domandaInterval = setInterval(this.chiediDomanda, this.refresh)), this.tempoRisultati);
 					}
 				}
 			}
@@ -237,7 +241,17 @@ class StanzaGioco extends React.Component {
 						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
 						<div className=" giocatori ">
 							<div style={{ color: "white", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
-							{this.creaGiocatori()}
+							<Scrollbars
+								style={{ flexGrow: 1 }}
+								renderView={(props) => (
+									<div
+										{...props}
+										className="d-flex flex-column align-items-center"
+										style={{ ...props.style, paddingRight: "8px" }}
+									/>
+								)}>
+								{this.creaGiocatori()}
+							</Scrollbars>
 						</div>
 					</div>
 				</div>

@@ -34,6 +34,7 @@ const withAuth = (Component) => {
 			const { autenticato, caricamento } = this.state;
 			if (caricamento) return null;
 			if (!caricamento && !autenticato) {
+				localStorage.setItem("redirect", this.props.location.pathname);
 				return <Redirect to="/login" />;
 			}
 			return <Component {...this.props} />;

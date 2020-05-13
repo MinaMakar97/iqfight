@@ -9,7 +9,7 @@
 
         aggiornaUltimaRichiesta($dbConn, $username);
 
-        if (!tempoScaduto($dbConn, $idStanza, $tempoDomanda)) {
+        if (!tempoScaduto($dbConn, "timestampDomanda", $idStanza, $tempoDomanda)) {
             $query = $dbConn->prepare("SELECT aggiornaGiocatori FROM partecipa WHERE username = ?");
             $query->bind_param("s", $username);
             $query->execute();
@@ -99,7 +99,7 @@
     }
 
     function mandaRisultati(mysqli $dbConn, $idStanza) {
-        $query = $dbConn->prepare("UPDATE stanza SET domandaDaCambiare = 1 WHERE id = ?");
+        $query = $dbConn->prepare("UPDATE stanza SET domandaDaCambiare = 1, timestampRisultati = CURRENT_TIMESTAMP WHERE id = ?");
         $query->bind_param("i", $idStanza);
         $query->execute();
 
