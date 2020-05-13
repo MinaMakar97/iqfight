@@ -1,6 +1,7 @@
 import React from "react";
 import SalaAttesa from "./SalaAttesa";
 import StanzaGioco from "./StanzaGioco";
+import { Link } from "react-router-dom";
 
 class Gioco extends React.Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ class Gioco extends React.Component {
 			diz: {},
 			giocatori: [],
 			creatore: false,
+			stanzaCorretta: false,
 		};
 	}
 
@@ -29,6 +31,7 @@ class Gioco extends React.Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json2 = JSON.parse(e.target.responseText);
 				if (json2["successo"] === true) {
+					this.setState({ stanzaCorretta: true });
 					if (json2["iniziata"] === 0) {
 						this.setState({
 							iniziata: 0,
@@ -74,11 +77,22 @@ class Gioco extends React.Component {
 	}
 
 	render() {
-		return this.state.iniziata === 0 ? (
-			<SalaAttesa {...this.state.diz} giocatori={this.state.giocatori} idStanza={this.state.id} inizia={this.inziaPartita}></SalaAttesa>
-		) : (
-			<StanzaGioco></StanzaGioco>
+		let component = (
+			<div className="centra flex-column">
+				<p> Stanza non esistente</p>
+				<Link to="/gioca">
+					<button className="bottone">Torna indietro</button>
+				</Link>
+			</div>
 		);
+		if (this.state.stanzaCorretta)
+			component =
+				this.state.iniziata === 0 ? (
+					<SalaAttesa {...this.state.diz} giocatori={this.state.giocatori} idStanza={this.state.id} inizia={this.inziaPartita}></SalaAttesa>
+				) : (
+					<StanzaGioco></StanzaGioco>
+				);
+		return component;
 	}
 }
 export default Gioco;

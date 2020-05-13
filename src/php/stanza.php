@@ -30,12 +30,10 @@
 		$idStanza = $json["idStanza"];
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
-			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1,DEFAULT);");
-			if (!$query) {
-				die(json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]));
-			}
+			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1,DEFAULT)");
 			$query->bind_param('is', $idStanza, $username);
-			$query->execute();
+			if (!$query->execute()) 
+				die(json_encode(["successo" => false, "motivazione" => "La stanza non esiste"]));
 			$risultato = ["successo" => true];
 			$query = $dbConn->prepare("SELECT id, nome, categoria, privata, iniziata,creatore FROM stanza WHERE id = ?");
 			$query->bind_param("i", $idStanza);
