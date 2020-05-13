@@ -82,7 +82,7 @@ export default class Gioca extends Component {
 		return (
 			<div className="gioca w-100 h-100 d-flex flex-column">
 				<div className="row centra">
-					<img src={Logo} className="w-50 centra" alt="Logo di IQFight"></img>
+					<img src={Logo} className="w-50 centra iqfight-logo" alt="Logo di IQFight"></img>
 				</div>
 				<div className="row centra">
 					<h1 className="titolo"> Entra in una stanza </h1>

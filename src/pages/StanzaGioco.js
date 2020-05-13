@@ -64,6 +64,7 @@ class StanzaGioco extends React.Component {
 	}
 
 	componentDidMount() {
+		if (window.innerWidth < 576) window.scrollTo({ top: 0, behavior: "smooth" });
 		this.chiediDomanda();
 		this.domandaInterval = setInterval(this.chiediDomanda, this.refresh);
 	}
@@ -192,6 +193,7 @@ class StanzaGioco extends React.Component {
 
 	componentWillUnmount() {
 		clearInterval(this.stateInterval);
+		clearInterval(this.domandaInterval);
 	}
 
 	render() {
@@ -199,7 +201,7 @@ class StanzaGioco extends React.Component {
 			<Vincitori giocatori={this.state.giocatori} cambia={this.props.cambia}></Vincitori>
 		) : (
 			<div className="pagina-classifica stanza-gioco w-100 h-100 flex-column centra elimina-padding">
-				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine"></img> : null}
+				{this.width < 576 ? <img src={logo} alt="Logo" className="mb-1 immagine iqfight-logo"></img> : null}
 				<div className="row w-100 div-princ mt-3 elimina-padding">
 					<div className="col-12 col-sm-8 mt-4 elimina-padding">
 						<div className="progress mb-4" id="progress">
@@ -239,7 +241,7 @@ class StanzaGioco extends React.Component {
 						<hr className="riga"></hr>
 					</div>
 					<div className="col-12 col-sm-3 centra flex-column">
-						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4"></img> : null}
+						{this.width >= 576 ? <img src={logo} alt="Logo" className="mb-4 iqfight-logo"></img> : null}
 						<div className=" giocatori ">
 							<div style={{ color: "white", paddingTop: "1em", fontSize: "large" }}>Giocatori</div>
 							<Scrollbars

@@ -1,7 +1,3 @@
-.crea-stanza img {
-    max-width: 150px;
-}
-
 .opzione-toggle {
     background-color: white;
     justify-content: space-between;
@@ -62,8 +58,9 @@
         max-height: 400px;
     }
 
-    .crea-stanza .contenitore-viola {
-        width: 100%;
+    .crea-stanza {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 

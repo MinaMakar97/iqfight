@@ -26,10 +26,6 @@
     margin: 1em 0 1em;
 }
 
-.aggiungi-domanda img {
-    max-width: 170px;
-}
-
 .react-select {
     width: 100%;
     padding: 0 !important;

@@ -58,7 +58,7 @@ export default class Classifica extends Component {
 			<div className="pagina-classifica w-100 h-100 d-flex flex-column">
 				<div className="row">
 					<div className="col-12 text-center mb-4">
-						<img src={logo} alt="Logo di IQFight" className="w-50"></img>
+						<img src={logo} alt="Logo di IQFight" className="w-50 iqfight-logo"></img>
 					</div>
 				</div>
 				<div className="row">
