@@ -12,7 +12,7 @@
 		$privata = intval($json["privata"]);
 		$nome = $json["nome"];
 		$categoria = $json["categoria"];
-		$query = $dbConn->prepare("INSERT INTO stanza VALUES (DEFAULT, ?, ?, ?, ?, null, 0, null, -1, 0, null);");
+		$query = $dbConn->prepare("INSERT INTO stanza (nome, categoria, privata, creatore) VALUES (?, ?, ?, ?);");
 		if (!$query) {
 			die (json_encode(["successo" => false, "errore" => mysqli_error($dbConn)]));
 		}
@@ -32,7 +32,7 @@
 		$idStanza = $json["idStanza"];
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
-			$query = $dbConn->prepare("INSERT INTO partecipa VALUES (?, ?, 0, null, null, 1,DEFAULT)");
+			$query = $dbConn->prepare("INSERT INTO partecipa (idStanza, username) VALUES (?, ?)");
 			$query->bind_param('is', $idStanza, $username);
 			if (!$query->execute()) 
 				die(json_encode(["successo" => false, "motivazione" => "La stanza non esiste"]));

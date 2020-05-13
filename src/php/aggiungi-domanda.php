@@ -18,7 +18,7 @@
         $risposta3 = $json["risposta3"];
         $risposta4 = $json["risposta4"];
         $categoria = $json["categoria"];
-        $query = $dbConn->prepare("INSERT INTO domanda VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)");
+        $query = $dbConn->prepare("INSERT INTO domanda (domanda, rispCorretta, risposta2, risposta3, risposta4) VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)");
         $query->bind_param("ssssss", $domanda, $rispostaCorretta, $risposta2, $risposta3, $risposta4, $categoria);
         $query->execute();
         echo json_encode(["successo" => true]);
