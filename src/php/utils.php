@@ -129,4 +129,13 @@
         fclose($file);
     }
 
+    function controllaLogin() {
+        if (!isset($_SESSION["username"])) die(json_encode(["successo" => false, "Devi aver effetuato il login per inviare questa richiesta"]));
+    }
+
+    function controllaStanza() {
+        controllaLogin();
+        if (!isset($_SESSION["idStanza"])) die(json_encode(["successo" => false, "Devi entrare in una stanza per inviare questa richiesta"]));
+    }
+
 ?>

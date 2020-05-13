@@ -2,6 +2,7 @@
     include "utils.php";
     $conn = connettiDB();
     if ($_SERVER["REQUEST_METHOD"] == "GET"){
+        controllaStanza();
         $conn->query("START TRANSACTION");
         $json = infoStanza($conn,$_SESSION["idStanza"]);
         $domandaDaCambiare = $json["domandaDaCambiare"];

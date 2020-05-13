@@ -4,6 +4,7 @@
     $dbConn = connettiDB();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        controllaStanza();
         $username = $_SESSION["username"];
         $idStanza = $_SESSION["idStanza"];
         $json = prendiJson();

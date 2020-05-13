@@ -5,6 +5,7 @@
 
 	if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		// Creazione di una stanza
+		controllaLogin();
 		$json = prendiJson();
 		controllaParametri($json, "privata", "nome", "categoria");
 		$creatore = $_SESSION["username"];
@@ -24,6 +25,7 @@
 	}
 	else if ($_SERVER['REQUEST_METHOD'] == "PUT") {
 		// Un giocatore vuole entrare in una stanza o avviarla
+		controllaLogin();
 		$json = prendiJson();
 		controllaParametri($json, "azione", "idStanza");
 		$azione = $json["azione"];
@@ -59,6 +61,7 @@
 		
 	}
 	else if($_SERVER["REQUEST_METHOD"] == "GET"){
+		controllaStanza();
 		//ritornare i giocatori
 		$username = $_SESSION["username"];
 		$idStanza = $_SESSION["idStanza"];

@@ -9,6 +9,7 @@
     }
     else if ($_SERVER['REQUEST_METHOD'] == "POST") {
         // Crea nuova domanda
+        controllaLogin();
         $json = prendiJson();
         controllaParametri($json, "categoria", "domanda", "rispostaCorretta", "risposta2", "risposta3", "risposta4");
         $domanda = $json["domanda"];
