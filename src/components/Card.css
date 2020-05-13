@@ -4,8 +4,8 @@
     border-radius: 25px;
     flex-direction: row;
     height: 60px;
-    min-width: 100%;
     min-width: 250px;
+    min-height: 60px;
     display: flex;
     justify-content: flex-start;
     align-items: center; 

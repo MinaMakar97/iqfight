@@ -110,8 +110,10 @@ class StanzaAttesa extends React.Component {
 						<hr className="riga"></hr>
 					</div>
 					<div className="col-12 col-sm-3 giocatori">
-						<Scrollbars renderView={(props) => <div {...props} className="scroll-view d-flex flex-column align-items-center" />}>
-							<div style={{ color: "white", paddingTop: "1em", fontSize: "x-large" }}>Giocatori</div>
+						<div style={{ color: "white", paddingTop: "1em", fontSize: "x-large" }}>Giocatori</div>
+						<Scrollbars
+							style={{ flexGrow: 1 }}
+							renderView={(props) => <div {...props} className="scroll-view d-flex flex-column align-items-center" />}>
 							{this.creaGiocatori()}
 						</Scrollbars>
 					</div>
