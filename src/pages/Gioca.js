@@ -10,7 +10,7 @@ export default class Gioca extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stanze: [],
+			stanze: null,
 			cerca: "",
 			categoria: "Tutte",
 			categorie: ["Tutte", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
@@ -22,31 +22,31 @@ export default class Gioca extends Component {
 	}
 
 	componentDidMount() {
-		const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
-		let stanze = [];
-		for (let i = 0; i < 25; i++) {
-			stanze.push({
-				nome: "Stanza" + i,
-				categoria: categorie[Math.floor(Math.random() * categorie.length)],
-				giocatori: Math.floor(Math.random() * 8),
-			});
-		}
-		this.setState({
-			stanze: stanze,
-		});
+		// const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
+		// let stanze = [];
+		// for (let i = 0; i < 25; i++) {
+		// 	stanze.push({
+		// 		nome: "Stanza" + i,
+		// 		categoria: categorie[Math.floor(Math.random() * categorie.length)],
+		// 		giocatori: Math.floor(Math.random() * 8),
+		// 	});
+		// }
+		// this.setState({
+		// 	stanze: stanze,
+		// });
 
-		// this.xhr = new XMLHttpRequest();
-		// this.xhr.onreadystatechange = (e) => {
-		// 	if (e.target.readyState === 4 && e.target.status === 200) {
-		// 		let json = JSON.parse(e.target.responseText);
-		// 		if (json["successo"] === true) {
-		// 			this.setState({ stanze: json["stanze"] });
-		// 		}
-		// 	}
-		// };
-		// this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
-		// this.xhr.withCredentials = true;
-		// this.xhr.send();
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ stanze: json["stanze"] });
+				}
+			}
+		};
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
+		this.xhr.withCredentials = true;
+		this.xhr.send();
 
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {
@@ -96,6 +96,42 @@ export default class Gioca extends Component {
 			singleValue: (provided) => ({ ...provided, color: "#8B6EDD" }),
 		};
 
+		let contenutoStanze = null;
+		if (this.state.stanze !== null)
+			contenutoStanze =
+				this.state.stanze.length === 0 ? (
+					<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
+						<p>
+							Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
+						</p>
+					</div>
+				) : (
+					<Scrollbars
+						className="row div-stanze centra d-flex flex-grow-1"
+						renderView={(props) => (
+							<div
+								{...props}
+								className="d-flex flex-wrap scroll-bar-content"
+								style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
+							/>
+						)}>
+						{this.state.stanze
+							.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
+							.filter(
+								(e) => this.state.categoria === "Tutte" || (this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
+							)
+							.map((stanza, index) => (
+								<Link to={"/room/" + stanza.id} key={index}>
+									<CardStanza
+										nomeStanza={stanza.nome}
+										categoria={stanza.categoria}
+										numGiocatori={stanza.giocatori}
+										maxGiocatori={8}></CardStanza>
+								</Link>
+							))}
+					</Scrollbars>
+				);
+
 		return (
 			<div className="gioca w-100 h-100 d-flex flex-column">
 				<div className="row centra">
@@ -125,40 +161,7 @@ export default class Gioca extends Component {
 								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow" onChange={this.cerca}></input>
 							</div>
 						</div>
-						{this.state.stanze.length === 0 ? (
-							<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
-								<p>
-									Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
-								</p>
-							</div>
-						) : (
-							<Scrollbars
-								className="row div-stanze centra d-flex flex-grow-1"
-								renderView={(props) => (
-									<div
-										{...props}
-										className="d-flex flex-wrap scroll-bar-content"
-										style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
-									/>
-								)}>
-								{this.state.stanze
-									.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
-									.filter(
-										(e) =>
-											this.state.categoria === "Tutte" ||
-											(this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
-									)
-									.map((stanza, index) => (
-										<Link to={"/room/" + stanza.id} key={index}>
-											<CardStanza
-												nomeStanza={stanza.nome}
-												categoria={stanza.categoria}
-												numGiocatori={stanza.giocatori}
-												maxGiocatori={8}></CardStanza>
-										</Link>
-									))}
-							</Scrollbars>
-						)}
+						{contenutoStanze}
 					</div>
 				</div>
 				<div className="row centra order-2">
