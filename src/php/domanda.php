@@ -11,6 +11,7 @@
         if ($domandaDaCambiare == 1){
             if ($numDomanda == $numDomande - 1) {
                 // Partita finita
+                inserisciGiocatoreClassifica($conn, $_SESSION["username"]);
                 $conn->query("COMMIT");
                 echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => classificaGioco($conn, $_SESSION["idStanza"])]);
                 die();
@@ -59,4 +60,58 @@
         return $giocatori;
     }
 
+    function inserisciGiocatoreClassifica(mysqli $conn, $username){
+        $query = $conn->query("SELECT count(*) as total FROM classifica");
+        $query = $query->fetch_assoc();
+        $rowUsername = $conn->prepare("SELECT punteggio FROM partecipa WHERE username = ?");
+        $rowUsername->bind_param("s",$username);
+        $rowUsername->execute();
+        $row = $rowUsername->get_result();
+        $row = $row->fetch_assoc();
+        if ($query["total"] < 20){
+            $query=$conn->prepare("INSERT INTO classifica VALUES (?,?)");
+            $query->bind_param("si",$username,$row["punteggio"]);
+            if (!$query->execute()){
+                $punteggioGiocatore = punteggioGiocatoreClassifica($conn,$username);
+                if ($punteggioGiocatore < $row["punteggio"]){
+                    $query = $conn->prepare("UPDATE classifica SET punteggio = ? WHERE username = ?");
+                    $query->bind_param("is", $row["punteggio"],$username);
+                    $query->execute();
+                }
+            }
+
+        }
+        else{
+            $query = $conn->query("SELECT min(punteggio) as minimo FROM classifica");
+            $query = $query->fetch_assoc();
+            $minimo = $query["minimo"];
+            if ($row["punteggio"] > $minimo) {
+                $query=$conn->prepare("INSERT INTO classifica VALUES (?,?)");
+                $query->bind_param("si",$username,$row["punteggio"]);
+                if ($query->execute()){
+                    $query = $conn->prepare("DELETE FROM classifica WHERE punteggio = ? LIMIT 1");
+                    $query->bind_param("i", $minimo);
+                    $query->execute();  
+                }
+                else{
+                    $punteggioGiocatore = punteggioGiocatoreClassifica($conn,$username);
+                    if ($punteggioGiocatore < $row["punteggio"]){
+                        $query = $conn->prepare("UPDATE classifica SET punteggio = ? WHERE username = ?");
+                        $query->bind_param("is", $row["punteggio"],$username);
+                        $query->execute();
+                    }
+                }
+            }
+        }
+        
+    }
+        
+    function punteggioGiocatoreClassifica(mysqli $conn, $username) {
+        $query = $conn->prepare("SELECT punteggio FROM classifica WHERE username = ?");
+        $query->bind_param("s", $username);
+        $query->execute();
+        $res = $query->get_result();
+        $res = $res->fetch_assoc();
+        return $res["punteggio"];
+    }
 ?>
