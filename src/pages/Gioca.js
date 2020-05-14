@@ -11,38 +11,42 @@ export default class Gioca extends Component {
 		super(props);
 		this.state = {
 			stanze: [],
+			cerca: "",
+			categoria: "Tutte",
 			categorie: ["Tutte", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
 		};
 		this.xhr = null;
 		this.xhrCat = null;
+		this.cerca = this.cerca.bind(this);
+		this.filtra = this.filtra.bind(this);
 	}
 
 	componentDidMount() {
-		// const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
-		// let stanze = [];
-		// for (let i = 0; i < 25; i++) {
-		// 	stanze.push({
-		// 		nome: "Stanza" + i,
-		// 		categoria: categorie[Math.floor(Math.random() * categorie.length)],
-		// 		giocatori: Math.floor(Math.random() * 8),
-		// 	});
-		// }
-		// this.setState({
-		// 	stanze: stanze,
-		// });
+		const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
+		let stanze = [];
+		for (let i = 0; i < 25; i++) {
+			stanze.push({
+				nome: "Stanza" + i,
+				categoria: categorie[Math.floor(Math.random() * categorie.length)],
+				giocatori: Math.floor(Math.random() * 8),
+			});
+		}
+		this.setState({
+			stanze: stanze,
+		});
 
-		this.xhr = new XMLHttpRequest();
-		this.xhr.onreadystatechange = (e) => {
-			if (e.target.readyState === 4 && e.target.status === 200) {
-				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] === true) {
-					this.setState({ stanze: json["stanze"] });
-				}
-			}
-		};
-		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
-		this.xhr.withCredentials = true;
-		this.xhr.send();
+		// this.xhr = new XMLHttpRequest();
+		// this.xhr.onreadystatechange = (e) => {
+		// 	if (e.target.readyState === 4 && e.target.status === 200) {
+		// 		let json = JSON.parse(e.target.responseText);
+		// 		if (json["successo"] === true) {
+		// 			this.setState({ stanze: json["stanze"] });
+		// 		}
+		// 	}
+		// };
+		// this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
+		// this.xhr.withCredentials = true;
+		// this.xhr.send();
 
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {
@@ -61,6 +65,19 @@ export default class Gioca extends Component {
 	componentWillUnmount() {
 		if (this.xhr) this.xhr.onreadystatechange = null;
 		if (this.xhrCat) this.xhrCat.onreadystatechange = null;
+	}
+
+	cerca(e) {
+		let elementoCercato = e.target.value;
+		this.setState({
+			cerca: elementoCercato,
+		});
+	}
+
+	filtra(e) {
+		this.setState({
+			categoria: e.value,
+		});
 	}
 
 	render() {
@@ -93,6 +110,7 @@ export default class Gioca extends Component {
 							<div className="col-12 col-sm-6 d-flex align-items-center">
 								<p style={{ marginRight: "1em", color: "#8B6EDD" }}>Categoria</p>
 								<Select
+									onChange={this.filtra}
 									defaultValue={{ label: "Tutte", value: "Tutte" }}
 									options={options}
 									className="form-control-lg"
@@ -104,7 +122,7 @@ export default class Gioca extends Component {
 									isSearchable={false}></Select>
 							</div>
 							<div className="col-12 col-sm-6">
-								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow"></input>
+								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow" onChange={this.cerca}></input>
 							</div>
 						</div>
 						{this.state.stanze.length === 0 ? (
@@ -123,15 +141,22 @@ export default class Gioca extends Component {
 										style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
 									/>
 								)}>
-								{this.state.stanze.map((stanza, index) => (
-									<Link to={"/room/" + stanza.id} key={index}>
-										<CardStanza
-											nomeStanza={stanza.nome}
-											categoria={stanza.categoria}
-											numGiocatori={stanza.giocatori}
-											maxGiocatori={8}></CardStanza>
-									</Link>
-								))}
+								{this.state.stanze
+									.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
+									.filter(
+										(e) =>
+											this.state.categoria === "Tutte" ||
+											(this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
+									)
+									.map((stanza, index) => (
+										<Link to={"/room/" + stanza.id} key={index}>
+											<CardStanza
+												nomeStanza={stanza.nome}
+												categoria={stanza.categoria}
+												numGiocatori={stanza.giocatori}
+												maxGiocatori={8}></CardStanza>
+										</Link>
+									))}
 							</Scrollbars>
 						)}
 					</div>
