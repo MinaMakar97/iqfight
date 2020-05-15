@@ -44,8 +44,7 @@ class Gioco extends React.Component {
 					}
 				} else
 					this.setState({
-						stringa: "fallimento nel caricamento...",
-						stanzaCorretta: false,
+						stringa: json2["motivazione"],
 					});
 			}
 		};
@@ -83,15 +82,17 @@ class Gioco extends React.Component {
 	}
 
 	render() {
-		let component = (
-			<div className="centra flex-column">
-				<p> Stanza non esistente</p>
-				<Link to="/gioca">
-					<button className="bottone">Torna indietro</button>
-				</Link>
-			</div>
-		);
-		if (this.state.stanzaCorretta)
+		let component = null;
+		if (this.state.stringa !== "")
+			component = (
+				<div className="centra flex-column">
+					<p> {this.state.stringa} </p>
+					<Link to="/gioca">
+						<button className="bottone">Torna indietro</button>
+					</Link>
+				</div>
+			);
+		else if (this.state.stanzaCorretta)
 			component =
 				this.state.iniziata === 0 ? (
 					<SalaAttesa
@@ -102,7 +103,7 @@ class Gioco extends React.Component {
 				) : (
 					<StanzaGioco cambia={this.cambiaIniziata}></StanzaGioco>
 				);
-		return this.state.stanzaCorretta != null ? component : null;
+		return component;
 	}
 }
 export default Gioco;

@@ -32,31 +32,40 @@
 		$idStanza = $json["idStanza"];
 		$username = $_SESSION["username"];
 		if ($azione == "entra") {
-			$query = $dbConn->prepare("INSERT INTO partecipa (idStanza, username) VALUES (?, ?)");
-			$query->bind_param('is', $idStanza, $username);
-			if (!$query->execute()) 
-				die(json_encode(["successo" => false, "motivazione" => "La stanza non esiste"]));
-			$risultato = ["successo" => true];
-			$query = $dbConn->prepare("SELECT id, nome, categoria, privata, iniziata,creatore FROM stanza WHERE id = ?");
-			$query->bind_param("i", $idStanza);
-			$query->execute();
-			$stanza = $query->get_result();
-			$stanza = $stanza->fetch_assoc();
-			$risultato["id"] = $stanza["id"];
-			$risultato["nome"] = $stanza["nome"];
-			$risultato["categoria"] = $stanza["categoria"];
-			$risultato["privata"] = $stanza["privata"];
-			$risultato["iniziata"] = $stanza["iniziata"];
-			$risultato["creatore"] = $stanza["creatore"] == $username;
-			$query = $dbConn ->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 WHERE idStanza = ?");
-			$query->bind_param("i",$idStanza);
-			if ($query->execute()){
-				$_SESSION["idStanza"] = $idStanza;
-				echo json_encode($risultato);
+			$dbConn->query("START TRANSACTION");
+			if (numGiocatoriStanza($dbConn,$idStanza) < 8){
+				$query = $dbConn->prepare("INSERT INTO partecipa (idStanza, username) VALUES (?, ?)");
+				$query->bind_param('is', $idStanza, $username);
+				if (!$query->execute()){
+					$dbConn->query("COMMIT");
+					die(json_encode(["successo" => false, "motivazione" => "La stanza non esiste"]));
+				}
+				$risultato = ["successo" => true];
+				$query = $dbConn->prepare("SELECT id, nome, categoria, privata, iniziata,creatore FROM stanza WHERE id = ?");
+				$query->bind_param("i", $idStanza);
+				$query->execute();
+				$stanza = $query->get_result();
+				$stanza = $stanza->fetch_assoc();
+				$risultato["id"] = $stanza["id"];
+				$risultato["nome"] = $stanza["nome"];
+				$risultato["categoria"] = $stanza["categoria"];
+				$risultato["privata"] = $stanza["privata"];
+				$risultato["iniziata"] = $stanza["iniziata"];
+				$risultato["creatore"] = $stanza["creatore"] == $username;
+				$query = $dbConn ->prepare("UPDATE partecipa SET aggiornaGiocatori = 1 WHERE idStanza = ?");
+				$query->bind_param("i",$idStanza);
+				if ($query->execute()){
+					$_SESSION["idStanza"] = $idStanza;
+					echo json_encode($risultato);
+				}
+				else {
+					echo json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]);
+				}
 			}
 			else {
-				echo json_encode(["successo"=>false, "errore" => mysqli_error($dbConn)]);
+				echo json_encode(["successo" => false, "motivazione" => "Stanza piena"]);
 			}
+			$dbConn->query("COMMIT");
 		}
 		
 	}
@@ -108,6 +117,15 @@
 	}
 
 	disconnettiDB($dbConn);
+
+	function numGiocatoriStanza(mysqli $conn, $idStanza){
+		$query = $conn->prepare("SELECT count(username) as numero FROM partecipa WHERE idStanza = ? FOR UPDATE");
+		$query->bind_param("i",$idStanza);
+		$query->execute();
+		$row = $query->get_result();
+		$row = $row ->fetch_assoc();
+		return $row["numero"];
+	}
 	
 ?>
 
