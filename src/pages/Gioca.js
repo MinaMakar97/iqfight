@@ -10,7 +10,7 @@ export default class Gioca extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			stanze: [],
+			stanze: null,
 			cerca: "",
 			categoria: "Tutte",
 			categorie: ["Tutte", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
@@ -95,6 +95,42 @@ export default class Gioca extends Component {
 			placeholder: (provided) => ({ ...provided, color: "#c1b1ec" }),
 			singleValue: (provided) => ({ ...provided, color: "#8B6EDD" }),
 		};
+
+		let contenutoStanze = null;
+		if (this.state.stanze !== null)
+			contenutoStanze =
+				this.state.stanze.length === 0 ? (
+					<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
+						<p>
+							Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
+						</p>
+					</div>
+				) : (
+					<Scrollbars
+						className="row div-stanze centra d-flex flex-grow-1"
+						renderView={(props) => (
+							<div
+								{...props}
+								className="d-flex flex-wrap scroll-bar-content"
+								style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
+							/>
+						)}>
+						{this.state.stanze
+							.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
+							.filter(
+								(e) => this.state.categoria === "Tutte" || (this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
+							)
+							.map((stanza, index) => (
+								<Link to={"/room/" + stanza.id} key={index}>
+									<CardStanza
+										nomeStanza={stanza.nome}
+										categoria={stanza.categoria}
+										numGiocatori={stanza.giocatori}
+										maxGiocatori={8}></CardStanza>
+								</Link>
+							))}
+					</Scrollbars>
+				);
 
 		return (
 			<div className="gioca w-100 h-100 d-flex flex-column">

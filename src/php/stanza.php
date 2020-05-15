@@ -66,7 +66,7 @@
 		$username = $_SESSION["username"];
 		$idStanza = $_SESSION["idStanza"];
 
-		$query = $dbConn->prepare("SELECT iniziata, aggiornaGiocatori,creatore FROM partecipa, stanza WHERE username = ? AND idStanza = ?");
+		$query = $dbConn->prepare("SELECT iniziata, aggiornaGiocatori,creatore FROM partecipa, stanza WHERE id = idStanza AND username = ? AND idStanza = ?");
 		$query->bind_param("si", $username, $idStanza);
 		$query->execute();
 		$row = $query->get_result();

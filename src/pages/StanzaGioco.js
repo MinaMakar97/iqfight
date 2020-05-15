@@ -37,6 +37,9 @@ class StanzaGioco extends React.Component {
 		const progressBar = document.getElementById("prog");
 		progressBar.style.transitionDuration = "0s";
 		progressBar.style.width = "100%";
+		// eslint-disable-next-line
+		const refreshStyle = progressBar.offsetWidth; // Triggera il reflow
+		progressBar.style.transitionDuration = this.tempoDomanda;
 
 		let giocatori = { ...this.state.giocatori };
 		for (let giocatore in giocatori) {
@@ -66,7 +69,6 @@ class StanzaGioco extends React.Component {
 	}
 
 	chiediDomanda() {
-		this.risettaStato();
 		let xhr = new XMLHttpRequest();
 		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/domanda.php");
 		xhr.onreadystatechange = (e) => {
@@ -80,6 +82,7 @@ class StanzaGioco extends React.Component {
 						this.stateInterval = null;
 					} else {
 						clearInterval(this.domandaInterval);
+						this.risettaStato();
 						this.setState({
 							domanda: json["domanda"],
 							risposta1: json["risposte"][0],
@@ -88,8 +91,8 @@ class StanzaGioco extends React.Component {
 							risposta4: json["risposte"][3],
 						});
 						const progress = document.getElementById("prog");
-						progress.style.transitionDuration = this.tempoDomanda;
 						progress.style.width = "0%";
+
 						document.getElementById("progress").style.opacity = 1;
 						if (!this.stateInterval) this.stateInterval = setInterval(this.getStato, this.refresh);
 					}
