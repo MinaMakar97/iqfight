@@ -166,40 +166,7 @@ export default class Gioca extends Component {
 								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow" onChange={this.cerca}></input>
 							</div>
 						</div>
-						{this.state.stanze.length === 0 ? (
-							<div className="centra flex-grow-1 text-center" style={{ color: "var(--colore-border)" }}>
-								<p>
-									Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
-								</p>
-							</div>
-						) : (
-							<Scrollbars
-								className="row div-stanze centra d-flex flex-grow-1"
-								renderView={(props) => (
-									<div
-										{...props}
-										className="d-flex flex-wrap scroll-bar-content"
-										style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
-									/>
-								)}>
-								{this.state.stanze
-									.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
-									.filter(
-										(e) =>
-											this.state.categoria === "Tutte" ||
-											(this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
-									)
-									.map((stanza, index) => (
-										<Link to={"/room/" + stanza.id} key={index}>
-											<CardStanza
-												nomeStanza={stanza.nome}
-												categoria={stanza.categoria}
-												numGiocatori={stanza.giocatori}
-												maxGiocatori={8}></CardStanza>
-										</Link>
-									))}
-							</Scrollbars>
-						)}
+						{contenutoStanze}
 					</div>
 				</div>
 				<div className="row centra order-2">
