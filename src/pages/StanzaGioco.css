@@ -9,6 +9,7 @@
     word-spacing: break-all;
     text-align: center;
     font-weight: bold;
+    color:var(--colore-scritte);
 }
 
 .domanda::selection{
@@ -27,6 +28,7 @@
     cursor: pointer;
     word-spacing: break-all;
     text-align: center;
+    color:var(--colore-scritte);
 }
 
 

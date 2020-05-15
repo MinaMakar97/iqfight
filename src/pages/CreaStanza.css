@@ -10,7 +10,7 @@
 .contenitore-viola {
     width: 80%;
     overflow: hidden;
-    background-color: #E0D5FF;
+    background-color: var(--colore-contorno);
     border-radius: 15px;
     padding: 1em;
     overflow: auto;
@@ -24,7 +24,7 @@
     border-radius: 10px;
     height: 60px;
     width: 45%;
-    color: var(--colore-card);
+    color: var(--colore-titolo);
     font-size: 1.5em;
     margin: .2em 0 .2em 0;
     text-align: center;

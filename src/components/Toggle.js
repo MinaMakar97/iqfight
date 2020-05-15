@@ -11,6 +11,7 @@ export default class Toggle extends Component {
 					value={this.props.value}
 					defaultChecked={this.props.checked}
 					tabIndex={-1}
+					onClick={this.props.onClick}
 				/>
 				<span className="toggle-slider"></span>
 			</label>

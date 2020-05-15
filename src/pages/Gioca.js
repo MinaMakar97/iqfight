@@ -92,15 +92,15 @@ export default class Gioca extends Component {
 				borderRadius: "10px",
 				height: "calc(1.5em + 1rem + 2px)",
 			}),
-			placeholder: (provided) => ({ ...provided, color: "#c1b1ec" }),
-			singleValue: (provided) => ({ ...provided, color: "#8B6EDD" }),
+			placeholder: (provided) => ({ ...provided, color: "var(--colore-placeholder)" }),
+			singleValue: (provided) => ({ ...provided, color: "var(--colore-quart)" }),
 		};
 
 		let contenutoStanze = null;
 		if (this.state.stanze !== null)
 			contenutoStanze =
 				this.state.stanze.length === 0 ? (
-					<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
+					<div className="centra flex-grow-1 text-center" style={{ color: "var(--colore-border)" }}>
 						<p>
 							Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
 						</p>
@@ -157,7 +157,8 @@ export default class Gioca extends Component {
 											...theme.colors,
 											primary: "var(--colore-quart)",
 											primary50: "var(--colore-placeholder)",
-											primary25: "#d7ceed",
+											primary25: "var(--colore-placeholder)",
+											neutral0: "var(--colore-card)",
 										},
 									})}
 									isSearchable={false}></Select>

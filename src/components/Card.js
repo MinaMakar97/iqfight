@@ -13,7 +13,7 @@ class Card extends React.Component {
 				{/* la seconda colonna */}
 				<div className="dis-text">
 					<div className="font-weight-bold a">{this.props.nome}</div>
-					<div className="text-muted a">{this.props.punteggio}</div>
+					<div className="a">{this.props.punteggio}</div>
 				</div>
 				<div className="posizione">{this.props.posizione}</div>
 			</div>

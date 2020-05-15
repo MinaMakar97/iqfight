@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import "./MenuLaterale.css";
 import { withRouter } from "react-router-dom";
 import avatarPredefinito from "../img/user.png";
-
+import Toggle from "./Toggle";
 class MenuLaterale extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { aperto: !(window.innerWidth <= 576), username: null, avatar: null, lista: [] };
+		this.state = { aperto: !(window.innerWidth <= 576), username: null, avatar: null, lista: [], checked: null };
 		this.setta = this.setta.bind(this);
 		this.cambiaPagina = this.cambiaPagina.bind(this);
 		this.sezioniMenu = this.sezioniMenu.bind(this);
 		this.esci = this.esci.bind(this);
+		this.onChange = this.onChange.bind(this);
 		this.sezioni = ["Classifica", "Gioca"];
 	}
 
@@ -81,13 +82,59 @@ class MenuLaterale extends Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
-					this.setState({ username: json["username"], avatar: json["avatar"] });
+					this.setState({ username: json["username"], avatar: json["avatar"], checked: json["dark"] });
+					console.log(json["dark"]);
+					this.state.checked === 1 ? this.darkMode() : this.normalMode();
 				}
 			}
 		};
 		xhr.withCredentials = true;
 		xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/info-utente.php");
 		xhr.send();
+	}
+
+	onChange(e) {
+		console.log(e.target.checked);
+		this.setState({
+			checked: e.target.checked,
+		});
+		if (e.target.checked) {
+			this.darkMode();
+		} else {
+			this.normalMode();
+		}
+		if (this.state.username !== null) {
+			let xhr = new XMLHttpRequest();
+			let json = { dark: e.target.checked };
+			xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/info-utente.php");
+			xhr.withCredentials = true;
+			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhr.send(JSON.stringify(json));
+		}
+	}
+
+	normalMode() {
+		document.documentElement.style.setProperty("--colore-primario", null);
+		document.documentElement.style.setProperty("--colore-secondario", null);
+		document.documentElement.style.setProperty("--colore-card", null);
+		document.documentElement.style.setProperty("--colore-quart", null);
+		document.documentElement.style.setProperty("--colore-contorno", null);
+		document.documentElement.style.setProperty("--colore-terz", null);
+		document.documentElement.style.setProperty("--colore-border", null);
+		document.documentElement.style.setProperty("--colore-scritte", null);
+		document.documentElement.style.setProperty("--colore-placeholder", null);
+	}
+
+	darkMode() {
+		document.documentElement.style.setProperty("--colore-primario", "#484848");
+		document.documentElement.style.setProperty("--colore-secondario", "#2f3477");
+		document.documentElement.style.setProperty("--colore-card", "#8a8a8a");
+		document.documentElement.style.setProperty("--colore-terz", "#717171");
+		document.documentElement.style.setProperty("--colore-quart", "#045970");
+		document.documentElement.style.setProperty("--colore-contorno", "#656565");
+		document.documentElement.style.setProperty("--colore-border", "#424242");
+		document.documentElement.style.setProperty("--colore-scritte", "white");
+		document.documentElement.style.setProperty("--colore-placeholder", "#626363");
 	}
 
 	render() {
@@ -108,6 +155,11 @@ class MenuLaterale extends Component {
 					) : null}
 					<hr className="riga-menu"></hr>
 					{this.sezioniMenu()}
+					<div className="pos-toggle centra flex-column" style={{ height: "5em" }}>
+						<Toggle name={"dark"} onClick={this.onChange} checked={this.state.checked}></Toggle>
+						<div className="pt-1">Dark mode</div>
+					</div>
+					<hr className="riga-menu"></hr>
 				</div>
 				<div className="menu-button" onClick={this.setta}>
 					<p id="freccia" className={this.state.aperto ? "arrow-right" : "arrow-left"}></p>

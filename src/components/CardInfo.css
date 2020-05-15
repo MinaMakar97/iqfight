@@ -1,5 +1,5 @@
 .nome-sezione{
-    color:#8B6EDD;
+    color:var(--colore-quart);
     font-size: .9em;
     height: 30%;
 }
@@ -12,9 +12,10 @@
 
 .div-card{
     height: auto;
-    background-color: white;
+    color:var(--colore-scritte);
+    background-color: var(--colore-card);
     border-style: solid;
-    border-color: rgb(101, 64, 204);
+    border-color: var(--colore-border);
     border-radius: 15px;
     padding-left: 30px;
     padding-right: 30px;

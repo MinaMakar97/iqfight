@@ -5,12 +5,14 @@
 
 .aggiungi-domanda textarea {
     height: 3em;
+    
 }
 
 .form-control-lg {
     margin: 0em 0em 1em;
     border-radius: 10px !important;
     padding: .375rem .75rem !important;
+    background-color:var(--colore-card);
 }
 
 .input-toggle-text::placeholder {

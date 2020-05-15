@@ -65,8 +65,8 @@ export default class AggiungiDomanda extends Component {
 				borderRadius: "10px",
 				height: "calc(1.5em + 1rem + 2px)",
 			}),
-			placeholder: (provided) => ({ ...provided, color: "#c1b1ec" }),
-			singleValue: (provided) => ({ ...provided, color: "#8B6EDD" }),
+			placeholder: (provided) => ({ ...provided, color: "var(--colore-placeholder)" }),
+			singleValue: (provided) => ({ ...provided, color: "var(--colore-quart)" }),
 		};
 		return (
 			<div className="aggiungi-domanda w-100">
@@ -87,7 +87,12 @@ export default class AggiungiDomanda extends Component {
 								placeholder="Categoria"
 								theme={(theme) => ({
 									...theme,
-									colors: { ...theme.colors, primary: "#8B6EDD", primary50: "#c1b1ec", primary25: "#d7ceed" },
+									colors: {
+										...theme.colors,
+										neutral0: "var(--colore-card)",
+										primary50: "var(--colore-placeholder)",
+										primary25: "var(--colore-placeholder)",
+									},
 								})}
 								isSearchable={false}></Select>
 							<textarea placeholder="Domanda" className="form-control-lg shadow" required name="domanda" maxLength="100"></textarea>
