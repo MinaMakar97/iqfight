@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import TerminiServizio from "../components/TerminiServizio";
 class FormRegistrazione extends React.Component {
 	constructor(props) {
 		super(props);
@@ -92,8 +92,8 @@ class FormRegistrazione extends React.Component {
 						placeholder="Password"
 						name="password"
 						required></input>
-					<div className="form-control-lg shadow" style={{ borderRadius: "10px", display: "flex", backgroundColor: "white" }}>
-						<div style={{ color: "#c1b1ec" }}>Avatar</div>
+					<div className="form-control-lg shadow" style={{ borderRadius: "10px", display: "flex", backgroundColor: "var(--colore-card)" }}>
+						<div style={{ color: "var(--colore-placeholder)" }}>Avatar</div>
 						<p id="name-avatar" className="sfoglia">
 							{this.state.filePath}
 						</p>
@@ -105,8 +105,12 @@ class FormRegistrazione extends React.Component {
 					<div className="termini-cond mt-3">
 						<input className="form-check-input" type="checkbox" value="" id="defaultCheck1" required />
 						<label className="form-check-label" htmlFor="defaultCheck1">
-							Accetto i termini di servizio
+							Accetto&nbsp;
 						</label>
+						<label style={{ color: "white", textDecoration: "underline" }} data-toggle="modal" data-target="#exampleModalLong">
+							termini di servizio
+						</label>
+						<TerminiServizio></TerminiServizio>
 					</div>
 					<p style={{ display: "none", marginTop: "1em" }} id="err-log"></p>
 
