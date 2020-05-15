@@ -144,7 +144,7 @@ export default class Gioca extends Component {
 					<div className="contenitore-viola h-100">
 						<div className="row centra">
 							<div className="col-12 col-sm-6 d-flex align-items-center">
-								<p style={{ marginRight: "1em", color: "#8B6EDD" }}>Categoria</p>
+								<p style={{ marginRight: "1em", color: "var(--colore-quart)" }}>Categoria</p>
 								<Select
 									onChange={this.filtra}
 									defaultValue={{ label: "Tutte", value: "Tutte" }}
@@ -153,7 +153,12 @@ export default class Gioca extends Component {
 									styles={styles}
 									theme={(theme) => ({
 										...theme,
-										colors: { ...theme.colors, primary: "#8B6EDD", primary50: "#c1b1ec", primary25: "#d7ceed" },
+										colors: {
+											...theme.colors,
+											primary: "var(--colore-quart)",
+											primary50: "var(--colore-placeholder)",
+											primary25: "#d7ceed",
+										},
 									})}
 									isSearchable={false}></Select>
 							</div>

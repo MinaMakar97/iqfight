@@ -14,11 +14,11 @@
 }
 
 .input-toggle-text::placeholder {
-    color: #c1b1ec;
+    color: var(--colore-placeholder);
 }
 
 .input-toggle-text {
-    color: #8B6EDD;
+    color: var(--colore-quart);
 }
 
 .titolo {

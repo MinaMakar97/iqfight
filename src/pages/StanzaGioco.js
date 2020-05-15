@@ -35,7 +35,6 @@ class StanzaGioco extends React.Component {
 
 	risettaStato() {
 		const progressBar = document.getElementById("prog");
-
 		progressBar.style.transitionDuration = "0s";
 		progressBar.style.width = "100%";
 		void progressBar.offsetWidth; // Triggera il reflow
@@ -51,7 +50,7 @@ class StanzaGioco extends React.Component {
 		for (let risposta of lista) {
 			risposta.classList.remove("correggi-risposta");
 			risposta.style.opacity = 1;
-			risposta.style.backgroundColor = "white";
+			risposta.style.backgroundColor = "var(--colore-card)";
 			risposta.style.fontWeight = "unset";
 		}
 

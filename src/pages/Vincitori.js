@@ -90,11 +90,9 @@ class Vincitori extends React.Component {
 						</Link>
 					</div>
 					<div className="col-12 col-sm-6 centra">
-						<Link>
-							<button type="submit" className="shadow bottone mb-4" onClick={this.giocaAncora}>
-								Gioca ancora
-							</button>
-						</Link>
+						<button type="submit" className="shadow bottone mb-4" onClick={this.giocaAncora}>
+							Gioca ancora
+						</button>
 					</div>
 				</div>
 			</div>

@@ -6,27 +6,38 @@ import avatarPredefinito from "../img/user.png";
 class MenuLaterale extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { aperto: !(window.innerWidth <= 576), username: null, avatar: null };
+		this.state = { aperto: !(window.innerWidth <= 576), username: null, avatar: null, lista: [] };
 		this.setta = this.setta.bind(this);
 		this.cambiaPagina = this.cambiaPagina.bind(this);
+		this.sezioniMenu = this.sezioniMenu.bind(this);
 		this.esci = this.esci.bind(this);
-		this.sezioni = ["Guida", "Classifica", "Gioca", "Aggiungi domanda", "Esci"];
-		this.lista = [];
+		this.sezioni = ["Classifica", "Gioca"];
+	}
 
-		for (let sez of this.sezioni) {
-			this.lista.push(
-				<div className="div-content" key={sez} id={sez.replace(" ", "-").toLowerCase()} onClick={this.cambiaPagina}>
-					{sez}
+	aggiungiCard(stringa) {
+		return (
+			<div>
+				<div className="div-content" key={stringa} id={stringa.replace(" ", "-").toLowerCase()} onClick={this.cambiaPagina}>
+					{stringa}
 				</div>
-			);
-			this.lista.push(<hr className="riga-menu" key={"riga-" + sez}></hr>);
-		}
+				<hr className="riga-menu" key={"riga-" + stringa}></hr>
+			</div>
+		);
 	}
 
 	setta() {
 		this.setState((prevState) => ({
 			aperto: !prevState.aperto,
 		}));
+	}
+
+	sezioniMenu() {
+		let lista = [];
+		for (let sez of this.sezioni) {
+			lista.push(this.aggiungiCard(sez));
+		}
+		if (this.state.username !== null) lista.push(this.aggiungiCard("Aggiungi domanda"), this.aggiungiCard("Esci"));
+		return lista;
 	}
 
 	esci() {
@@ -96,7 +107,7 @@ class MenuLaterale extends Component {
 						</div>
 					) : null}
 					<hr className="riga-menu"></hr>
-					{this.lista}
+					{this.sezioniMenu()}
 				</div>
 				<div className="menu-button" onClick={this.setta}>
 					<p id="freccia" className={this.state.aperto ? "arrow-right" : "arrow-left"}></p>

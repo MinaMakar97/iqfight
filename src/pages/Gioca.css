@@ -15,7 +15,7 @@
 }
 
 .riga-testo-riga hr {
-    background-color: white;
+    background-color: var(--colore-card);
     height: 4px;
     flex-grow: 1;
 }
@@ -25,7 +25,7 @@
 }
 
 .gioca .contenitore-viola {
-    background-color: #E0D5FF;
+    background-color: var(--colore-contorno);
     border-radius: 15px;
     display: flex;
     flex-direction: column;

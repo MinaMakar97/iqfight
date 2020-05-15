@@ -33,7 +33,7 @@
 .descrizione {
     padding-top: 20px;
     text-align: center;
-    color: white;
+    color: var(--colore-titolo);
     font-size: x-large;
 }
 
@@ -60,10 +60,10 @@
 }
 
 .contorno {
-    color: #8b6edd;
+    color: var(--colore-quart);
     width: 4.5em;
     height: 100%;
-    background-color: #e0d5ff;
+    background-color: var(--colore-contorno);
     border-radius: 10px;
     text-align: center;
 }

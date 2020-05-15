@@ -39,17 +39,17 @@ label.toggle {
   width: 18px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: var(--colore-card);
   -webkit-transition: .4s;
   transition: .4s;
 }
 
 input:checked + .toggle-slider {
-  background-color: #8B6EDD;
+  background-color: var(--colore-quart);
 }
 
 input:focus + .toggle-slider {
-  box-shadow: 0 0 1px #8B6EDD;
+  box-shadow: 0 0 1px var(--colore-quart);
 }
 
 input:checked + .toggle-slider:before {
