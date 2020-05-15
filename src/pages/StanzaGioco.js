@@ -38,8 +38,7 @@ class StanzaGioco extends React.Component {
 
 		progressBar.style.transitionDuration = "0s";
 		progressBar.style.width = "100%";
-		// eslint-disable-next-line
-		const refreshStyle = progressBar.offsetWidth; // Triggera il reflow
+		void progressBar.offsetWidth; // Triggera il reflow
 		progressBar.style.transitionDuration = this.tempoDomanda;
 
 		let giocatori = { ...this.state.giocatori };
@@ -153,8 +152,13 @@ class StanzaGioco extends React.Component {
 				if (json["successo"] === true) {
 					if (json["azione"] === "aggiorna") {
 						// Qualcuno ha risposto, è entrato o è uscito
+						let newGiocatori = {};
+						for (let giocatore in json["giocatori"]) {
+							newGiocatori[giocatore] = json["giocatori"][giocatore];
+							newGiocatori[giocatore].punteggio = giocatore in this.state.giocatori ? this.state.giocatori[giocatore].punteggio : 0;
+						}
 						this.setState({
-							giocatori: json["giocatori"],
+							giocatori: newGiocatori,
 						});
 					} else if (json["azione"] === "risultati") {
 						// Fine del round

@@ -87,7 +87,7 @@
     
 
     function statoGiocatori(mysqli $dbConn, $idStanza) {
-        $query = $dbConn->prepare("SELECT partecipa.username, avatar, punteggio, CASE WHEN rispostaCorretta IS NULL THEN 0 ELSE 1 END as risposto FROM partecipa, utente WHERE idStanza = ? AND utente.username = partecipa.username");
+        $query = $dbConn->prepare("SELECT partecipa.username, avatar, CASE WHEN rispostaCorretta IS NULL THEN 0 ELSE 1 END as risposto FROM partecipa, utente WHERE idStanza = ? AND utente.username = partecipa.username");
         $query->bind_param("i", $idStanza);
         $query->execute();
         $result = $query->get_result();
