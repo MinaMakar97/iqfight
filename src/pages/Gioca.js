@@ -22,31 +22,31 @@ export default class Gioca extends Component {
 	}
 
 	componentDidMount() {
-		const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
-		let stanze = [];
-		for (let i = 0; i < 25; i++) {
-			stanze.push({
-				nome: "Stanza" + i,
-				categoria: categorie[Math.floor(Math.random() * categorie.length)],
-				giocatori: Math.floor(Math.random() * 8),
-			});
-		}
-		this.setState({
-			stanze: stanze,
-		});
+		// const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
+		// let stanze = [];
+		// for (let i = 0; i < 25; i++) {
+		// 	stanze.push({
+		// 		nome: "Stanza" + i,
+		// 		categoria: categorie[Math.floor(Math.random() * categorie.length)],
+		// 		giocatori: Math.floor(Math.random() * 8),
+		// 	});
+		// }
+		// this.setState({
+		// 	stanze: stanze,
+		// });
 
-		// this.xhr = new XMLHttpRequest();
-		// this.xhr.onreadystatechange = (e) => {
-		// 	if (e.target.readyState === 4 && e.target.status === 200) {
-		// 		let json = JSON.parse(e.target.responseText);
-		// 		if (json["successo"] === true) {
-		// 			this.setState({ stanze: json["stanze"] });
-		// 		}
-		// 	}
-		// };
-		// this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
-		// this.xhr.withCredentials = true;
-		// this.xhr.send();
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ stanze: json["stanze"] });
+				}
+			}
+		};
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
+		this.xhr.withCredentials = true;
+		this.xhr.send();
 
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {
@@ -108,7 +108,7 @@ export default class Gioca extends Component {
 					<div className="contenitore-viola h-100">
 						<div className="row centra">
 							<div className="col-12 col-sm-6 d-flex align-items-center">
-								<p style={{ marginRight: "1em", color: "#8B6EDD" }}>Categoria</p>
+								<p style={{ marginRight: "1em", color: "var(--colore-quart)" }}>Categoria</p>
 								<Select
 									onChange={this.filtra}
 									defaultValue={{ label: "Tutte", value: "Tutte" }}
@@ -117,7 +117,12 @@ export default class Gioca extends Component {
 									styles={styles}
 									theme={(theme) => ({
 										...theme,
-										colors: { ...theme.colors, primary: "#8B6EDD", primary50: "#c1b1ec", primary25: "#d7ceed" },
+										colors: {
+											...theme.colors,
+											primary: "var(--colore-quart)",
+											primary50: "var(--colore-placeholder)",
+											primary25: "#d7ceed",
+										},
 									})}
 									isSearchable={false}></Select>
 							</div>
@@ -126,7 +131,7 @@ export default class Gioca extends Component {
 							</div>
 						</div>
 						{this.state.stanze.length === 0 ? (
-							<div className="centra flex-grow-1 text-center" style={{ color: "rgb(101, 64, 204)" }}>
+							<div className="centra flex-grow-1 text-center" style={{ color: "var(--colore-border)" }}>
 								<p>
 									Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
 								</p>

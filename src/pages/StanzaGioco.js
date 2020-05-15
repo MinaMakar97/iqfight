@@ -35,9 +35,6 @@ class StanzaGioco extends React.Component {
 
 	risettaStato() {
 		const progressBar = document.getElementById("prog");
-		const divProgress = document.getElementById("progress");
-
-		progressBar.ontransitionend = (e) => console.log(e);
 		progressBar.style.transitionDuration = "0s";
 		progressBar.style.width = "100%";
 
@@ -51,7 +48,7 @@ class StanzaGioco extends React.Component {
 		for (let risposta of lista) {
 			risposta.classList.remove("correggi-risposta");
 			risposta.style.opacity = 1;
-			risposta.style.backgroundColor = "white";
+			risposta.style.backgroundColor = "var(--colore-card)";
 			risposta.style.fontWeight = "unset";
 		}
 

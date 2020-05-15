@@ -1,6 +1,6 @@
 .input-toggle {
     display: flex;
-    background-color: white;
+    background-color: var(--colore-input);
     border-radius: .25rem;
 
     align-items: center;
