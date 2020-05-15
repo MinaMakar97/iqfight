@@ -22,9 +22,9 @@
 
 .crea-stanza .categoria {
     border-radius: 10px;
-    height: 60px;
-    width: 45%;
     color: var(--colore-titolo);
+    height: 100%;
+    width: 100%;
     font-size: 1.5em;
     margin: .2em 0 .2em 0;
     text-align: center;
@@ -32,6 +32,20 @@
     user-select: none;
     cursor: pointer;
 }
+
+.crea-stanza .div-categoria {
+    height: 70px;
+    width: 45%;
+    padding: .3em;
+}
+
+.crea-stanza .div-categoria input[type="radio"] {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+}
+
 
 .crea-stanza .domande-casuali {
     background-image: linear-gradient(to left, #fa709a 0%, #fee140 100%);
@@ -41,6 +55,7 @@
 
 .crea-stanza .div-categorie {
     justify-content: space-around;
+    padding: .5em;
 }
 
 .crea-stanza input:checked + label {
@@ -49,7 +64,7 @@
 }
 
 @media screen and (max-width: 576px) {
-    .crea-stanza .categoria {
+    .crea-stanza .div-categoria {
         width: 100%;
     }
 

@@ -3,7 +3,7 @@ import React from "react";
 class TerminiServizio extends React.Component {
 	render() {
 		return (
-			<div className="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
 						<div className="modal-header" style={{ backgroundColor: "var(--colore-card)", color: "var(--colore-scritte)" }}>
@@ -14,36 +14,186 @@ class TerminiServizio extends React.Component {
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
-						<div className="modal-body">
-							TOS Preview your Terms of Service Website Terms and Conditions of Use 1. Terms By accessing this Website, accessible from
-							iqfight.altervista.org, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are
-							responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited
-							from accessing this site. The materials contained in this Website are protected by copyright and trade mark law. These
-							Terms of Service has been created with the help of the Terms of Service Generator and the Terms & Conditions Example. 2.
-							Use License Permission is granted to temporarily download one copy of the materials on IQFight's Website for personal,
-							non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license
-							you may not: modify or copy the materials; use the materials for any commercial purpose or for any public display; attempt
-							to reverse engineer any software contained on IQFight's Website; remove any copyright or other proprietary notations from
-							the materials; or transferring the materials to another person or "mirror" the materials on any other server. This will
-							let IQFight to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be
-							terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.
-							3. Disclaimer All the materials on IQFight’s Website are provided "as is". IQFight makes no warranties, may it be
-							expressed or implied, therefore negates all other warranties. Furthermore, IQFight does not make any representations
-							concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials
-							or any sites linked to this Website. 4. Limitations IQFight or its suppliers will not be hold accountable for any damages
-							that will arise with the use or inability to use the materials on IQFight’s Website, even if IQFight or an authorize
-							representative of this Website has been notified, orally or written, of the possibility of such damage. Some jurisdiction
-							does not allow limitations on implied warranties or limitations of liability for incidental damages, these limitations may
-							not apply to you. 5. Revisions and Errata The materials appearing on IQFight’s Website may include technical,
-							typographical, or photographic errors. IQFight will not promise that any of the materials in this Website are accurate,
-							complete, or current. IQFight may change the materials contained on its Website at any time without notice. IQFight does
-							not make any commitment to update the materials. 6. Links IQFight has not reviewed all of the sites linked to its Website
-							and is not responsible for the contents of any such linked site. The presence of any link does not imply endorsement by
-							IQFight of the site. The use of any linked website is at the user’s own risk. 7. Site Terms of Use Modifications IQFight
-							may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to
-							be bound by the current version of these Terms and Conditions of Use. 8. Your Privacy Please read our Privacy Policy. 9.
-							Governing Law Any claim related to IQFight's Website shall be governed by the laws of it without regards to its conflict
-							of law provisions.
+						<div className="modal-body text-justify">
+							<p>
+								<span className="website_name">IQFight</span> ("Us" or "We") provides the{" "}
+								<span className="website_url">https://iqfight.altervista.org</span> website and various related services
+								(collectively, the "Website") to you, the User, subject to your compliance with all the terms, conditions, and notices
+								contained or referenced herein (the "Terms of Service"), as well as any other written agreement between us and you.
+							</p>
+
+							<p>
+								In addition, when using particular services or materials on this Website, Users shall be subject to any posted rules
+								applicable to such services or materials that may contain terms and conditions in addition to those in these Terms of
+								Service. All such guidelines or rules are hereby incorporated by reference into these Terms of Service.
+							</p>
+
+							<p>
+								These Terms of Service are effective as of <span className="date">[DATE]</span>. We expressly reserve the right to
+								change these Terms of Service from time to time without notice to you. You acknowledge and agree that it is your
+								responsibility to review this Website and these Terms of Service from time to time and to familiarize yourself with
+								any modifications.
+							</p>
+
+							<p>
+								Your continued use of this Website after such modifications will constitute acknowledgement of the modified Terms of
+								Service and agreement to abide and be bound by the modified Terms of Service. This Terms of Service was created by{" "}
+								<a href="https://www.termsservicetemplate.com">Terms of Service Template</a> and the{" "}
+								<a href="https://www.terms-conditions-generator.com">Terms and Conditions Generator</a>.
+							</p>
+
+							<p>
+								We reserve the sole right to either modify or discontinue the Website, including any of the Website’s features, at any
+								time with or without notice to you. We will not be liable to you or any third party should we exercise such right. Any
+								new features that augment or enhance the then-current services on this Website shall also be subject to these Terms of
+								Service.
+							</p>
+
+							<h3>Conduct on Website</h3>
+
+							<p>
+								Your use of the Website is subject to all applicable laws and regulations, and you are solely responsible for the
+								substance of your communications through the Website. By posting information in or otherwise using any communications
+								service, chat room, message board, newsgroup, software library, or other interactive service that may be available to
+								you on or through this Website, you agree that you will not upload, share, post, or otherwise distribute or facilitate
+								distribution of any content — including text, communications, software, images, sounds, data, or other information —
+								that:
+							</p>
+
+							<ul>
+								<li>
+									Is unlawful, threatening, abusive, harassing, defamatory, libelous, deceptive, fraudulent, invasive of another’s
+									privacy, tortious, contains explicit or graphic descriptions or accounts of sexual acts (including but not limited
+									to sexual language of a violent or threatening nature directed at another individual or group of individuals), or
+									otherwise violates our rules or policies
+								</li>
+								<li>
+									Victimizes, harasses, degrades, or intimidates an individual or group of individuals on the basis of religion,
+									gender, sexual orientation, race, ethnicity, age, or disability
+								</li>
+								<li>
+									Infringes on any patent, trademark, trade secret, copyright, right of publicity, or other proprietary right of any
+									party
+								</li>
+								<li>
+									Constitutes unauthorized or unsolicited advertising, junk or bulk email (also known as "spamming"), chain letters,
+									any other form of unauthorized solicitation, or any form of lottery or gambling
+								</li>
+								<li>
+									Contains software viruses or any other computer code, files, or programs that are designed or intended to disrupt,
+									damage, or limit the functioning of any software, hardware, or telecommunications equipment or to damage or obtain
+									unauthorized access to any data or other information of any third party
+								</li>
+								<li>Impersonates any person or entity, including any of our employees or representatives</li>
+							</ul>
+
+							<p>
+								We neither endorse nor assume any liability for the contents of any material uploaded or submitted by third party
+								users of the Website. We generally do not pre-screen, monitor, or edit the content posted by users of communications
+								services, chat rooms, message boards, newsgroups, software libraries, or other interactive services that may be
+								available on or through this Website. However, we and our agents have the right at their sole discretion to remove any
+								content that, in our judgment, does not comply with these Terms of Service and any other rules of user conduct for our
+								site, or is otherwise harmful, objectionable, or inaccurate. We are not responsible for any failure or delay in
+								removing such content. You hereby consent to such removal and waive any claim against us arising out of such removal
+								of content.
+							</p>
+
+							<p>
+								You agree that we may at any time, and at our sole discretion, terminate your membership, account, or other
+								affiliation with our site without prior notice to you for violating any of the above provisions. In addition, you
+								acknowledge that we will cooperate fully with investigations of violations of systems or network security at other
+								sites, including cooperating with law enforcement authorities in investigating suspected criminal violations.
+							</p>
+
+							<h3>Third Party Websites</h3>
+
+							<p>
+								This site may link you to other sites on the Internet or otherwise include references to information, documents,
+								software, materials and/or services provided by other parties. These sites may contain information or material that
+								some people may find inappropriate or offensive.
+							</p>
+
+							<p>
+								These other sites and parties are not under our control, and you acknowledge that we are not responsible for the
+								accuracy, copyright compliance, legality, decency, or any other aspect of the content of such sites, nor are we
+								responsible for errors or omissions in any references to other parties or their products and services. The inclusion
+								of such a link or reference is provided merely as a convenience and does not imply endorsement of, or association
+								with, the Website or party by us, or any warranty of any kind, either express or implied.
+							</p>
+
+							<h3>Intellectual Property</h3>
+
+							<p>
+								All custom graphics, icons, logos, and service names used on the Website are registered trademarks, service marks,
+								and/or artwork held under copyright of <span className="website_name">IQFight</span> or its Affiliates. All other
+								marks are property of their respective owners. Nothing in these Terms of Service grants you any right to use any
+								trademark, service mark, logo, and/or the name or trade names of <span className="website_name">IQFight</span> or its
+								Affiliates.
+							</p>
+
+							<h3>Disclaimer of Warranties</h3>
+
+							<p>
+								Content available through this Website often represents the opinions and judgments of an information provider, site
+								user, or other person or entity not connected with us. We do not endorse, nor are we responsible for the accuracy or
+								reliability of, any opinion, advice, or statement made by anyone other than an authorized{" "}
+								<span className="website_name">IQFight</span> spokesperson speaking in his/her official capacity. Please refer to the
+								specific editorial policies posted on various sections of this Website for further information, which policies are
+								incorporated by reference into these Terms of Service.
+							</p>
+
+							<p>
+								You understand and agree that temporary interruptions of the services available through this Website may occur as
+								normal events. You further understand and agree that we have no control over third party networks you may access in
+								the course of the use of this Website, and therefore, delays and disruption of other network transmissions are
+								completely beyond our control.
+							</p>
+
+							<p>
+								You understand and agree that the services available on this Website are provided "AS IS" and that we assume no
+								responsibility for the timeliness, deletion, mis-delivery or failure to store any user communications or
+								personalization settings.
+							</p>
+
+							<h3>International Use</h3>
+
+							<p>
+								Although this Website may be accessible worldwide, we make no representation that materials on this Website are
+								appropriate or available for use in locations outside the United States, and accessing them from territories where
+								their contents are illegal is prohibited. Those who choose to access this Website from other locations do so on their
+								own initiative and are responsible for compliance with local laws. Any offer for any product, service, and/or
+								information made in connection with this Website is void where prohibited.
+							</p>
+
+							<h3>Termination</h3>
+
+							<p>
+								You agree that we may, in our sole discretion, terminate or suspend your access to all or part of the Website with or
+								without notice and for any reason, including, without limitation, breach of these Terms of Service. Any suspected
+								fraudulent, abusive or illegal activity may be grounds for terminating your relationship and may be referred to
+								appropriate law enforcement authorities.
+							</p>
+
+							<p>
+								Upon termination or suspension, regardless of the reasons therefore, your right to use the services available on this
+								Website immediately ceases, and you acknowledge and agree that we may immediately deactivate or delete your account
+								and all related information and files in your account and/or bar any further access to such files or this Website. We
+								shall not be liable to you or any third party for any claims or damages arising out of any termination or suspension
+								or any other actions taken by us in connection with such termination or suspension.
+							</p>
+
+							<h3>Governing Law</h3>
+
+							<p>
+								These Terms of Service and any dispute or claim arising out of, or related to them, shall be governed by and construed
+								in accordance with the internal laws of the <span className="country">it</span> without giving effect to any choice or
+								conflict of law provision or rule.
+							</p>
+
+							<p>
+								Any legal suit, action or proceeding arising out of, or related to, these Terms of Service or the Website shall be
+								instituted exclusively in the federal courts of <span className="country">it</span>.
+							</p>
 						</div>
 						<div className="modal-footer centra">
 							<button type="button" className="bottone" data-dismiss="modal">

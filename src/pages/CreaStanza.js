@@ -38,22 +38,27 @@ export default class CreaStanza extends Component {
 
 	render() {
 		const categorie = [];
-		categorie.push(<input type="radio" name="categoria" className="d-none" id="casuale" key="casuale" value="Casuale"></input>);
-		categorie.push(
-			<label className="categoria centra domande-casuali" htmlFor="casuale" key="lab-casuale">
-				Domande Casuali
-				<br />
-				Classificata
-			</label>
-		);
 		for (let key in this.mappaColori) {
-			categorie.push(<input type="radio" name="categoria" className="d-none" id={key} key={"lab-" + key} value={key}></input>);
 			categorie.push(
-				<label className="categoria centra" style={{ backgroundColor: this.mappaColori[key] }} htmlFor={key} key={key}>
-					{key}
-				</label>
+				<div className="div-categoria overflow-hidden position-relative">
+					<input type="radio" name="categoria" id={key} key={"lab-" + key} value={key} required></input>
+					<label className="categoria centra" style={{ backgroundColor: this.mappaColori[key] }} htmlFor={key} key={key}>
+						{key}
+					</label>
+				</div>
 			);
 		}
+		categorie.push(
+			<div className="div-categoria overflow-hidden position-relative">
+				<input type="radio" name="categoria" id="casuale" value="Casuale" required></input>
+				<label className="categoria centra domande-casuali" htmlFor="casuale">
+					Domande Casuali
+					<br />
+					Classificata
+				</label>
+			</div>
+		);
+
 		return (
 			<form className="crea-stanza container-fluid h-100 d-flex flex-column" onSubmit={this.creaStanza}>
 				<div className="row centra">
