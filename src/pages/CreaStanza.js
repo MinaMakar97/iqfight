@@ -2,20 +2,11 @@ import React, { Component } from "react";
 import Logo from "../img/iqfight-logo.png";
 import Toggle from "../components/Toggle";
 import "./CreaStanza.css";
+import { immaginiCard } from "../components/CardStanza";
 
 export default class CreaStanza extends Component {
 	constructor(props) {
 		super(props);
-		this.mappaColori = {
-			Arte: "#f991c3",
-			Geografia: "#7FDBFF",
-			Giochi: "#AAAAAA",
-			Informatica: "#0074D9",
-			Lingue: "#FF4136",
-			Scienze: "#3BB347",
-			Spettacolo: "#9c7abe",
-			Storia: "#FF851B",
-		};
 		this.creaStanza = this.creaStanza.bind(this);
 	}
 
@@ -38,18 +29,26 @@ export default class CreaStanza extends Component {
 
 	render() {
 		const categorie = [];
-		for (let key in this.mappaColori) {
+		for (let key in immaginiCard) {
 			categorie.push(
-				<div className="div-categoria overflow-hidden position-relative">
+				<div className="div-categoria position-relative">
 					<input type="radio" name="categoria" id={key} key={"lab-" + key} value={key} required></input>
-					<label className="categoria centra" style={{ backgroundColor: this.mappaColori[key] }} htmlFor={key} key={key}>
+					<label
+						className="categoria centra"
+						style={{
+							//backgroundColor: this.mappaColori[key],
+							backgroundImage: immaginiCard[key].url,
+							backgroundPosition: immaginiCard[key].position,
+						}}
+						htmlFor={key}
+						key={key}>
 						{key}
 					</label>
 				</div>
 			);
 		}
 		categorie.push(
-			<div className="div-categoria overflow-hidden position-relative">
+			<div className="div-categoria position-relative">
 				<input type="radio" name="categoria" id="casuale" value="Casuale" required></input>
 				<label className="categoria centra domande-casuali" htmlFor="casuale">
 					Domande Casuali

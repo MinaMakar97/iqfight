@@ -126,15 +126,15 @@ class MenuLaterale extends Component {
 	}
 
 	darkMode() {
-		document.documentElement.style.setProperty("--colore-primario", "#484848");
-		document.documentElement.style.setProperty("--colore-secondario", "#2f3477");
-		document.documentElement.style.setProperty("--colore-card", "#8a8a8a");
+		document.documentElement.style.setProperty("--colore-primario", "#2f3477");
+		document.documentElement.style.setProperty("--colore-secondario", "#484848");
+		document.documentElement.style.setProperty("--colore-card", "#b9b8b8");
 		document.documentElement.style.setProperty("--colore-terz", "#717171");
-		document.documentElement.style.setProperty("--colore-quart", "#045970");
-		document.documentElement.style.setProperty("--colore-contorno", "#656565");
+		document.documentElement.style.setProperty("--colore-quart", "white");
+		document.documentElement.style.setProperty("--colore-contorno", "#00000033");
 		document.documentElement.style.setProperty("--colore-border", "#424242");
 		document.documentElement.style.setProperty("--colore-scritte", "white");
-		document.documentElement.style.setProperty("--colore-placeholder", "#626363");
+		document.documentElement.style.setProperty("--colore-placeholder", "white");
 	}
 
 	render() {

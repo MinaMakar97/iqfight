@@ -17,13 +17,20 @@
 
 .card-stanza .div-giocatori {
     margin-right: 1em;
-    min-width: 2em;
+    min-width: 3em;
+    background-color: rgba(255,255,255,.4);
+    border-radius: 8px;
+    padding: .2em;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .card-stanza .num-giocatori {
     color: black;
     font-weight: bold;
     font-size: 1.5em;
+    padding-right: .3em;
 }
 
 .card-stanza .max-giocatori {
@@ -31,7 +38,7 @@
 }
 
 .card-stanza .nome-stanza {
-    color: black;
+    color: rgb(241, 250, 250);
     font-weight: bold;
 }
 
