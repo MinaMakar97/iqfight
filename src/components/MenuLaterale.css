@@ -51,6 +51,7 @@ hr.riga-menu{
     flex-direction: column;
     overflow: hidden;
     cursor: pointer;
+    max-height: 13vh;
 }
 
 .div-content:hover{
