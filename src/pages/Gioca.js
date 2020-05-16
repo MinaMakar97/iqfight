@@ -50,6 +50,7 @@ export default class Gioca extends Component {
 		// this.setState({
 		// 	stanze: stanze,
 		// });
+
 		this.chiediStanza();
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {
@@ -112,11 +113,7 @@ export default class Gioca extends Component {
 					<Scrollbars
 						className="row div-stanze centra d-flex flex-grow-1"
 						renderView={(props) => (
-							<div
-								{...props}
-								className="d-flex flex-wrap scroll-bar-content"
-								style={{ ...props.style, padding: "0 4em 0 4em", alignContent: "flex-start" }}
-							/>
+							<div {...props} className="d-flex flex-wrap scroll-bar-content" style={{ ...props.style, alignContent: "flex-start" }} />
 						)}>
 						{this.state.stanze
 							.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
@@ -144,13 +141,12 @@ export default class Gioca extends Component {
 					<h1 className="titolo"> Entra in una stanza </h1>
 				</div>
 				<div className="row centra flex-grow-1 order-3 order-sm-1" style={{ minHeight: 0 }}>
-					<div className="contenitore-viola h-100">
-						<div className="row">
+					<div className="contenitore-viola h-100 centra">
+						<div className="row" style={{ width: "90%" }}>
 							<div className="col-12 col-sm-6 d-flex align-items-center">
-								<p style={{ marginRight: "1em", color: "var(--colore-quart)" }}>Categoria</p>
 								<Select
 									onChange={this.filtra}
-									defaultValue={{ label: "Tutte", value: "Tutte" }}
+									placeholder="Categoria"
 									options={options}
 									className="form-control-lg"
 									styles={styles}
@@ -167,11 +163,18 @@ export default class Gioca extends Component {
 									isSearchable={false}></Select>
 							</div>
 
-							<div className="col-10 col-sm-5">
-								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow" onChange={this.cerca}></input>
-							</div>
-							<div className="col-2 col-sm-1 ricarica" onClick={this.chiediStanza}>
-								<i class="fa fa-refresh icona" aria-hidden="true"></i>
+							<div className="col-12 col-sm-6">
+								<div className="d-flex">
+									<input
+										type="text"
+										placeholder="Cerca stanza..."
+										className="form-control-lg shadow flex-grow-1"
+										onChange={this.cerca}></input>
+
+									<button className="ricarica shadow form-control-lg" onClick={this.chiediStanza}>
+										<i className="fa fa-refresh icona" aria-hidden="true"></i>
+									</button>
+								</div>
 							</div>
 						</div>
 						{contenutoStanze}
