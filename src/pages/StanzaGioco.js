@@ -185,7 +185,7 @@ class StanzaGioco extends React.Component {
 	rispondi(e) {
 		if (!this.state.risposto) {
 			const risposta = e.target.textContent;
-			e.target.style.backgroundColor = "#E0D5FF";
+			e.target.style.backgroundColor = "#9e8fc9";
 			e.target.style.fontWeight = "bolder";
 			let xhr = new XMLHttpRequest();
 			xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/rispondi.php");
