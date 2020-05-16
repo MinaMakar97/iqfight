@@ -11,7 +11,9 @@
         if ($domandaDaCambiare == 1){
             if ($numDomanda == $numDomande - 1) {
                 // Partita finita
-                inserisciGiocatoreClassifica($conn, $_SESSION["username"]);
+                if (categoriaStanza($conn,$_SESSION["idStanza"]) == "Casuale"){
+                    inserisciGiocatoreClassifica($conn, $_SESSION["username"]);
+                }
                 $conn->query("COMMIT");
                 echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => classificaGioco($conn, $_SESSION["idStanza"])]);
                 die();
@@ -39,6 +41,14 @@
     }
     disconnettiDB($conn);
     
+    function categoriaStanza($conn, $idStanza){
+        $rowUsername = $conn->prepare("SELECT categoria FROM stanza WHERE id = ?");
+        $rowUsername->bind_param("i",$idStanza);
+        $rowUsername->execute();
+        $row = $rowUsername->get_result();
+        $row = $row->fetch_assoc();
+        return $row["categoria"];
+    }
 
     function aggiornaStanza($conn, $idStanza){
         $query = $conn->prepare("UPDATE stanza SET domandaDaCambiare = 0, numDomanda = numDomanda + 1, timestampDomanda = now() WHERE id = ?");
