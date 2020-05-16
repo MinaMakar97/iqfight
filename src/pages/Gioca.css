@@ -85,3 +85,15 @@
         width: 100%;
     }
 }
+
+.ricarica{
+    color: white;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icona{
+    font-size: 20px;
+}

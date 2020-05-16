@@ -19,6 +19,22 @@ export default class Gioca extends Component {
 		this.xhrCat = null;
 		this.cerca = this.cerca.bind(this);
 		this.filtra = this.filtra.bind(this);
+		this.chiediStanza = this.chiediStanza.bind(this);
+	}
+
+	chiediStanza() {
+		this.xhr = new XMLHttpRequest();
+		this.xhr.onreadystatechange = (e) => {
+			if (e.target.readyState === 4 && e.target.status === 200) {
+				let json = JSON.parse(e.target.responseText);
+				if (json["successo"] === true) {
+					this.setState({ stanze: json["stanze"] });
+				}
+			}
+		};
+		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
+		this.xhr.withCredentials = true;
+		this.xhr.send();
 	}
 
 	componentDidMount() {
@@ -34,20 +50,7 @@ export default class Gioca extends Component {
 		// this.setState({
 		// 	stanze: stanze,
 		// });
-
-		this.xhr = new XMLHttpRequest();
-		this.xhr.onreadystatechange = (e) => {
-			if (e.target.readyState === 4 && e.target.status === 200) {
-				let json = JSON.parse(e.target.responseText);
-				if (json["successo"] === true) {
-					this.setState({ stanze: json["stanze"] });
-				}
-			}
-		};
-		this.xhr.open("GET", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/browser-stanze.php");
-		this.xhr.withCredentials = true;
-		this.xhr.send();
-
+		this.chiediStanza();
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {
 			if (e.target.readyState === 4 && e.target.status === 200) {
@@ -142,7 +145,7 @@ export default class Gioca extends Component {
 				</div>
 				<div className="row centra flex-grow-1 order-3 order-sm-1" style={{ minHeight: 0 }}>
 					<div className="contenitore-viola h-100">
-						<div className="row centra">
+						<div className="row">
 							<div className="col-12 col-sm-6 d-flex align-items-center">
 								<p style={{ marginRight: "1em", color: "var(--colore-quart)" }}>Categoria</p>
 								<Select
@@ -163,8 +166,12 @@ export default class Gioca extends Component {
 									})}
 									isSearchable={false}></Select>
 							</div>
-							<div className="col-12 col-sm-6">
+
+							<div className="col-10 col-sm-5">
 								<input type="text" placeholder="Cerca stanza..." className="form-control-lg shadow" onChange={this.cerca}></input>
+							</div>
+							<div className="col-2 col-sm-1 ricarica" onClick={this.chiediStanza}>
+								<i class="fa fa-refresh icona" aria-hidden="true"></i>
 							</div>
 						</div>
 						{contenutoStanze}
