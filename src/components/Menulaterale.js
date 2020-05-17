@@ -83,7 +83,6 @@ class MenuLaterale extends Component {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
 					this.setState({ username: json["username"], avatar: json["avatar"], checked: json["dark"] });
-					console.log(json["dark"]);
 					this.state.checked === 1 ? this.darkMode() : this.normalMode();
 				}
 			}
@@ -148,7 +147,7 @@ class MenuLaterale extends Component {
 								<img
 									alt="Avatar utente"
 									src={this.state.avatar || avatarPredefinito}
-									style={{ width: "40px", borderRadius: "100%" }}></img>
+									style={{ width: "50px", height: "50px", borderRadius: "100%" }}></img>
 								<p style={{ marginBottom: 0 }}>{this.state.username}</p>
 							</div>
 						</div>

@@ -5,7 +5,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST"){
         controllaStanza();
         $conn->query("START TRANSACTION");
-        $query = $conn->prepare("DELETE FROM domandeStanza where idStanza = ?");
+        $query = $conn->prepare("DELETE FROM domandestanza where idStanza = ?");
         $query->bind_param("i", $_SESSION["idStanza"]);
         $query->execute();
 

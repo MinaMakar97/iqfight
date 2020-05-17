@@ -10,7 +10,7 @@
         }
         $source_file = $_FILES["avatar"]["name"];
         $imageFileType = strtolower(pathinfo($source_file,PATHINFO_EXTENSION));
-        $target_file = $target_dir . basename($_SESSION["username"] . "." . $imageFileType);
+        $target_file = $target_dir . basename($_SESSION["username_temp"] . "." . $imageFileType);
         $uploadOk = 1;
 
         // Check file size
@@ -29,8 +29,8 @@
         echo json_encode(["successo" => true]);
     }
     $query = $dbConn -> prepare("UPDATE utente SET avatar = ? WHERE username = ?");
-    $query->bind_param("ss",$target_file,$_SESSION["username"]);
+    $path = "/iqfight/" . $target_file;
+    $query->bind_param("ss", $path, $_SESSION["username_temp"]);
     $query->execute();
-
     disconnettiDB($dbConn);
 ?>

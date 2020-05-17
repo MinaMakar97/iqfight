@@ -32,6 +32,7 @@ class FormRegistrazione extends React.Component {
 				}
 			}
 		};
+		xml.withCredentials = true;
 		xml.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/registrazione.php");
 		xml.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 		xml.send(JSON.stringify(json));

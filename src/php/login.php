@@ -14,6 +14,7 @@
         $query->execute();
         $risultatoQuery = $query->get_result();
         if (!$risultatoQuery) {die(json_encode(["errore" => "Username o password non corretti"]));}
+        if (isset($_SESSION["username_temp"])) unset($_SESSION["username_temp"]);
         $_SESSION["username"] = $username;
         $userNpass = $risultatoQuery->fetch_assoc();
         if (!password_verify($password,$userNpass["password"])){

@@ -30,6 +30,7 @@ export default class CreaStanza extends Component {
 	render() {
 		const categorie = [];
 		for (let key in immaginiCard) {
+			if (key === "Casuale") continue;
 			categorie.push(
 				<div className="div-categoria position-relative">
 					<input type="radio" name="categoria" id={key} key={"lab-" + key} value={key} required></input>
