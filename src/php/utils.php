@@ -6,6 +6,12 @@
         header("Access-Control-Allow-Methods: GET, PUT, POST, DELETE");
         header("Access-Control-Allow-Credentials: true");
     }
+
+    $dbHost = "localhost";
+    $dbUser = "iqfight";
+    $dbPassw = "";
+    $dbName = "my_iqfight";
+
     // Variabili di gioco
     $tempoDomanda = 20;
     $tempoRisultati = 2;
@@ -22,9 +28,11 @@
 
     function connettiDB()
     {
-        $conn = @mysqli_connect("localhost", "root", "", "iqfight");
+        global $dbHost, $dbUser, $dbPassw, $dbName;
+        $conn = @mysqli_connect($dbHost, $dbUser, $dbPassw, $dbName);
         if (!$conn)
             die(json_encode(["successo" => false, "motivazione" => "Impossibile connettersi al database"]));
+        $conn->set_charset("utf8");
         return $conn;
     }
 
@@ -71,7 +79,7 @@
     }
 
     function prendiDomanda($conn, $idStanza,$numDomanda){
-        $query = $conn->prepare("SELECT domanda, rispCorretta, risposta2, risposta3, risposta4 FROM domandeStanza,domanda WHERE indice = ? and idStanza = ? and domandeStanza.idDomanda = domanda.id");
+        $query = $conn->prepare("SELECT domanda, rispCorretta, risposta2, risposta3, risposta4 FROM domandestanza,domanda WHERE indice = ? and idStanza = ? and domandestanza.idDomanda = domanda.id");
         $query->bind_param("ii",$numDomanda,$idStanza);
         $query->execute();
         $row = $query->get_result();
@@ -95,7 +103,7 @@
         $numGiocatoriAttuale = aggiornaGiocatori($dbConn, $idStanza);
 
 		if ($numGiocatoriAttuale == 0){
-			$query = $dbConn->prepare("DELETE FROM domandeStanza where idStanza = ?");
+			$query = $dbConn->prepare("DELETE FROM domandestanza where idStanza = ?");
 			$query->bind_param("i", $idStanza);
 			$query->execute();
 			$query = $dbConn->prepare("DELETE FROM stanza where id = ?");

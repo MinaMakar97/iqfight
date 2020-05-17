@@ -26,6 +26,7 @@ export const immaginiCard = {
 		url: "url(https://c4.wallpaperflare.com/wallpaper/98/436/868/aviation-background-eiffel-tower-paris-font-hd-wallpaper-preview.jpg)",
 		position: "0% 0%",
 	},
+	Casuale: { url: "linear-gradient(to left, #fa709a 0%, #fee140 100%)", position: "0% 0%" },
 };
 
 export default class CardStanza extends Component {

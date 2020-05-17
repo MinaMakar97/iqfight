@@ -32,7 +32,7 @@
     }
 
     function salvaDomande(mysqli $conn,$domande,$idStanza){
-        $query = $conn->prepare("INSERT INTO domandeStanza (indice,idDomanda,idStanza) VALUES (?,?,?)");
+        $query = $conn->prepare("INSERT INTO domandestanza (indice,idDomanda,idStanza) VALUES (?,?,?)");
         for ($i=0; $i < count($domande); $i++){
             $query->bind_param("iii",$i,$domande[$i],$idStanza);
             $query->execute();
