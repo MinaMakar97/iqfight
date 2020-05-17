@@ -90,7 +90,7 @@ export default class AggiungiDomanda extends Component {
 									colors: {
 										...theme.colors,
 										neutral0: "var(--colore-card)",
-										primary50: "var(--colore-placeholder)",
+										primary50: "var(--colore-secondario)",
 										primary25: "var(--colore-placeholder)",
 									},
 								})}

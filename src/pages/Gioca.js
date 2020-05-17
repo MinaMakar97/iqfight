@@ -156,7 +156,7 @@ export default class Gioca extends Component {
 											...theme.colors,
 											primary: "var(--colore-quart)",
 											primary50: "var(--colore-placeholder)",
-											primary25: "var(--colore-placeholder)",
+											primary25: "var(--colore-secondario)",
 											neutral0: "var(--colore-card)",
 										},
 									})}
