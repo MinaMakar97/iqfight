@@ -62,12 +62,18 @@ class FormRegistrazione extends React.Component {
 		let json = {};
 		let username = e.target.username.value;
 		let password = e.target.password.value;
-		let email = e.target.email.value;
-		json = { username: username, password: password, email: email };
-		let avatar = e.target.avatar.value;
-		let file = e.target.avatar.files[0];
+		let conferma = e.target.confermaPassword.value;
+		if (password === conferma) {
+			let email = e.target.email.value;
+			json = { username: username, password: password, email: email };
+			let avatar = e.target.avatar.value;
+			let file = e.target.avatar.files[0];
 
-		this.inviaRegistrazione(json, avatar, file);
+			this.inviaRegistrazione(json, avatar, file);
+		} else {
+			document.getElementById("err-log").textContent = "Le due password non coincidono";
+			document.getElementById("err-log").style.display = "inline";
+		}
 	}
 
 	render() {
@@ -92,6 +98,14 @@ class FormRegistrazione extends React.Component {
 						placeholder="Password"
 						name="password"
 						required></input>
+					<input
+						className="form-control-lg shadow mb-4"
+						minLength="3"
+						maxLength="50"
+						type="password"
+						placeholder="Conferma password"
+						name="confermaPassword"
+						required></input>
 					<div className="form-control-lg shadow" style={{ borderRadius: "10px", display: "flex", backgroundColor: "var(--colore-card)" }}>
 						<div style={{ color: "var(--colore-placeholder)" }}>Avatar</div>
 						<p id="name-avatar" className="sfoglia">
@@ -99,7 +113,7 @@ class FormRegistrazione extends React.Component {
 						</p>
 						<label className="contorno centra">
 							Sfoglia
-							<input type="file" name="avatar" style={{ display: "none" }} onChange={this.cambiaFile}></input>
+							<input type="file" name="avatar" style={{ display: "none" }} onChange={this.cambiaFile} accept="image/*"></input>
 						</label>
 					</div>
 					<div className="termini-cond mt-3">
