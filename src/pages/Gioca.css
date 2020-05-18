@@ -78,6 +78,10 @@
     transform: scale(.95);
 }
 
+.gioca input.form-control-lg {
+    min-width: 100px;
+}
+
 .ricarica {
     background-color: var(--colore-card);
     border-radius: 8px;
