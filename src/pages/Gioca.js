@@ -95,6 +95,7 @@ export default class Gioca extends Component {
 				boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.4)",
 				borderRadius: "10px",
 				height: "calc(1.5em + 1rem + 2px)",
+				border: "none",
 			}),
 			placeholder: (provided) => ({ ...provided, color: "var(--colore-placeholder)" }),
 			singleValue: (provided) => ({ ...provided, color: "var(--colore-quart)" }),
@@ -104,32 +105,24 @@ export default class Gioca extends Component {
 		if (this.state.stanze !== null)
 			contenutoStanze =
 				this.state.stanze.length === 0 ? (
-					<div className="centra flex-grow-1 text-center" style={{ color: "var(--colore-border)" }}>
+					<div className="centra flex-grow-1 text-center w-100 h-100" style={{ color: "var(--colore-border)" }}>
 						<p>
 							Non ci sono stanze disponibili,<br></br> perchè non ne crei una?
 						</p>
 					</div>
 				) : (
-					<Scrollbars
-						className="row div-stanze centra d-flex flex-grow-1"
-						renderView={(props) => (
-							<div {...props} className="d-flex flex-wrap scroll-bar-content" style={{ ...props.style, alignContent: "flex-start" }} />
-						)}>
-						{this.state.stanze
-							.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
-							.filter(
-								(e) => this.state.categoria === "Tutte" || (this.state.categoria !== "Tutte" && this.state.categoria === e.categoria)
-							)
-							.map((stanza, index) => (
-								<Link to={"/room/" + stanza.id} key={index}>
-									<CardStanza
-										nomeStanza={stanza.nome}
-										categoria={stanza.categoria}
-										numGiocatori={stanza.giocatori}
-										maxGiocatori={8}></CardStanza>
-								</Link>
-							))}
-					</Scrollbars>
+					this.state.stanze
+						.filter((e) => e.nome.toLowerCase().includes(this.state.cerca.toLowerCase()))
+						.filter((e) => this.state.categoria === "Tutte" || (this.state.categoria !== "Tutte" && this.state.categoria === e.categoria))
+						.map((stanza, index) => (
+							<Link to={"/room/" + stanza.id} key={index}>
+								<CardStanza
+									nomeStanza={stanza.nome}
+									categoria={stanza.categoria}
+									numGiocatori={stanza.giocatori}
+									maxGiocatori={8}></CardStanza>
+							</Link>
+						))
 				);
 
 		return (
@@ -154,8 +147,8 @@ export default class Gioca extends Component {
 										...theme,
 										colors: {
 											...theme.colors,
-											primary: "var(--colore-quart)",
-											primary50: "var(--colore-placeholder)",
+											primary: "var(--colore-secondario)",
+											primary50: "var(--colore-secondario)",
 											primary25: "var(--colore-secondario)",
 											neutral0: "var(--colore-card)",
 										},
@@ -177,7 +170,17 @@ export default class Gioca extends Component {
 								</div>
 							</div>
 						</div>
-						{contenutoStanze}
+						<Scrollbars
+							className="row div-stanze centra d-flex flex-grow-1"
+							renderView={(props) => (
+								<div
+									{...props}
+									className="d-flex flex-wrap scroll-bar-content"
+									style={{ ...props.style, alignContent: "flex-start" }}
+								/>
+							)}>
+							{contenutoStanze}
+						</Scrollbars>
 					</div>
 				</div>
 				<div className="row centra order-2">

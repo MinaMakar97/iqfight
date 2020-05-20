@@ -71,7 +71,13 @@ export default class CreaStanza extends Component {
 					<div className="contenitore-viola h-100 d-flex flex-column">
 						<div className="row">
 							<div className="col-12 col-sm-6">
-								<input type="text" className="form-control-lg shadow" placeholder="Nome stanza" name="nomeStanza" required></input>
+								<input
+									type="text"
+									className="form-control-lg shadow"
+									placeholder="Nome stanza"
+									name="nomeStanza"
+									maxLength="25"
+									required></input>
 							</div>
 							<div className="col-12 col-sm-6">
 								<div className="centra opzione-toggle form-control-lg shadow">

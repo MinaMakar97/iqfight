@@ -64,6 +64,7 @@ export default class AggiungiDomanda extends Component {
 				boxShadow: "4px 4px 4px rgba(0, 0, 0, 0.4)",
 				borderRadius: "10px",
 				height: "calc(1.5em + 1rem + 2px)",
+				border: "none",
 			}),
 			placeholder: (provided) => ({ ...provided, color: "var(--colore-placeholder)" }),
 			singleValue: (provided) => ({ ...provided, color: "var(--colore-quart)" }),
@@ -89,9 +90,10 @@ export default class AggiungiDomanda extends Component {
 									...theme,
 									colors: {
 										...theme.colors,
-										neutral0: "var(--colore-card)",
+										primary: "var(--colore-secondario)",
 										primary50: "var(--colore-secondario)",
-										primary25: "var(--colore-placeholder)",
+										primary25: "var(--colore-secondario)",
+										neutral0: "var(--colore-card)",
 									},
 								})}
 								isSearchable={false}></Select>

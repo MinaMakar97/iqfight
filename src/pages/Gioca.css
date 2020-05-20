@@ -66,7 +66,7 @@
 }
 
 .gioca .scroll-bar-content {
-    margin-right: -17px;
+    margin-right: -18px !important;
     padding-bottom: 1em;
 }
 
@@ -76,6 +76,10 @@
 
 .gioca .ricarica:active {
     transform: scale(.95);
+}
+
+.gioca input.form-control-lg {
+    min-width: 100px;
 }
 
 .ricarica {

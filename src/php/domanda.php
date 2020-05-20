@@ -93,7 +93,7 @@
         $rowUsername->execute();
         $row = $rowUsername->get_result();
         $row = $row->fetch_assoc();
-        if ($query["total"] < 20){
+        if ($query["total"] < 10){
             $query=$conn->prepare("INSERT INTO classifica VALUES (?,?)");
             $query->bind_param("si",$username,$row["punteggio"]);
             if (!$query->execute()){
