@@ -9,7 +9,7 @@ import Gioca from "./pages/Gioca";
 import Home from "./pages/Home.js";
 import withAuth from "./components/withAuth";
 import CreaStanza from "./pages/CreaStanza";
-
+import InfoUtente from "./pages/InfoUtente";
 class App extends Component {
 	render() {
 		return (
@@ -29,6 +29,7 @@ class App extends Component {
 							<Route path="/crea-stanza" component={withAuth(CreaStanza)}></Route>
 							<Route path="/room/:id" component={withAuth(Gioco)}></Route>
 							<Route path="/classifica" component={Classifica}></Route>
+							<Route path="/profilo" component={withAuth(InfoUtente)}></Route>
 						</Switch>
 					</Router>
 				</div>

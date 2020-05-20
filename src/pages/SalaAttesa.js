@@ -12,10 +12,10 @@ class StanzaAttesa extends React.Component {
 		this.creaGiocatori = this.creaGiocatori.bind(this);
 		this.avvia = this.avvia.bind(this);
 		this.aggiornaPagina = this.aggiornaPagina.bind(this);
-
 		this.state = {
 			giocatori: [],
 			creatore: "",
+			risposto: 0,
 		};
 
 		this.updateInterval = null;
@@ -61,6 +61,7 @@ class StanzaAttesa extends React.Component {
 						this.setState({
 							giocatori: json["giocatori"],
 							creatore: json["creatore"],
+							risposto: 1,
 						});
 					} else if (json["azione"] === "inizio") {
 						clearInterval(this.updateInterval);
@@ -121,13 +122,14 @@ class StanzaAttesa extends React.Component {
 						</Scrollbars>
 					</div>
 				</div>
+
 				<div className="centra mt-4">
 					{this.state.creatore ? (
-						<button className="bottone" onClick={this.avvia}>
+						<button className="bottone" onClick={this.avvia} style={{ opacity: this.state.risposto }}>
 							Avvia
 						</button>
 					) : (
-						<p className="titolo" style={{ textAlign: "center" }}>
+						<p className="titolo" style={{ textAlign: "center", opacity: this.state.risposto }}>
 							In attesa dell'inizio della partita
 						</p>
 					)}

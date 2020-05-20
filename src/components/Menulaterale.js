@@ -17,8 +17,8 @@ class MenuLaterale extends Component {
 
 	aggiungiCard(stringa) {
 		return (
-			<div>
-				<div className="div-content" key={stringa} id={stringa.replace(" ", "-").toLowerCase()} onClick={this.cambiaPagina}>
+			<div key={stringa}>
+				<div className="div-content" id={stringa.replace(" ", "-").toLowerCase()} onClick={this.cambiaPagina}>
 					{stringa}
 				</div>
 				<hr className="riga-menu" key={"riga-" + stringa}></hr>
@@ -105,7 +105,7 @@ class MenuLaterale extends Component {
 		if (this.state.username !== null) {
 			let xhr = new XMLHttpRequest();
 			let json = { dark: e.target.checked };
-			xhr.open("POST", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/info-utente.php");
+			xhr.open("PUT", process.env.REACT_APP_LOCAL_ENDPOINT + "/iqfight/info-utente.php");
 			xhr.withCredentials = true;
 			xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 			xhr.send(JSON.stringify(json));
@@ -143,7 +143,7 @@ class MenuLaterale extends Component {
 					{this.state.username ? (
 						<div>
 							<hr className="riga-menu"></hr>
-							<div className="div-content centra">
+							<div className="div-content centra" onClick={this.cambiaPagina} id="profilo">
 								<img
 									alt="Avatar utente"
 									src={this.state.avatar || avatarPredefinito}
