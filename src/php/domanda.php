@@ -15,7 +15,10 @@
                     inserisciGiocatoreClassifica($conn, $_SESSION["username"]);
                 }
                 $conn->query("COMMIT");
-                echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => classificaGioco($conn, $_SESSION["idStanza"])]);
+                numPartiteUtente($conn,$_SESSION["username"]);
+                $giocatori = classificaGioco($conn, $_SESSION["idStanza"]);
+                if ($giocatori[0]["username"] == $_SESSION["username"]) partitaVinta($conn,$_SESSION["username"]);
+                echo json_encode(["successo" => true, "azione" => "finita", "giocatori" => $giocatori]);
                 die();
             }
             else {
@@ -40,6 +43,18 @@
 
     }
     disconnettiDB($conn);
+
+    function numPartiteUtente(mysqli $conn, $username){
+        $query = $conn->prepare("UPDATE utente SET partiteGiocate = partiteGiocate + 1 WHERE username = ?");
+        $query->bind_param("s", $username);
+        $query->execute();
+    }
+
+    function partitaVinta(mysqli $conn, $username){
+        $query = $conn->prepare("UPDATE utente SET partiteVinte = partiteVinte + 1 WHERE username = ?");
+        $query->bind_param("s", $username);
+        $query->execute();
+    }
     
     function categoriaStanza($conn, $idStanza){
         $rowUsername = $conn->prepare("SELECT categoria FROM stanza WHERE id = ?");

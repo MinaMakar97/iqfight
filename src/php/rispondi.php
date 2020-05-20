@@ -12,6 +12,7 @@
         $rispostaClient = $json["risposta"];
         if (!tempoScaduto($dbConn, "timestampDomanda", $idStanza, $tempoDomanda)) {
             if (rispostaCorretta($dbConn, $username, $rispostaClient, $idStanza)) {
+                risposteGiuste($dbConn,$username);
                 aggiornaPunteggio($dbConn, $username, $idStanza, $tempoDomanda);
             }
             aggiornaGiocatori($dbConn, $idStanza);
@@ -34,6 +35,12 @@
         $query->bind_param("is", $rispCorrettaClient, $username);
         $query->execute();
         return $rispCorrettaClient;
+    }
+
+    function risposteGiuste(mysqli $conn, $username){
+        $query = $conn->prepare("UPDATE utente SET risposteGiuste = risposteGiuste + 1 WHERE username = ?");
+        $query->bind_param("s", $username);
+        $query->execute();
     }
 
     function aggiornaPunteggio(mysqli $dbConn, $username, $idStanza, $tempoDomanda)
