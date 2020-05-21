@@ -1,0 +1,46 @@
+.info-utente{
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 15px;
+    margin-top: 1em;
+    margin-right: 1em;
+}
+
+.info-utente .dim{
+    width: 90%;
+}
+
+.statistiche{
+    background-color: rgba(255, 255, 255, 0.6);
+    padding-left: 1em;
+    padding-right: 1em;
+    border-radius: 15px;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+
+.info-utente .div-card, .statistiche .div-card{
+    margin-bottom: 1.5em !important;
+
+}
+
+.info-princ{
+    justify-content: space-between !important;
+    margin: 1em;
+}
+
+@media screen and (max-width: 576px){
+    .statistiche{
+        margin-top: 2em;
+        padding-left: .5em;
+        padding-right: .5em;
+        margin-left: 0 !important;
+    }
+    .info-utente{
+        padding-left: .5em;
+        padding-right: .5em;
+        margin-right: 0 !important;
+    }
+}
