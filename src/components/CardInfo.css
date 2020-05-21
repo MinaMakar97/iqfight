@@ -6,9 +6,9 @@
 
 .sezione{
     font-size: 1.5em;
-    text-overflow: clip;
-    
+    flex-grow: 1;
 }
+
 
 .div-card{
     height: auto;
@@ -18,15 +18,23 @@
     border-color: var(--colore-border);
     border-radius: 15px;
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 20px;
     margin-bottom: 3em;
     word-break: break-all;
     min-height: 70px;
-    padding-top: .4em;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    /* text-overflow: clip; */
 }
 
 @media screen and (max-width: 576px){
     .div-card{
         margin-bottom: 1em !important;
+        padding-left: 15px;
+        padding-right: 10px;
+    }
+    .sezione{
+        font-size: 1em !important;
     }
 }
