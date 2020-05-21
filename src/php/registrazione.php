@@ -9,11 +9,8 @@
         $email = $json["email"];
         controllaParametri($json, "username", "email", "password");
         $password = password_hash($password, PASSWORD_DEFAULT);
-        $query = $dbConn -> prepare("SELECT email FROM utente WHERE email = ?");
-        $query->bind_param("s",$email);
-        $query->execute();
-        $risultatoQuery = $query->get_result();
-        if (mysqli_num_rows($risultatoQuery) > 0) {
+        
+        if (emailRegistrata($dbConn,$email)) {
             die(json_encode(["successo"=> false, "motivazione" => "email registrata"]));
         }
         $query = $dbConn->prepare("INSERT INTO utente (username, email, password) VALUES ( ?, ?, ?);");

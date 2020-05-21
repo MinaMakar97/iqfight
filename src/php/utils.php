@@ -146,4 +146,12 @@
         if (!isset($_SESSION["idStanza"])) die(json_encode(["successo" => false, "Devi entrare in una stanza per inviare questa richiesta"]));
     }
 
+    function emailRegistrata(mysqli $dbConn, $email){
+        $query = $dbConn -> prepare("SELECT email FROM utente WHERE email = ?");
+        $query->bind_param("s",$email);
+        $query->execute();
+        $risultatoQuery = $query->get_result();
+        return mysqli_num_rows($risultatoQuery) > 0 ? true: false; 
+    }
+
 ?>
