@@ -17,10 +17,12 @@ class InfoUtente extends React.Component {
 			partiteGiocate: "",
 			username: "",
 			email: "",
+			avatar: avatarPredefinito,
 			modificaUsername: false,
 			modificaEmail: false,
 			modificaPassword: false,
 			errore: "",
+			message: "",
 		};
 		this.changeForm = this.changeForm.bind(this);
 		this.modfica = this.modifica.bind(this);
@@ -28,23 +30,28 @@ class InfoUtente extends React.Component {
 	}
 
 	invia(e) {
+		document.getElementById("err-log").textContent = "";
+		document.getElementById("err-log").style.display = "none";
 		if (e.key === "Enter") {
 			let id = e.target.id;
 			if (id === "user") {
-				this.setState({
-					modificaUsername: false,
-				});
-				this.cambiaInfo("username", e.target.value);
+				if (this.cambiaInfo("username", e.target.value)) {
+					this.setState({
+						modificaUsername: false,
+					});
+				}
 			} else if (id === "mail") {
-				this.setState({
-					modificaEmail: false,
-				});
-				this.cambiaInfo("email", e.target.value);
+				if (this.cambiaInfo("email", e.target.value)) {
+					this.setState({
+						modificaEmail: false,
+					});
+				}
 			} else if (id === "pass") {
-				this.setState({
-					modificaPassword: false,
-				});
-				this.cambiaInfo("password", e.target.value);
+				if (this.cambiaInfo("password", e.target.value)) {
+					this.setState({
+						modificaPassword: false,
+					});
+				}
 			}
 		}
 	}
@@ -58,6 +65,10 @@ class InfoUtente extends React.Component {
 				if (json["successo"] === false) {
 					document.getElementById("err-log").textContent = json["motivazione"];
 					document.getElementById("err-log").style.display = "inline";
+				} else {
+					this.setState({ messagge: json["messaggio"] });
+					// eslint-disable-next-line no-undef
+					$("#popup-successo").modal();
 				}
 			}
 		};
@@ -67,17 +78,17 @@ class InfoUtente extends React.Component {
 	}
 
 	changeForm(e) {
-		if (e.target.id === "username") {
+		if (e.target.id === "username" || e.target.id === "user") {
 			this.setState({
-				modificaUsername: true,
+				modificaUsername: !this.state.modificaUsername,
 			});
-		} else if (e.target.id === "email") {
+		} else if (e.target.id === "email" || e.target.id === "mail") {
 			this.setState({
-				modificaEmail: true,
+				modificaEmail: !this.state.modificaEmail,
 			});
-		} else if (e.target.id === "password") {
+		} else if (e.target.id === "password" || e.target.id === "pass") {
 			this.setState({
-				modificaPassword: true,
+				modificaPassword: !this.state.modificaPassword,
 			});
 		}
 	}
@@ -94,6 +105,7 @@ class InfoUtente extends React.Component {
 						partiteGiocate: json["partiteGiocate"],
 						username: json["username"],
 						email: json["email"],
+						avatar: json["avatar"] != null ? process.env.REACT_APP_LOCAL_ENDPOINT + json["avatar"] : this.state.avatar,
 					});
 				}
 			}
@@ -111,7 +123,7 @@ class InfoUtente extends React.Component {
 		return (
 			<div
 				id={id}
-				className="col-5 col-sm-3 w-100 h-100 p-0"
+				className="modifica col-5 col-sm-3 p-0"
 				style={{ textAlign: "right", color: "var(--colore-quart)" }}
 				onClick={this.changeForm}>
 				modifica
@@ -126,15 +138,17 @@ class InfoUtente extends React.Component {
 				<div className="row w-100 h-100 p-0 pt-1 mb-4 info-princ">
 					<div className="col-12 col-sm-6 h-100 p-0">
 						<div className="info-utente flex-column centra">
-							<img
-								alt="Avatar utente"
-								className="mb-4 mt-4"
-								src={avatarPredefinito}
-								style={{ width: "130px", height: "130px", borderRadius: "100%" }}></img>
+							<div style={{ width: "150px", height: "150px", position: "relative" }} className="mb-4 mt-4">
+								<img alt="Avatar utente" src={this.state.avatar} style={{ width: "95%", height: "95%", borderRadius: "100%" }}></img>
+								<div className="cerchio-penna centra">
+									<i className="penna fas fa-pen"></i>
+								</div>
+							</div>
 
 							<p style={{ display: "none" }} id="err-log"></p>
 
 							<CardInfo
+								modifica={true}
 								tipo="text"
 								nomeSezione={"Nome utente"}
 								id="user"
@@ -142,8 +156,10 @@ class InfoUtente extends React.Component {
 								style={{ width: "100%" }}
 								html={this.modifica("username")}
 								invia={this.invia}
+								onBlur={this.changeForm}
 								disabled={!this.state.modificaUsername}></CardInfo>
 							<CardInfo
+								modifica={true}
 								tipo="email"
 								id="mail"
 								nomeSezione={"Email"}
@@ -152,8 +168,10 @@ class InfoUtente extends React.Component {
 								tronca={true}
 								invia={this.invia}
 								html={this.modifica("email")}
+								onBlur={this.changeForm}
 								disabled={!this.state.modificaEmail}></CardInfo>
 							<CardInfo
+								modifica={true}
 								tipo="password"
 								id="pass"
 								nomeSezione={"Password"}
@@ -161,32 +179,60 @@ class InfoUtente extends React.Component {
 								style={{ width: "100%" }}
 								invia={this.invia}
 								html={this.modifica("password")}
+								onBlur={this.changeForm}
 								disabled={!this.state.modificaPassword}></CardInfo>
 						</div>
 					</div>
 
-					<div class="col-12 col-sm-6 h-100 p-0">
+					<div className="col-12 col-sm-6 h-100 p-0">
 						<div className="statistiche centra flex-column">
-							<img
-								alt="Avatar utente"
-								className="mb-4 mt-4"
-								src={statics}
-								style={{ width: "130px", height: "130px", borderRadius: "100%" }}></img>
+							<div
+								style={{ width: "150px", height: "150px", borderRadius: "100%", backgroundColor: "var(--colore-terz)" }}
+								className="mb-4 mt-4 centra">
+								<img alt="Avatar utente" src={statics} style={{ width: "100%", height: "100%", borderRadius: "100%" }}></img>
+							</div>
 							<CardInfo
+								modifica={false}
+								tipo="text"
 								nomeSezione={"Risposte corrette"}
 								sezione={this.state.risposteCorrette}
 								style={{ width: "100%" }}
+								disabled={true}
 								html={this.img(check)}></CardInfo>
 							<CardInfo
+								modifica={false}
+								tipo="text"
 								nomeSezione={"Partite vinte"}
 								sezione={this.state.partiteVinte}
 								style={{ width: "100%" }}
+								disabled={true}
 								html={this.img(crown)}></CardInfo>
 							<CardInfo
+								modifica={false}
+								tipo="text"
 								nomeSezione={"Partite giocate"}
 								sezione={this.state.partiteGiocate}
 								style={{ width: "100%" }}
+								disabled={true}
 								html={this.img(sword)}></CardInfo>
+						</div>
+					</div>
+				</div>
+				<div className="modal fade" id="popup-successo" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div className="modal-dialog modal-dialog-centered" role="document">
+						<div className="modal-content">
+							<div className="modal-header">
+								<h5 className="modal-title">Operazione riuscita</h5>
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div className="modal-body">{this.state.message}</div>
+							<div className="modal-footer">
+								<button type="button" className="btn bottone" data-dismiss="modal" onClick={() => window.location.reload()}>
+									Ok
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

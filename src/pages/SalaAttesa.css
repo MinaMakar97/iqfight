@@ -13,6 +13,13 @@
 	padding-right: 0px !important;
 	min-height: 305px;
 }
+.sala-attesa .div-card{
+	margin-top: 1.5em;
+}
+
+.giocatori .card{
+	border: solid 4px var(--colore-border);
+}
 
 .sala-attesa .row{
 	margin-right: 0px !important;

@@ -116,7 +116,7 @@ class StanzaGioco extends React.Component {
 				<Card
 					nome={jGiocatori[chiave].username}
 					punteggio={jGiocatori[chiave].punteggio}
-					immagine={jGiocatori[chiave].avatar || userImage}
+					immagine={jGiocatori[chiave].avatar ? process.env.REACT_APP_LOCAL_ENDPOINT + jGiocatori[chiave].avatar : userImage}
 					style={{ width: "90%" }}
 					className={classi}
 					key={chiave}></Card>
