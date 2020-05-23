@@ -147,7 +147,7 @@ export default class AggiungiDomanda extends Component {
 							</div>
 							<div className="modal-body">Domanda inserita con successo, grazie per la tua collaborazione!</div>
 							<div className="modal-footer">
-								<button type="button" className="btn bottone" data-dismiss="modal">
+								<button type="button" className="bottone" data-dismiss="modal">
 									Ok
 								</button>
 							</div>

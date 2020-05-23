@@ -244,7 +244,7 @@ class InfoUtente extends React.Component {
 							</div>
 							<div className="modal-body">{this.state.message}</div>
 							<div className="modal-footer">
-								<button type="button" className="btn bottone" data-dismiss="modal" onClick={() => window.location.reload()}>
+								<button type="button" className="bottone" data-dismiss="modal" onClick={() => window.location.reload()}>
 									Ok
 								</button>
 							</div>
