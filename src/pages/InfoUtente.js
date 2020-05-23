@@ -25,6 +25,7 @@ class InfoUtente extends React.Component {
 			errore: "",
 			message: "",
 			mostraPopup: false,
+			precedente: "",
 		};
 		this.changeForm = this.changeForm.bind(this);
 		this.modfica = this.modifica.bind(this);
@@ -81,14 +82,26 @@ class InfoUtente extends React.Component {
 
 	changeForm(e) {
 		if (e.target.id === "username" || e.target.id === "user") {
+			if (e.target.id === "username") this.setState({ precedente: document.getElementById("user").value });
+			else {
+				document.getElementById("user").value = this.state.precedente;
+			}
 			this.setState({
 				modificaUsername: !this.state.modificaUsername,
 			});
 		} else if (e.target.id === "email" || e.target.id === "mail") {
+			if (e.target.id === "email") this.setState({ precedente: document.getElementById("mail").value });
+			else {
+				document.getElementById("mail").value = this.state.precedente;
+			}
 			this.setState({
 				modificaEmail: !this.state.modificaEmail,
 			});
 		} else if (e.target.id === "password" || e.target.id === "pass") {
+			if (e.target.id === "password") this.setState({ precedente: document.getElementById("pass").value });
+			else {
+				document.getElementById("pass").value = this.state.precedente;
+			}
 			this.setState({
 				modificaPassword: !this.state.modificaPassword,
 			});
