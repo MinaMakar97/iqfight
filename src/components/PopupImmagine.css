@@ -1,0 +1,111 @@
+.iqfight-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    z-index: 1050;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.iqfight-popup-bg {
+    background-color: white;
+    min-height: 500px;
+    min-width: 350px;
+    width: 80%;
+    height: 70%;
+    max-width: 700px;
+    max-height: 80%;
+    position: relative;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.iqfight-popup canvas {
+    position: relative;
+    cursor: move;
+}
+
+.iqfight-popup .img-container {
+    position: relative;
+    width: 100%;
+    display: inline-block;
+    background-color: red;
+}
+
+.iqfight-popup .cerchio-img {
+    position: absolute;
+    box-shadow: 0px 0px 0px 999px rgba(0, 0, 0, 0.7);;
+    pointer-events: none;
+    border-radius: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.iqfight-popup .div-immagine {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.iqfight-popup .div-controlli {
+    display: flex;
+    justify-content: center;
+    height: 2em;
+}
+
+.iqfight-popup .div-controlli i {
+    font-size: 2em;
+    margin: 0 1em;
+    cursor: pointer;
+}
+
+.iqfight-popup .div-pulsanti {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.iqfight-popup .div-pulsanti button{
+    width: 48%;
+}
+
+.iqfight-popup .annulla {
+    background-color: #b00;
+}
+
+.iqfight-popup .salva {
+    background-color: #0b0;
+}
+
+.iqfight-popup .carica-immagine {
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 18px;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.iqfight-popup button {
+    border: none;
+    background-color: #ddd;
+    border-radius: 18px;
+    padding: 1em;
+    outline: none;
+}
+
+.iqfight-popup .row {
+    margin: .5em !important;
+    width: 100%;
+}
