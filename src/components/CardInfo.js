@@ -26,7 +26,7 @@ class CardInfo extends React.Component {
 								style={
 									!this.props.disabled
 										? { boxShadow: "1px 1px 8px var(--colore-border)", border: "none", outline: "none" }
-										: { border: "unset" }
+										: { border: "unset", textOverflow: "ellipsis" }
 								}
 								disabled={this.props.disabled}></input>
 						) : (
