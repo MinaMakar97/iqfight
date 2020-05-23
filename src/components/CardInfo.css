@@ -1,5 +1,5 @@
 .nome-sezione{
-    color:var(--colore-quart);
+    color:var(--colore-border);
     font-size: .9em;
     min-height: 20px;
     align-items: flex-start;
@@ -12,6 +12,10 @@
     font-size: 1.5em;
     flex-grow: 1;
     min-height: 30px;
+    color:var(--colore-scritte);
+}
+
+.sezione input {
     color:var(--colore-scritte);
 }
 

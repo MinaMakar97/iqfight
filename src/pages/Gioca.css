@@ -97,6 +97,7 @@
 
 .icona{
     font-size: 20px;
+    color: var(--colore-quart);
 }
 
 @media screen and (max-width: 576px) {

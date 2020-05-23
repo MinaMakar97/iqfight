@@ -39,14 +39,14 @@ body {
   --colore-contorno:#e0d5ff;
   --colore-input:white;
   --colore-card:white;
-  --colore-scritte:rgba(0, 0, 0, 0.651);
+  --colore-scritte:black;
   --sfondo-generale: url(img/sfondo.jpg);
   --opacita:1;
 }
 
-input[type="text"], input[type="password"], input[type="email"]{
+input[type="text"], input[type="password"], input[type="email"], textarea{
   background-color: var(--colore-card);
-  color: var(--colore-scritte);
+  color: var(--colore-quart);
 }
 
 .contenitore-principale {

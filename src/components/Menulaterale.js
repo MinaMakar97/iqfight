@@ -138,7 +138,7 @@ class MenuLaterale extends Component {
 		document.documentElement.style.setProperty("--colore-quart", "white");
 		document.documentElement.style.setProperty("--colore-contorno", "#00000033");
 		document.documentElement.style.setProperty("--colore-border", "#424242");
-		document.documentElement.style.setProperty("--colore-scritte", "white");
+		document.documentElement.style.setProperty("--colore-scritte", "#2f3477");
 		document.documentElement.style.setProperty("--colore-placeholder", "white");
 	}
 
