@@ -160,11 +160,18 @@ class StanzaGioco extends React.Component {
 							giocatori: newGiocatori,
 						});
 					} else if (json["azione"] === "risultati") {
+						let newGiocatori = {};
+						for (let giocatore in json["giocatori"]) {
+							let avatar = this.state.giocatori[giocatore].avatar;
+							newGiocatori[giocatore] = json["giocatori"][giocatore];
+							newGiocatori[giocatore].punteggio = json["giocatori"][giocatore].punteggio;
+							newGiocatori[giocatore].avatar = avatar;
+						}
+						this.setState({
+							giocatori: newGiocatori,
+						});
 						// Fine del round
 						document.getElementById("progress").style.opacity = 0;
-						this.setState({
-							giocatori: json["giocatori"],
-						});
 						clearInterval(this.stateInterval);
 						this.stateInterval = null;
 						if (this.state.miaRisposta == null || this.state.miaRisposta.textContent !== json["rispCorretta"])

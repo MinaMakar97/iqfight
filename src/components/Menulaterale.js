@@ -154,7 +154,7 @@ class MenuLaterale extends Component {
 									alt="Avatar utente"
 									src={this.state.avatar || avatarPredefinito}
 									style={{ width: "50px", height: "50px", borderRadius: "100%" }}></img>
-								<p style={{ marginBottom: 0, wordBreak: "break-all", lineHeight: 1 }}>{this.state.username}</p>
+								<p style={{ marginBottom: 0, wordBreak: "break-all", lineHeight: 1, marginTop: ".3em" }}>{this.state.username}</p>
 							</div>
 						</div>
 					) : null}
