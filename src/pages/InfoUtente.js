@@ -178,6 +178,7 @@ class InfoUtente extends React.Component {
 							<CardInfo
 								modifica={true}
 								tipo="text"
+								max="15"
 								nomeSezione={"Nome utente"}
 								id="user"
 								sezione={this.state.username}
@@ -187,6 +188,7 @@ class InfoUtente extends React.Component {
 								onBlur={this.changeForm}
 								disabled={!this.state.modificaUsername}></CardInfo>
 							<CardInfo
+								max="40"
 								modifica={true}
 								tipo="email"
 								id="mail"

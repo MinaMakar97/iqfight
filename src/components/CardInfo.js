@@ -14,6 +14,7 @@ class CardInfo extends React.Component {
 					<div className="row sezione">
 						{this.props.modifica ? (
 							<input
+								maxLength={this.props.max}
 								className="w-100 h-100"
 								id={this.props.id}
 								type={this.props.tipo}
