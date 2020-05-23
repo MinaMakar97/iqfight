@@ -23,12 +23,43 @@
 
 .info-utente .div-card, .statistiche .div-card{
     margin-bottom: 1.5em !important;
-
+    padding-top: .5em;
+    padding-bottom: .5em;
+    height: 75px;
 }
 
 .info-princ{
     justify-content: space-between !important;
     margin: 1em;
+}
+
+.avatar{
+    position: relative;
+}
+
+.cerchio-penna{
+    position: absolute;
+    background-color: var(--colore-card);
+    bottom:7%;
+    right: 0%;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.15);
+}
+
+.modifica{
+    text-align: right;
+    justify-content: flex-end;
+    align-items: flex-end;
+    display: flex;
+    margin-bottom: .3em;
+}
+
+.penna{
+    font-size: 25px;
+    color: var(--colore-quart);
+
 }
 
 @media screen and (max-width: 576px){
@@ -42,5 +73,8 @@
         padding-left: .5em;
         padding-right: .5em;
         margin-right: 0 !important;
+    }
+    .modifica{
+        margin-bottom: .3em;
     }
 }

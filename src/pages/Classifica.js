@@ -45,7 +45,7 @@ export default class Classifica extends Component {
 					className={i < 3 ? classiPodio[i] : ""}
 					nome={giocatori[i].username}
 					punteggio={giocatori[i].punteggio.toLocaleString() + " punti"}
-					immagine={giocatori[i].avatar || userImage}
+					immagine={process.env.REACT_APP_LOCAL_ENDPOINT + giocatori[i].avatar || userImage}
 					style={{ animationDelay: i * 0.25 + "s" }}
 					key={i}></Card>
 			);

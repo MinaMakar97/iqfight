@@ -32,7 +32,7 @@ body {
   --colore-terz:#0996BB;
   --colore-quart:#8B6EDD;
   --colore-border:rgb(101, 64, 204);
-  --colore-shadow:rgba(0, 0, 0, 0.4);
+  --colore-shadow:rgba(0, 0, 0, 0.3);
   --colore-placeholder:#c1b1ec;
   --colore-bottone:white;
   --colore-titolo: white;
@@ -42,11 +42,11 @@ body {
   --colore-scritte:black;
   --sfondo-generale: url(img/sfondo.jpg);
   --opacita:1;
-
 }
 
-input[type="text"], input[type="password"], input[type="email"]{
+input[type="text"], input[type="password"], input[type="email"], textarea{
   background-color: var(--colore-card);
+  color: var(--colore-quart);
 }
 
 .contenitore-principale {

@@ -30,7 +30,7 @@ class StanzaAttesa extends React.Component {
 				<Card
 					nome={jGiocatori[i].username}
 					punteggio={jGiocatori[i].punteggio}
-					immagine={jGiocatori[i].avatar || userImage}
+					immagine={jGiocatori[i].avatar ? process.env.REACT_APP_LOCAL_ENDPOINT + jGiocatori[i].avatar : userImage}
 					style={{ width: "90%" }}
 					key={i}></Card>
 			);
@@ -93,22 +93,32 @@ class StanzaAttesa extends React.Component {
 				</p>
 				<div className="row w-100 div-princ mt-3">
 					<div className="col-12 col-sm-8">
-						<CardInfo nomeSezione={"Nome stanza"} sezione={this.props.nome} style={{ width: "100%" }}></CardInfo>
+						<CardInfo
+							modifica={false}
+							nomeSezione={"Nome stanza"}
+							sezione={this.props.nome}
+							style={{ width: "100%", alignItems: "center" }}></CardInfo>
 						<div className="row">
 							<div className={"col-12 col-sm-6 p-0 pr-sm-2"}>
-								<CardInfo nomeSezione={"Categoria"} sezione={this.props.categoria} style={{ width: "100%" }}></CardInfo>
+								<CardInfo
+									modifica={false}
+									nomeSezione={"Categoria"}
+									sezione={this.props.categoria}
+									style={{ width: "100%", alignItems: "center" }}></CardInfo>
 							</div>
 							<div className={"col-12 col-sm-6 p-0 pl-sm-2"} style={{ paddingRight: 0 }}>
 								<CardInfo
+									modifica={false}
 									nomeSezione={"Visbilità stanza"}
 									sezione={this.props.privata === 0 ? "Pubblica" : "Privata"}
-									style={{ width: "100%" }}></CardInfo>
+									style={{ width: "100%", alignItems: "center" }}></CardInfo>
 							</div>
 						</div>
 						<CardInfo
+							modifica={false}
 							nomeSezione={"Link stanza"}
 							sezione={"https://iqfight.altervista.org/room/" + this.props.id}
-							style={{ width: "100%" }}></CardInfo>
+							style={{ width: "100%", alignItems: "center" }}></CardInfo>
 					</div>
 					<div className="col-12 col-sm-1">
 						<hr className="riga"></hr>

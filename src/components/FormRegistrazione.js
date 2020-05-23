@@ -13,6 +13,7 @@ class FormRegistrazione extends React.Component {
 	}
 
 	cambiaFile(e) {
+		if (!e.target.files) return;
 		this.setState({
 			filePath: e.target.files[0].name,
 		});

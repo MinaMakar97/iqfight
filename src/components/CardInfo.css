@@ -1,14 +1,23 @@
 .nome-sezione{
-    color:var(--colore-quart);
+    color:var(--colore-border);
     font-size: .9em;
-    height: 30%;
+    min-height: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
+    padding-top: .1em;
 }
 
 .sezione{
     font-size: 1.5em;
     flex-grow: 1;
+    min-height: 30px;
+    color:var(--colore-scritte);
 }
 
+.sezione input {
+    color:var(--colore-scritte);
+}
 
 .div-card{
     height: auto;
@@ -17,20 +26,17 @@
     border-style: solid;
     border-color: var(--colore-border);
     border-radius: 15px;
-    padding-left: 30px;
-    padding-right: 20px;
-    margin-bottom: 3em;
+    margin-bottom: 1em;
     word-break: break-all;
     min-height: 70px;
-    align-items: center;
-    display: flex;
     justify-content: space-between;
     /* text-overflow: clip; */
+    padding-left: 30px;
+    padding-right: 20px;
 }
 
 @media screen and (max-width: 576px){
     .div-card{
-        margin-bottom: 1em !important;
         padding-left: 15px;
         padding-right: 10px;
     }

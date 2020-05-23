@@ -26,7 +26,7 @@ class Vincitori extends React.Component {
 					className={i < 3 ? classiPodio[i] : ""}
 					nome={jGiocatori[i].username}
 					punteggio={jGiocatori[i].punteggio}
-					immagine={jGiocatori[i].avatar || userImage}
+					immagine={jGiocatori[i].avatar ? process.env.REACT_APP_LOCAL_ENDPOINT + jGiocatori[i].avatar : userImage}
 					style={{ animationDelay: i * 0.25 + "s", width: "" + 100 - i * 10 + "%" }}
 					key={i}></Card>
 			);

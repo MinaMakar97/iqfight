@@ -60,10 +60,12 @@ class MenuLaterale extends Component {
 	cambiaPagina(e) {
 		if (e.target.id === "esci") this.esci();
 		else {
-			this.props.history.push("/" + e.target.getAttribute("id"));
-			if (this.sezione) this.sezione.style.backgroundColor = "unset";
-			e.target.style.backgroundColor = "#0996BB";
-			this.sezione = e.target;
+			let element = e.target;
+			if (!element.id) element = element.parentElement;
+			this.props.history.push("/" + element.id);
+			if (this.sezione) this.sezione.style.backgroundColor = null;
+			element.style.backgroundColor = "#0996BB";
+			this.sezione = element;
 			if (window.innerWidth <= 576) this.setta();
 		}
 	}
@@ -82,7 +84,11 @@ class MenuLaterale extends Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
-					this.setState({ username: json["username"], avatar: json["avatar"], checked: json["dark"] });
+					this.setState({
+						username: json["username"],
+						avatar: json["avatar"] != null ? process.env.REACT_APP_LOCAL_ENDPOINT + json["avatar"] : null,
+						checked: json["dark"],
+					});
 					this.state.checked === 1 ? this.darkMode() : this.normalMode();
 				}
 			}
@@ -132,7 +138,7 @@ class MenuLaterale extends Component {
 		document.documentElement.style.setProperty("--colore-quart", "white");
 		document.documentElement.style.setProperty("--colore-contorno", "#00000033");
 		document.documentElement.style.setProperty("--colore-border", "#424242");
-		document.documentElement.style.setProperty("--colore-scritte", "white");
+		document.documentElement.style.setProperty("--colore-scritte", "#2f3477");
 		document.documentElement.style.setProperty("--colore-placeholder", "white");
 	}
 
@@ -143,7 +149,7 @@ class MenuLaterale extends Component {
 					{this.state.username ? (
 						<div>
 							<hr className="riga-menu"></hr>
-							<div className="div-content centra" onClick={this.cambiaPagina} id="profilo">
+							<div className="div-content centra" onClick={this.cambiaPagina} id={"profilo"}>
 								<img
 									alt="Avatar utente"
 									src={this.state.avatar || avatarPredefinito}

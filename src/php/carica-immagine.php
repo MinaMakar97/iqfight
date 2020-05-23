@@ -28,7 +28,7 @@
             $uploadOk = 1;
     
             // Check file size
-            if ($_FILES["avatar"]["size"] > 10000000) {
+            if ($_FILES["avatar"]["size"] > 2000000) {
                 die(json_encode(["successo"=> false, "motivazione" => "Mi dispiace file troppo grande"]));
             }
             // Allow certain file formats
@@ -38,7 +38,7 @@
             }
             // if everything is ok, try to upload file
             if (!move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) {
-                die(json_encode(["successo"=> false, "motivazione" => "c'e' stato un errore nel caricamento imagine"]));
+                die(json_encode(["successo"=> false, "motivazione" => "C'e' stato un errore nel caricamento immagine"]));
             }
         }
         

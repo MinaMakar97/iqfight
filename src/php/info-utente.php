@@ -46,6 +46,7 @@
             die();
         }
         $_SESSION["username"] = $newUsername;
+        echo json_encode(["successo" => true, "messaggio" => "Username cambiato con successo"]);
     }
 
     function cambiaEmail(mysqli $conn, $username, $newEmail){
@@ -56,6 +57,7 @@
         $query = $conn->prepare("UPDATE utente SET email = ? WHERE username = ?");
         $query->bind_param("ss", $newEmail,$username);
         $query->execute();
+        echo json_encode(["successo" => true, "messaggio" => "Email cambiata con successo"]);
     }
 
     function cambiaPassword(mysqli $conn, $username, $newPassword){
@@ -63,6 +65,7 @@
         $query = $conn->prepare("UPDATE utente SET password = ? WHERE username = ?");
         $query->bind_param("ss", $password,$username);
         $query->execute();
+        echo json_encode(["successo" => true, "messaggio" => "Password cambiata con successo"]);
     }
 
 
