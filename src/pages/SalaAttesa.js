@@ -16,6 +16,7 @@ class StanzaAttesa extends React.Component {
 			giocatori: [],
 			creatore: "",
 			risposto: 0,
+			copiato: false,
 		};
 
 		this.updateInterval = null;
@@ -84,6 +85,20 @@ class StanzaAttesa extends React.Component {
 		if (this.updateInterval) clearInterval(this.updateInterval);
 	}
 
+	selezionaTesto(element) {
+		if (document.body.createTextRange) {
+			const range = document.body.createTextRange();
+			range.moveToElementText(element);
+			range.select();
+		} else if (window.getSelection) {
+			const selection = window.getSelection();
+			const range = document.createRange();
+			range.selectNodeContents(element);
+			selection.removeAllRanges();
+			selection.addRange(range);
+		}
+	}
+
 	render() {
 		return (
 			<div className="w-100 h-100 flex-column centra sala-attesa">
@@ -115,6 +130,15 @@ class StanzaAttesa extends React.Component {
 							</div>
 						</div>
 						<CardInfo
+							html={<i class={this.state.copiato ? "fas fa-check" : "far fa-copy"} style={{ fontSize: "2em" }}></i>}
+							id="room-link"
+							onClick={() => {
+								this.setState({ copiato: true });
+								setTimeout(() => this.setState({ copiato: false }), 2000);
+								const link = document.getElementById("room-link");
+								this.selezionaTesto(link);
+								document.execCommand("copy");
+							}}
 							modifica={false}
 							nomeSezione={"Link stanza"}
 							sezione={"https://iqfight.altervista.org/room/" + this.props.id}
