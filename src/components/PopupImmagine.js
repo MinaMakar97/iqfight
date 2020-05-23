@@ -29,6 +29,7 @@ export default class Popup extends Component {
 		this.ridimensiona = this.ridimensiona.bind(this);
 
 		this.image = new Image();
+		this.image.crossOrigin = "Anonymous";
 		this.image.src = this.props.immagine || ImgUtente;
 	}
 
@@ -150,7 +151,7 @@ export default class Popup extends Component {
 			if (e.target.readyState === 4 && e.target.status === 200) {
 				let json = JSON.parse(e.target.responseText);
 				if (json["successo"] === true) {
-					if (this.props.salva) this.props.salva();
+					if (this.props.salva) this.props.salva(json);
 				}
 			}
 		};

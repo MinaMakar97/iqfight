@@ -47,7 +47,7 @@
         $query->bind_param("ss", $path, $username);
         $query->execute();
 
-        echo json_encode(["successo" => true]);
+        echo json_encode(["successo" => true, "messaggio" => "Immagine caricata con successo!"]);
     }
     disconnettiDB($dbConn);
 ?>
