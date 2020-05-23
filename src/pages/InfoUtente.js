@@ -66,7 +66,7 @@ class InfoUtente extends React.Component {
 					document.getElementById("err-log").textContent = json["motivazione"];
 					document.getElementById("err-log").style.display = "inline";
 				} else {
-					this.setState({ messagge: json["messaggio"] });
+					this.setState({ message: json["messaggio"] });
 					// eslint-disable-next-line no-undef
 					$("#popup-successo").modal();
 				}
