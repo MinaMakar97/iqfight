@@ -149,12 +149,12 @@ class MenuLaterale extends Component {
 					{this.state.username ? (
 						<div>
 							<hr className="riga-menu"></hr>
-							<div className="div-content centra" onClick={this.cambiaPagina} id={"profilo"}>
+							<div className="div-content centra" onClick={this.cambiaPagina} id={"profilo"} style={{ maxHeight: "15vh" }}>
 								<img
 									alt="Avatar utente"
 									src={this.state.avatar || avatarPredefinito}
 									style={{ width: "50px", height: "50px", borderRadius: "100%" }}></img>
-								<p style={{ marginBottom: 0 }}>{this.state.username}</p>
+								<p style={{ marginBottom: 0, wordBreak: "break-all", lineHeight: 1 }}>{this.state.username}</p>
 							</div>
 						</div>
 					) : null}

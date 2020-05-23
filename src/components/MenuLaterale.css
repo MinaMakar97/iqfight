@@ -43,7 +43,7 @@ hr.riga-menu{
 }
 
 .div-content{
-    height: 5em;
+    height: 6em;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -52,7 +52,7 @@ hr.riga-menu{
     flex-direction: column;
     overflow: hidden;
     cursor: pointer;
-    max-height: 13vh;
+    max-height: 12vh;
 }
 
 .div-content:hover{

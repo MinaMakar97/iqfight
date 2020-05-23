@@ -23,8 +23,7 @@
     height: auto;
     color:var(--colore-scritte);
     background-color: var(--colore-card);
-    border-style: solid;
-    border-color: var(--colore-border);
+    border: solid 4px var(--colore-border);
     border-radius: 15px;
     margin-bottom: 1em;
     word-break: break-all;
