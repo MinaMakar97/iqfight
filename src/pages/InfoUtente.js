@@ -7,6 +7,7 @@ import statics from "../img/statics.svg";
 import check from "../img/check.svg";
 import crown from "../img/crown.svg";
 import sword from "../img/sword.svg";
+import PopupImmagine from "../components/PopupImmagine";
 
 class InfoUtente extends React.Component {
 	constructor(props) {
@@ -23,6 +24,7 @@ class InfoUtente extends React.Component {
 			modificaPassword: false,
 			errore: "",
 			message: "",
+			mostraPopup: false,
 		};
 		this.changeForm = this.changeForm.bind(this);
 		this.modfica = this.modifica.bind(this);
@@ -134,11 +136,24 @@ class InfoUtente extends React.Component {
 	render() {
 		return (
 			<div className="pagina-classifica w-100 h-100 flex-column centra p-0">
+				{this.state.mostraPopup ? (
+					<PopupImmagine
+						annulla={() => this.setState({ mostraPopup: false })}
+						immagine={this.state.avatar}
+						salva={(json) => {
+							this.setState({ mostraPopup: false, message: json["messaggio"] });
+							// eslint-disable-next-line no-undef
+							$("#popup-successo").modal();
+						}}></PopupImmagine>
+				) : null}
 				<img src={logo} alt="Logo" className="iqfight-logo"></img>
 				<div className="row w-100 h-100 p-0 pt-1 mb-4 info-princ">
 					<div className="col-12 col-sm-6 h-100 p-0">
 						<div className="info-utente flex-column centra">
-							<div style={{ width: "150px", height: "150px", position: "relative" }} className="mb-4 mt-4">
+							<div
+								style={{ width: "150px", height: "150px", position: "relative" }}
+								className="mb-4 mt-4"
+								onClick={() => this.setState({ mostraPopup: true })}>
 								<img alt="Avatar utente" src={this.state.avatar} style={{ width: "95%", height: "95%", borderRadius: "100%" }}></img>
 								<div className="cerchio-penna centra">
 									<i className="penna fas fa-pen"></i>
