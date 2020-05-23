@@ -113,9 +113,15 @@
 
     .gioca .scroll-bar-content {
         padding: 0 .1em !important;
+        margin-left: -18px !important;
     }
 
     .riga-testo-riga {
         width: 100%;
+    }
+
+    .gioca .contenitore-viola .col-12 {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
     }
 }

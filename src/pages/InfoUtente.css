@@ -61,6 +61,15 @@
 
 }
 
+.iqfight-popup-bg {
+    background-color: var(--colore-card) !important;
+    color: var(--colore-scritte) !important; 
+}
+
+.iqfight-popup button {
+    color: var(--colore-input) !important;
+}
+
 @media screen and (max-width: 576px){
     .statistiche{
         margin-top: 2em;

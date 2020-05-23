@@ -6,7 +6,7 @@ export default class Popup extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			immagine: this.props.immagine,
+			immagine: this.props.immagine + "?" + new Date().getTime(),
 			zoom: 1,
 			top: 0,
 			left: 0,
@@ -30,7 +30,7 @@ export default class Popup extends Component {
 
 		this.image = new Image();
 		this.image.crossOrigin = "Anonymous";
-		this.image.src = this.props.immagine || ImgUtente;
+		this.image.src = this.props.immagine + "?" + new Date().getTime() || ImgUtente;
 	}
 
 	gestisciImmagine(e) {
@@ -40,10 +40,11 @@ export default class Popup extends Component {
 
 	cambiaImmagine(imgSrc) {
 		this.image.src = imgSrc;
-		this.setState({ immagine: imgSrc });
+		this.setState({ immagine: imgSrc + "?" + new Date().getTime() });
 	}
 
 	gestisciZoom(e) {
+		e.preventDefault();
 		const deltaY = -e.deltaY;
 		this.setState((prevState) => {
 			let scale = prevState.zoom * 0.001;
@@ -54,6 +55,7 @@ export default class Popup extends Component {
 	}
 
 	gestisciSposta(e) {
+		e.preventDefault();
 		if (e.targetTouches) {
 			if (e.targetTouches.length === 1)
 				// Panning
@@ -109,6 +111,7 @@ export default class Popup extends Component {
 	}
 
 	gestisciMouseUp(e) {
+		e.preventDefault();
 		const move = e.targetTouches ? "touchmove" : "mousemove";
 		const up = e.targetTouches ? "touchend" : "mouseup";
 		document.removeEventListener(move, this.gestisciSposta);
@@ -233,8 +236,8 @@ export default class Popup extends Component {
 
 	render() {
 		return (
-			<div className="iqfight-popup" onClick={this.props.annulla}>
-				<div className="iqfight-popup-bg" onClick={(e) => e.stopPropagation()}>
+			<div className="iqfight-popup" onMouseDown={this.props.annulla}>
+				<div className="iqfight-popup-bg" onMouseDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
 					<div className="row div-immagine">
 						<canvas ref={this.canvas}></canvas>
 						<div className="cerchio-img"></div>

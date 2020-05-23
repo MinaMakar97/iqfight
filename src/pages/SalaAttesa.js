@@ -130,7 +130,7 @@ class StanzaAttesa extends React.Component {
 							</div>
 						</div>
 						<CardInfo
-							html={<i class={this.state.copiato ? "fas fa-check" : "far fa-copy"} style={{ fontSize: "2em" }}></i>}
+							html={<i className={this.state.copiato ? "fas fa-check" : "far fa-copy"} style={{ fontSize: "2em" }}></i>}
 							id="room-link"
 							onClick={() => {
 								this.setState({ copiato: true });
