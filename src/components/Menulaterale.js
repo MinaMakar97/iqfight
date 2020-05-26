@@ -128,6 +128,7 @@ class MenuLaterale extends Component {
 		document.documentElement.style.setProperty("--colore-border", null);
 		document.documentElement.style.setProperty("--colore-scritte", null);
 		document.documentElement.style.setProperty("--colore-placeholder", null);
+		document.documentElement.style.setProperty("--colore-link", null);
 	}
 
 	darkMode() {
@@ -140,6 +141,7 @@ class MenuLaterale extends Component {
 		document.documentElement.style.setProperty("--colore-border", "#424242");
 		document.documentElement.style.setProperty("--colore-scritte", "#2f3477");
 		document.documentElement.style.setProperty("--colore-placeholder", "white");
+		document.documentElement.style.setProperty("--colore-link", "#00c9ff");
 	}
 
 	render() {

@@ -137,7 +137,7 @@ class FormRegistrazione extends React.Component {
 					</div>
 				</form>
 				<Link to="/login">
-					<p style={{ color: "blue", textAlign: "center" }}>Indietro</p>{" "}
+					<p style={{ color: "var(--colore-link)", textAlign: "center" }}>Indietro</p>{" "}
 				</Link>
 			</div>
 		);

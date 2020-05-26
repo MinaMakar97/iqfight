@@ -68,7 +68,7 @@ class Login extends React.Component {
 				<div className="div-logo">
 					<p style={{ color: "white" }}> Non sei ancora registrato? </p>
 					<Link to="/registrazione">
-						<p style={{ color: "blue", textAlign: "center" }}> Cosa aspetti, clicca qui! </p>
+						<p style={{ color: "var(--colore-link)", textAlign: "center" }}> Cosa aspetti, clicca qui! </p>
 					</Link>
 				</div>
 			</div>
