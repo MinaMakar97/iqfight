@@ -21,6 +21,7 @@ class StanzaAttesa extends React.Component {
 
 		this.updateInterval = null;
 		this.refresh = 1000;
+		this.copiaTimeout = null;
 	}
 
 	creaGiocatori() {
@@ -134,7 +135,8 @@ class StanzaAttesa extends React.Component {
 							id="room-link"
 							onClick={() => {
 								this.setState({ copiato: true });
-								setTimeout(() => this.setState({ copiato: false }), 2000);
+								if (this.copiaTimeout) clearTimeout(this.copiaTimeout);
+								this.copiaTimeout = setTimeout(() => this.setState({ copiato: false }), 1000);
 								const link = document.getElementById("room-link");
 								this.selezionaTesto(link);
 								document.execCommand("copy");
