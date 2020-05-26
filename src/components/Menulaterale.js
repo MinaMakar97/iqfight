@@ -99,7 +99,6 @@ class MenuLaterale extends Component {
 	}
 
 	onChange(e) {
-		console.log(e.target.checked);
 		this.setState({
 			checked: e.target.checked,
 		});
