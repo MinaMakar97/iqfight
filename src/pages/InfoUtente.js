@@ -165,9 +165,12 @@ class InfoUtente extends React.Component {
 						<div className="info-utente flex-column centra">
 							<div
 								style={{ width: "150px", height: "150px", position: "relative" }}
-								className="mb-4 mt-4"
+								className="mb-2 mt-2 centra"
 								onClick={() => this.setState({ mostraPopup: true })}>
-								<img alt="Avatar utente" src={this.state.avatar} style={{ width: "95%", height: "95%", borderRadius: "100%" }}></img>
+								<img
+									alt="Avatar utente"
+									src={this.state.avatar}
+									style={{ width: "100%", height: "100%", borderRadius: "100%" }}></img>
 								<div className="cerchio-penna centra">
 									<i className="penna fas fa-pen"></i>
 								</div>
@@ -218,7 +221,7 @@ class InfoUtente extends React.Component {
 						<div className="statistiche centra flex-column">
 							<div
 								style={{ width: "150px", height: "150px", borderRadius: "100%", backgroundColor: "var(--colore-terz)" }}
-								className="mb-4 mt-4 centra">
+								className="mb-2 mt-2 centra">
 								<img alt="Avatar utente" src={statics} style={{ width: "100%", height: "100%", borderRadius: "100%" }}></img>
 							</div>
 							<CardInfo
