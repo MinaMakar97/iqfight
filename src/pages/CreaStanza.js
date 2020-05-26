@@ -37,7 +37,6 @@ export default class CreaStanza extends Component {
 					<label
 						className="categoria centra"
 						style={{
-							//backgroundColor: this.mappaColori[key],
 							backgroundImage: immaginiCard[key].url,
 							backgroundPosition: immaginiCard[key].position,
 						}}
@@ -51,7 +50,7 @@ export default class CreaStanza extends Component {
 		categorie.push(
 			<div className="div-categoria position-relative">
 				<input type="radio" name="categoria" id="casuale" value="Casuale" required></input>
-				<label className="categoria centra domande-casuali" htmlFor="casuale">
+				<label className="categoria centra domande-casuali" htmlFor="casuale" style={{ background: immaginiCard["Casuale"].url }}>
 					Domande Casuali
 					<br />
 					Classificata

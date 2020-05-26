@@ -38,19 +38,6 @@ export default class Gioca extends Component {
 	}
 
 	componentDidMount() {
-		// const categorie = ["Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"];
-		// let stanze = [];
-		// for (let i = 0; i < 25; i++) {
-		// 	stanze.push({
-		// 		nome: "Stanza" + i,
-		// 		categoria: categorie[Math.floor(Math.random() * categorie.length)],
-		// 		giocatori: Math.floor(Math.random() * 8),
-		// 	});
-		// }
-		// this.setState({
-		// 	stanze: stanze,
-		// });
-
 		this.chiediStanza();
 		this.xhrCat = new XMLHttpRequest();
 		this.xhrCat.onreadystatechange = (e) => {

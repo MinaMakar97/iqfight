@@ -48,7 +48,6 @@
 
 
 .crea-stanza .domande-casuali {
-    background-image: linear-gradient(to left, #fa709a 0%, #fee140 100%);
     font-size: 1.2em;
     animation: heart-beat 3s infinite;
 }

@@ -97,7 +97,7 @@ export default class AggiungiDomanda extends Component {
 									},
 								})}
 								isSearchable={false}></Select>
-							<textarea placeholder="Domanda" className="form-control-lg shadow" required name="domanda" maxLength="100"></textarea>
+							<textarea placeholder="Domanda" className="form-control-lg shadow" required name="domanda" maxLength="125"></textarea>
 							<InputToggle
 								placeholder="Risposta 1"
 								className="form-control-lg shadow"
@@ -105,7 +105,7 @@ export default class AggiungiDomanda extends Component {
 								name="risposta1"
 								radioName="rispostaCorretta"
 								checked
-								maxLength="20"
+								maxLength="30"
 								required></InputToggle>
 							<InputToggle
 								placeholder="Risposta 2"
@@ -113,7 +113,7 @@ export default class AggiungiDomanda extends Component {
 								radio
 								name="risposta2"
 								radioName="rispostaCorretta"
-								maxLength="20"
+								maxLength="30"
 								required></InputToggle>
 							<InputToggle
 								placeholder="Risposta 3"
@@ -121,7 +121,7 @@ export default class AggiungiDomanda extends Component {
 								radio
 								name="risposta3"
 								radioName="rispostaCorretta"
-								maxLength="20"
+								maxLength="30"
 								required></InputToggle>
 							<InputToggle
 								placeholder="Risposta 4"
@@ -129,7 +129,7 @@ export default class AggiungiDomanda extends Component {
 								radio
 								name="risposta4"
 								radioName="rispostaCorretta"
-								maxLength="20"
+								maxLength="30"
 								required></InputToggle>
 							<input type="submit" className="bottone shadow" value="Invia"></input>
 						</form>
