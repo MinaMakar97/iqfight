@@ -71,7 +71,7 @@
 }
 
 @keyframes changeColor {
-    from {background-color: white;}
+    from {background-color: var(--colore-card);}
     to {background-color: green;}   
 }
 .elimina-padding{

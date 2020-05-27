@@ -100,7 +100,11 @@
     color: var(--colore-quart);
 }
 
-@media screen and (max-width: 576px) {
+.gioca .nome-stanza {
+    word-break: break-all;
+}
+
+@media screen and (max-width: 768px) {
     .contenitore-viola {
         width: 100% !important;
         max-height: 700px;

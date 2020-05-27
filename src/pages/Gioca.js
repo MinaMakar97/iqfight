@@ -13,7 +13,7 @@ export default class Gioca extends Component {
 			stanze: null,
 			cerca: "",
 			categoria: "Tutte",
-			categorie: ["Tutte", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
+			categorie: ["Tutte", "Casuale", "Arte", "Geografia", "Giochi", "Informatica", "Lingue", "Scienze", "Spettacolo", "Storia"],
 		};
 		this.xhr = null;
 		this.xhrCat = null;
@@ -75,6 +75,7 @@ export default class Gioca extends Component {
 		const options = this.state.categorie.map((el) => {
 			return { value: el, label: el };
 		});
+		options.push();
 		const styles = {
 			container: (provided) => ({ ...provided, padding: "0 !important", marginBottom: 0 }),
 			control: (provided) => ({
@@ -123,7 +124,7 @@ export default class Gioca extends Component {
 				<div className="row centra flex-grow-1 order-3 order-sm-1" style={{ minHeight: 0 }}>
 					<div className="contenitore-viola h-100 centra">
 						<div className="row" style={{ width: "90%" }}>
-							<div className="col-12 col-sm-6 d-flex align-items-center">
+							<div className="col-12 col-md-6 d-flex align-items-center">
 								<Select
 									onChange={this.filtra}
 									placeholder="Categoria"
@@ -143,7 +144,7 @@ export default class Gioca extends Component {
 									isSearchable={false}></Select>
 							</div>
 
-							<div className="col-12 col-sm-6">
+							<div className="col-12 col-md-6">
 								<div className="d-flex">
 									<input
 										type="text"

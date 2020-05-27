@@ -25,7 +25,6 @@ export default class Popup extends Component {
 		this.ruotaDestra = this.ruotaDestra.bind(this);
 		this.ruotaSinistra = this.ruotaSinistra.bind(this);
 		this.salvaImmagine = this.salvaImmagine.bind(this);
-		this.eliminaImmagine = this.eliminaImmagine.bind(this);
 		this.ridimensiona = this.ridimensiona.bind(this);
 
 		this.image = new Image();
@@ -36,6 +35,7 @@ export default class Popup extends Component {
 	gestisciImmagine(e) {
 		const file = e.target.files[0];
 		if (file) this.cambiaImmagine(URL.createObjectURL(file));
+		e.target.value = "";
 	}
 
 	cambiaImmagine(imgSrc) {
@@ -163,11 +163,6 @@ export default class Popup extends Component {
 		xhr.send(formData);
 	}
 
-	eliminaImmagine() {
-		this.image.src = ImgUtente;
-		this.setState({ immagine: ImgUtente });
-	}
-
 	disegnaGriglia(canvas) {
 		const ctx = canvas.getContext("2d");
 		const n = 30;
@@ -244,7 +239,7 @@ export default class Popup extends Component {
 					</div>
 					<div className="div-controlli row">
 						<i className="fas fa-undo" onClick={this.ruotaSinistra}></i>
-						<i className="fas fa-trash-alt" onClick={this.eliminaImmagine}></i>
+						<i className="fas fa-trash-alt" onClick={() => this.cambiaImmagine(ImgUtente)}></i>
 						<i className="fas fa-undo fa-flip-horizontal" onClick={this.ruotaDestra}></i>
 					</div>
 					<div className="row">
