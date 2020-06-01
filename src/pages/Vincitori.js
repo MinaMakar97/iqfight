@@ -80,7 +80,6 @@ class Vincitori extends React.Component {
 					{"Complimenti " + this.props.giocatori[0].username + ", hai vinto!"}
 				</p>
 				<div className="div-card">{this.creaGiocatori()}</div>
-				{/* <hr className="riga"></hr> */}
 				<div className="row">
 					<div className="col-12 col-sm-6 centra">
 						<Link to="/" replace>

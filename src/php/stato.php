@@ -40,18 +40,6 @@
                 $query->execute();
             }
             else {
-                // Controlla se qualcuno si è disconnesso
-                // $query = $dbConn->prepare("SELECT username, UNIX_TIMESTAMP(ultimaRichiesta) as ultimaRichiesta FROM partecipa WHERE idStanza = ?");
-                // $query->bind_param("i", $idStanza);
-                // $query->execute();
-                // $giocatori = $query->get_result();
-                // $giocatori = $giocatori->fetch_all(MYSQLI_ASSOC);
-                // $tempo = time();
-                // foreach($giocatori as $giocatore){
-                //     if ($tempo - $giocatore["ultimaRichiesta"] > 4) {
-                //         eliminaGiocatoreDaStanza($dbConn, $giocatore["username"], $idStanza);
-                //     }
-                // }
                 echo json_encode(["successo" => true, "azione" => null]);
             }
         } else {
@@ -77,7 +65,6 @@
         $query->execute();
         $result = $query->get_result();
         $giocatori = [];
-        //$result = $result->fetch_all(MYSQLI_ASSOC);
         while( $row = $result->fetch_assoc()){
             $giocatori[$row["username"]] = $row;  
         }
@@ -92,7 +79,6 @@
         $query->execute();
         $result = $query->get_result();
         $giocatori = [];
-        //$result = $result->fetch_all(MYSQLI_ASSOC);
         while( $row = $result->fetch_assoc()){
             $giocatori[$row["username"]] = $row;  
         }

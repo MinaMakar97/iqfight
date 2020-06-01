@@ -29,7 +29,6 @@
     word-break: break-all;
     min-height: 70px;
     justify-content: space-between;
-    /* text-overflow: clip; */
     padding-left: 30px;
     padding-right: 20px;
 }

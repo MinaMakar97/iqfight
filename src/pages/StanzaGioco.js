@@ -21,7 +21,7 @@ class StanzaGioco extends React.Component {
 			risposta4: "",
 			giocatori: {},
 			finita: false,
-			risposto: false, // Riattivarlo quando cambia domanda
+			risposto: false,
 			miaRisposta: null,
 		};
 

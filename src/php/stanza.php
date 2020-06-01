@@ -90,16 +90,6 @@
 		$giocatori = $query->get_result();
 		$giocatori = $giocatori->fetch_all(MYSQLI_ASSOC);
 
-		$query = $dbConn->prepare("UPDATE partecipa SET ultimaRichiesta = now() where username = ?");
-		$query->bind_param("s",$_SESSION["username"]);
-		$query->execute();
-
-		// foreach($giocatori as $giocatore){
-		// 	if ( $giocatore["ultimaRichiesta"] != null && time() - $giocatore["ultimaRichiesta"] > 4) {
-		// 		eliminaGiocatoreDaStanza($dbConn, $giocatore["username"], $_SESSION["idStanza"]);
-		// 	}
-		// }
-
 		if ($iniziata == 1){
 			echo json_encode(["successo"=>true, "azione"=>"inizio"]);
 		}

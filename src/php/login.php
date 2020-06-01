@@ -20,7 +20,6 @@
         if (!$userNpass || !password_verify($password,$userNpass["password"])){
             die(json_encode(["errore" => "Username o password non corretti"]));
         }
-        // header('Location: success.php');
         echo json_encode(["successo" => true, "url" => "/gioca"]);
 
     }

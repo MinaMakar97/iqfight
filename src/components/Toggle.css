@@ -1,5 +1,3 @@
-/* Courtesy of W3School */
-/* The switch - the box around the slider */
 label.toggle {
   margin: 0 !important;
   padding: 0 !important;
@@ -12,14 +10,12 @@ label.toggle {
   height: 24px;
 }
   
-/* Hide default HTML checkbox */
 .toggle input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-  
-/* The slider */
+
 .toggle-slider {
   position: absolute;
   cursor: pointer;
@@ -58,7 +54,6 @@ input:checked + .toggle-slider:before {
   transform: translateX(24px);
 }
 
-/* Rounded sliders */
 .toggle-slider {
   border-radius: 34px;
 }
