@@ -33,7 +33,7 @@ It is also possible to **add new questions** from the side menu, and you can vie
 <a href="https://github.com/SkyLionx" target="_blank">
   <img src="https://img.shields.io/badge/Profile-Fabrizio%20Rossi-green?style=for-the-badge&logo=github&labelColor=blue&color=white">
 </a>
-<a href="www.linkedin.com/in/FabrizioRossi98" target="_blank">
+<a href="https://www.linkedin.com/in/FabrizioRossi98" target="_blank">
  <img src="https://img.shields.io/badge/Profile-Fabrizio%20Rossi-green?style=for-the-badge&logo=linkedin&labelColor=blue&color=white">
 </a>
 
